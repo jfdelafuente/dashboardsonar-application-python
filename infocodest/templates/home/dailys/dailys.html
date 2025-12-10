@@ -1,0 +1,21 @@
+{% extends "layouts/base.html" %}
+{% import "bootstrap/utils.html" as utils %}
+{% block title %}Dailys{% endblock %}
+
+{% block content %}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">Dailys</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"><a href="{{ url_for('home.home') }}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{{ url_for('home.dailys') }}">Dailys</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Aplicación</li>
+            </ol>
+            {% include "includes/incl_infobox.html" %}
+            {% include "includes/incl_table_dailys.html" %}
+        </div>
+    </main>
+    {% include "includes/incl_footer.html" %}
+</div>
+{% endblock %}

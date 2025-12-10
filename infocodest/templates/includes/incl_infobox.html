@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-xl-3 col-md-6">
+    <div class="info-box">
+      <span class="info-box-icon bg-info"><i class="fa-solid fa-bookmark"></i></span>
+      <div class="info-box-content">
+        <span class="info-box-text">Aplicaciones</span>
+        <span class="info-box-number">{{ dato.aplicaciones }}</span>
+        <div class="progress">
+          <div class="progress-bar bg-info" style="width: {{dato.aplicaciones_value}}%"></div>
+        </div>
+        <span class="progress-description">{{ dato.aplicaciones_text }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-md-6">
+    <div class="info-box">
+      <span class="info-box-icon bg-yellow"><i class="fa-solid fa-copy"></i></span>
+      <div class="info-box-content">
+        <span class="info-box-text">Repositorios</span>
+        <span class="info-box-number">{{ dato.repositorios }}</span>
+        <div class="progress">
+          <div class="progress-bar bg-yellow" style="width: {{dato.repositorios_value}}%"></div>
+        </div>
+        <span class="progress-description">{{ dato.repositorios_text }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-md-6">
+    <div class="info-box">
+      <span class="info-box-icon bg-red"><i class="fa-solid fa-bug"></i></i></span>
+      <div class="info-box-content">
+        <span class="info-box-text">Bugs</span>
+        <span class="info-box-number">{{ dato.bugs }}</span>
+        <div class="progress">
+          <div class="progress-bar bg-red" style="width: {{dato.bugs_value}}%"></div>
+        </div>
+        <span class="progress-description">{{ dato.bugs_text }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-md-6">
+    <div class="info-box">
+      <span class="info-box-icon bg-green"><i class="fa-solid fa-flag"></i></span>
+      <div class="info-box-content">
+        <span class="info-box-text">Analisis Total/OK </span>
+        <span class="info-box-number">{{ dato.analisis }} / {{ dato.quality }}</span>
+        <div class="progress">
+          <div class="progress-bar bg-green" style="width: {{dato.analisis_value}}%"></div>
+        </div>
+        <span class="progress-description">
+          {{ dato.analisis_text }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

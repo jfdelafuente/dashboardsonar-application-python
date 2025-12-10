@@ -1,0 +1,35 @@
+{% extends "layouts/base.html" %}
+{% import "bootstrap/utils.html" as utils %}
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+<div>
+  <input type="hidden" id="postId" name="postId" value="{{ project | safe }}" />
+  <input type="hidden" id="nameId" name="nametId" value="{{ name | safe }}" />
+</div>
+<div id="layoutSidenav_content">
+  <main>
+    <div class="container-fluid px-4">
+      <h1 class="mt-4">Dashboard</h1>
+      <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Dashboard</li>
+      </ol>
+        <h1 class="text-center">Welcome {{current_user.username}}!</h1>
+    </div>
+    <div class="card mb-4">
+      <div class="card-header">
+          <i class="fas fa-chart-area me-1"></i>
+          Area Chart Example
+      </div>
+      <div class="card-body"><canvas id="radarChart" width="80%" height="20"></canvas></div>
+      <div class="card-footer small text-muted">{{ date.strftime("%A, %d %B, %Y at %X") }}</div>
+  </div>
+  </main>
+  {% include "includes/incl_footer.html" %}
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+  <script src="{{url_for('static',filename='assets/demo/chart-radar-rating.js')}}"></script>
+{% endblock %}

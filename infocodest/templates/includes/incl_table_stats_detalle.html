@@ -1,0 +1,78 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/table.css') }}">
+{% endblock %}
+{% block content %}
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Resultado de Datos {{ proveedor}}
+    </div>
+    <div class="card-body">
+        <div class="table-responsive small">
+            <table id="datatablesSimple" class="table table-striped table-hover table-sm">
+                <thead class="table-light">
+                    <tr> 
+                        <th scope="col">Aplicación</th>
+                        <th scope="col"># Repos</th>
+                        <th scope="col">Reliability</th>
+                        <th scope="col">Security</th>
+                        <th scope="col">Maintainability</th>
+                        <th scope="col">DLoC</th>
+                        <th scope="col">Coverage</th>
+                        <th scope="col">Quality Gate</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                  <tr> 
+                    <th scope="col">Aplicación</th>
+                    <th scope="col"># Repos</th>
+                    <th scope="col">Reliability</th>
+                    <th scope="col">Security</th>
+                    <th scope="col">Maintainability</th>
+                    <th scope="col">DLoC</th>
+                    <th scope="col">Coverage</th>
+                    <th scope="col">Quality Gate</th>
+                </tr>
+                  </tfoot>
+                <tbody class="table-group-divider">
+                    {% for score in scores %}
+                      <tr>
+                        {% if score.tipo =="WF" %}
+                          <td><a href="{{ url_for('home.show_stats_historico_project', project=score.aplicacion) }}">{{ score.aplicacion }}</a>
+                            <span class="badge text-bg-info rounded-pill"> {{ score.tipo }} </span>
+                          </td>
+                        {% else %}
+                          <td><a href="{{ url_for('home.show_stats_historico_project', project=score.aplicacion) }}">{{ score.aplicacion }}</a></td>
+                        {% endif %}
+                        <!-- 
+                          <td><a href="{{ url_for('home.show_stats_historico_project', project=score.aplicacion) }}">{{ score.aplicacion }}</a></td>
+                          <td><a href="/show/stats/historico/{{ score.aplicacion }}">{{ score.aplicacion }}</a></td>
+                          <td><a href="https://softwarequality-tc.shared-nonprod.cloud.si.orange.es/dashboard?id={{ score.app_sonar }}"  target="_blank" rel="noopener noreferrer">{{ score.name }}</a></td>
+                        -->
+                      <td>{{ score.repos }}</td>
+                      <td><i class="badge rounded-pill rating-{{score.reliability_label}}">{{score.reliability_label}}</i></td>
+                      <td><i class="badge rounded-pill rating-{{score.security_label}}">{{score.security_label}}</i></td>
+                      <td><i class="badge rounded-pill rating-{{score.sqale_label}}">{{score.sqale_label}}</i></td>
+                      <td><i class="badge rounded-pill rating-{{score.dloc_label}}">{{score.dloc_label}}</i></td>
+                      <td><i class="badge rounded-pill rating-{{score.coverage_label}}">{{score.coverage_label}}</i></td>
+                      <td>
+                        {% if score.alert_status_ok == "OK" %}
+                          <span class="badge text-bg-success rounded-pill">{{ score.alert_status_ok }}</span> /
+                        {% elif score.alert_status == "WARN" %}
+                          <span class="badge text-bg-warning rounded-pill">{{ score.alert_status_ok }}</span> /
+                        {% else %}
+                        <span class="badge text-bg-danger rounded-pill">{{ score.alert_status_ok }}</span> / 
+                        {% endif %}
+                        <span class="badge rating-F rounded-pill">{{ score.quality_gate}}</span>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+  <script src="{{url_for('static',filename='js/datatables-simple-demo.js')}}"></script>
+{% endblock %}

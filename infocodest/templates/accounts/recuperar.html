@@ -1,0 +1,33 @@
+{% extends "layouts/base-fullscreen.html" %}
+
+{% block title %}Password Recovery{% endblock %}
+
+{% block content %}
+<div id="layoutAuthentication">
+    <div id="layoutAuthentication_content">
+        <main>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-5">
+                        <div class="card shadow-lg border-0 rounded-lg mt-5">
+                            <div class="card-header">
+                                <h3 class="text-center font-weight-light my-4">Password Recovery</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="small mb-3 text-muted">{{ msg }}</div>
+                            </div>
+                            <div class="card-footer text-center py-3">
+                                <div class="small"><a href="{{ url_for('accounts.login')}}">Return to login</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div id="layoutAuthentication_footer">
+        {% include "includes/incl_footer.html" %}
+    </div>
+</div>
+{% endblock content %}

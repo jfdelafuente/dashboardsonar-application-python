@@ -1,0 +1,41 @@
+.rating-1, .rating-A {
+    color: #ffffff;
+    border-radius: 50%;
+    border: 1px solid #42dc38;
+    background-color: #42dc38;
+}
+
+.rating-2, .rating-B {
+    color: #ffffff;
+    border-radius: 50%;
+    border: 1px solid #91dd8c;
+    background-color: #91dd8c;
+}
+
+.rating-3, .rating-C {
+    color: #ffffff;
+    border-radius: 50%;
+    border: 1px solid rgb(247, 210, 46);
+    background-color: rgb(247, 210, 46);
+}
+
+.rating-4, .rating-D {
+    color: #ffffff;
+    border-radius: 50%;
+    border: 1px solid rgb(255, 99, 99);
+    background-color: rgb(255, 99, 99);
+}
+
+.rating-5, .rating-E {
+    color: #ffffff;
+    border-radius: 50%;
+    border: 1px solid red;
+    background-color: red;
+}
+
+.rating-6, .rating-F {
+    color: #ffffff;
+    border-radius: 50%;
+    border: 1px solid rgb(154, 175, 202);
+    background-color: rgb(96, 145, 177);
+}

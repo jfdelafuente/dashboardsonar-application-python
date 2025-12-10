@@ -1,0 +1,70 @@
+# byte-compiled / optimized / DLL files
+
+__pycache__/
+*.py[cod]
+
+# tests and coverage
+*.pytest_cache
+.coverage
+htmlcov/
+coverage.xml
+
+# database & logs
+*.db
+*.sqlite3
+*.log
+*.sqlite3-journal
+*.csv
+logs/
+
+# venv
+env
+venv
+.env
+
+# other
+.DS_Store
+
+# sphinx docs 
+_build
+_static
+_templates
+
+# javascript
+package-lock.json
+.vscode/symbols.json
+.vscode/settings.json
+
+infocodest/static/assets/node_modules
+infocodest/static/assets/yarn.lock
+infocodest/static/assets/.temp
+
+*.bak
+
+
+# mypy
+.mypy_cache
+
+# Git (temporalmente ignorar migrations hasta completar refactorización)
+# migrations
+
+# Scripts temporales
+scripts/test*
+scripts/enviar_reporte.py
+
+# Backups (creados durante refactorización)
+backup_*/
+*.backup
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Pytest
+.pytest_cache/
+
+# Coverage reports
+.coverage.*

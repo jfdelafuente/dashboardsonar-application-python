@@ -1,0 +1,122 @@
+<div id="layoutSidenav_nav">
+    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+        <div class="sb-sidenav-menu">
+            <div class="nav">
+                <div class="sb-sidenav-menu-heading">Core</div>
+                <a class="nav-link" href="{{ url_for('home.home') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Dashboard
+                </a>
+                <div class="sb-sidenav-menu-heading">
+                    <hr style="color: rgb(150, 10, 10); background-color: rgb(245, 240, 240); width:75%;" />
+                </div>
+                <div class="sb-sidenav-menu-heading"></div>
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseMetricas"
+                    aria-expanded="false" aria-controls="collapseMetricas">
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Metricas
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseMetricas" aria-labelledby="headingOne"
+                    data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="{{ url_for('home.metricas') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Métricas
+                        </a>
+                        <a class="nav-link" href="{{ url_for('home.proveedores') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Métricas por proveedor
+                        </a>
+                        <a class="nav-link" href="{{ url_for('home.historico') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Métricas Histórico
+                        </a>
+                    </nav>
+                </div>
+                <div class="sb-sidenav-menu-heading"></div>
+                <!--
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseKPIs"
+                    aria-expanded="false" aria-controls="collapseKPIs">
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    SLAs - SLOs
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseKPIs" aria-labelledby="headingOne"
+                    data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="{{ url_for('home.kpis') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            KPIs
+                        </a>
+                        <a class="nav-link" href="{{ url_for('home.kpis_proveedores') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            KPIs por proveedor
+                        </a>
+                        <a class="nav-link" href="{{ url_for('home.kpis_historico') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            KPIs Histórico
+                        </a>
+                    </nav>
+                </div>
+                -->
+                <div class="sb-sidenav-menu-heading"></div>
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSTATs"
+                    aria-expanded="false" aria-controls="collapseKPIs">
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Estadísticas
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseSTATs" aria-labelledby="headingOne"
+                    data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="{{ url_for('home.stats') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            STATs
+                        </a>
+                        <a class="nav-link" href="{{ url_for('home.stats_proveedores') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            STATs por proveedor
+                        </a>
+                        <a class="nav-link" href="{{ url_for('home.stats_historico') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            STATs Histórico
+                        </a>
+                    </nav>
+                </div>
+                <div class="sb-sidenav-menu-heading"></div>
+                <!--
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseDailys"
+                    aria-expanded="false" aria-controls="collapseDaily">
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Dailys
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseDailys" aria-labelledby="headingOne"
+                    data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="{{ url_for('home.dailys') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Dailys
+                        </a>
+                        <a class="nav-link" href="{{ url_for('home.dailys_proveedores') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Dailys por proveedor
+                        </a>
+                        <a class="nav-link" href="{{ url_for('home.dailys_historico') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Dailys Histórico
+                        </a>
+                    </nav>
+                </div>
+                -->
+            </div>
+        </div>
+        <div class="sb-sidenav-footer">
+            <div class="small">Logged in as:</div>
+            {% if current_user.is_authenticated %}
+                {{ current_user.username }}
+            {% endif %}
+        </div>
+    </nav>
+</div>

@@ -1,0 +1,66 @@
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ url_for('static', filename= 'css/table.css') }}">
+{% endblock %}
+{% block content %}
+<div class="card mb-4">
+  <div class="card-header">
+    <i class="fas fa-table me-1"></i>
+    Resultado de Datos {{ proveedor}}
+  </div>
+  <div class="card-body">
+    <div class="table-responsive small">
+      <table id="datatablesSimple" class="table table-striped table-hover table-sm">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">Aplicación</th>
+            <th scope="col">Project Name</th>
+            <th scope="col">Talla</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">SLA-1 : Deuda Tecnica</th>
+            <th scope="col">SLA-1 : Complejidad Ciclomatica</th>
+            <th scope="col">SLA-1 : Duplicidad Líneas Código (%)</th>
+            <th scope="col">SLO-1 : Complejidad Código</th>
+            <th scope="col">SLO-2 : Duplicidad Líneas</th>
+            <th scope="col">SLO-3 : Cobertura (%)</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th scope="col">Aplicación</th>
+            <th scope="col">Project Name</th>
+            <th scope="col">Talla</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">SLA-1 : Deuda Tecnica</th>
+            <th scope="col">SLA-1 : Complejidad Ciclomatica</th>
+            <th scope="col">SLA-1 : Duplicidad Líneas Código (%)</th>
+            <th scope="col">SLO-1 : Complejidad Código</th>
+            <th scope="col">SLO-2 : Duplicidad Líneas</th>
+            <th scope="col">SLO-3 : Cobertura (%)</th>
+          </tr>
+        </tfoot>
+        <tbody class="table-group-divider">
+          {% for score in scores %}
+          <tr>
+            <td><a href="{{ url_for('home.show_kpis_historico_project', project=score.aplicacion) }}">{{ score.aplicacion }}</a></td>
+            <td><a href="{{ url_for('home.show_kpis_historico_name', project=score.aplicacion, name=score.repo) }}">{{ score.repo }}</a></td>
+            <!-- <td><a href="/show/kpis/historico/{{ score.aplicacion }}">{{ score.aplicacion }}</a></td>
+            <td><a href="/show/kpis/historico/{{ score.aplicacion }}/{{ score.name }}">{{ score.name }}</a></td> -->
+            <td><i class="badge rounded-pill bg-secondary">{{ score.size }}</i></td>
+            <td><a href="https://softwarequality-tc.shared-nonprod.cloud.si.orange.es/dashboard?id={{ score.project }}"  target="_blank" rel="noopener noreferrer">{{ score.fecha }}</a></td>
+            <td><i class="badge rounded-pill rating-{{score.sqale_label}}">{{score.sqale_label}}</i> {{ score.sqale_debt_ratio }}%</td>
+            <td>{{ score.complexity }}</td>
+            <td><i class="badge rounded-pill rating-{{score.dloc_label}}">{{score.dloc_label}}</i> {{ score.duplicated_line_density }}%</td>
+            <td>{{ score.complexity }}</td>
+            <td><i class="badge rounded-pill rating-{{score.dloc_label}}">{{score.dloc_label}}</i> {{ score.ncloc }}</td>
+            <td><i class="badge rounded-pill rating-{{score.coverage_label}}">{{score.coverage_label}}</i> {{ score.coverage }}%</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+<script src="{{url_for('static',filename='js/datatables-simple-demo.js')}}"></script>
+{% endblock %}

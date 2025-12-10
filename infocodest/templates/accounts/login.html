@@ -1,0 +1,63 @@
+{% extends "layouts/base-fullscreen.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div id="layoutAuthentication">
+  <div id="layoutAuthentication_content">
+    <main>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5">
+            <div class="card shadow-lg border-0 rounded-lg mt-5">
+              <div class="card-header">
+                <h3 class="text-center font-weight-light my-4">Login</h3>
+                <span class="text-center">
+                  {% if msg %}
+                  <span class="text-danger"> {{ msg | safe }} </span>
+                  {% else %}
+                  Add your credentials
+                  {% endif %}
+                </span>
+              </div>
+              <div class="card-body">
+                <form role="form" method="post" action="">
+                  {{ form.hidden_tag() }}
+                  <div class="form-floating mb-3">
+                    {{ form.username(placeholder="Username", class="form-control") }}
+                    <label for="inputUsername">{{ form.username.label }}</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    {{ form.password(placeholder="Password", class="form-control",
+                    type="password") }}
+                    <label for="inputPassword">{{ form.password.label }}</label>
+                  </div>
+                  <div class="form-check mb-3">
+                    {{ form.remember(placeholder="RememberPassword", class="form-check-input",
+                    id="inputRememberPassword", type="checkbox",
+                    value="") }}
+                    <label class="form-check-label" for="inputRememberPassword">
+                      {{ form.remember.label }}
+                    </label>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                    <a class="small" href="{{ url_for('accounts.password') }}">Forgot Password?</a>
+                    {{ form.submit(class="btn btn-primary", type="submit") }}
+                  </div>
+                </form>
+              </div>
+              <div class="card-footer text-center py-3">
+                <div class="small"><a href="{{ url_for('accounts.register') }}">Need an account? Sign
+                    up!</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <div id="layoutAuthentication_footer">
+    {% include "includes/incl_footer.html" %}
+</div>
+</div>
+{% endblock content %}

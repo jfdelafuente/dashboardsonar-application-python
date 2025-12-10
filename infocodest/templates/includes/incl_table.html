@@ -1,0 +1,91 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/table.css') }}">
+{% endblock %}
+{% block content %}
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Resultado de Datos {{ proveedor}}
+    </div>
+    <div class="card-body">
+        <div class="table-responsive small">
+            <table id="datatablesSimple" class="table table-striped table-hover table-sm">
+                <thead class="table-light">
+                    <tr> 
+                        <th scope="col">Aplicación</th>
+                        <th scope="col">Project Name</th>
+                        <th scope="col">Talla</th>
+                        <th scope="col">Fecha Análisis</th>
+                        <!-- <th scope="col"># Bugs</th>
+                        <th scope="col">Reliability</th> -->
+                        <th scope="col">Reliability
+                          <span class="note little-spacer-left">/ <svg class="little-spacer-right" height="16" version="1.1" viewBox="0 0 16 16" width="16" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 1.41421;"><path d="M10.09,1.88A2.86,2.86,0,0,0,8,1a2.87,2.87,0,0,0-2.11.87A2.93,2.93,0,0,0,5,4h6A2.93,2.93,0,0,0,10.09,1.88Z" style="fill: currentcolor;"></path><path d="M14.54,9H13V5.6L14.3,4.42a.5.5,0,0,0,0-.71.49.49,0,0,0-.7,0L12.17,5H3.82L2.34,3.66a.5.5,0,0,0-.67.74L2.94,5.55V9H1.46a.5.5,0,0,0,0,1H3a5.2,5.2,0,0,0,1.05,2.32l-2,1.81a.5.5,0,1,0,.67.74l2-1.82A4.62,4.62,0,0,0,7,14.1V8A1,1,0,0,1,8,7a.94.94,0,0,1,1,.9v6.17A4.55,4.55,0,0,0,11.18,13l2,1.83a.51.51,0,0,0,.33.13.48.48,0,0,0,.37-.17.49.49,0,0,0,0-.7l-2-1.8a5.34,5.34,0,0,0,1-2.29h1.64a.5.5,0,0,0,0-1Z" style="fill: currentcolor;"></path></svg> Bugs</span>
+                        </th>
+                        <!-- <th scope="col"># Vulnerabilities</th> -->
+                        <th scope="col">Security
+                          <span class="note little-spacer-left">/ <svg class="little-spacer-right" height="16" version="1.1" viewBox="0 0 16 16" width="16" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 1.41421;"><path d="M12,7.05H6V5a2,2,0,1,1,4,0,1,1,0,0,0,2,0A4,4,0,1,0,4,5V7.06A1.12,1.12,0,0,0,3,8.17V14a1.12,1.12,0,0,0,1.12,1.12H12A1.12,1.12,0,0,0,13.1,14V8.17A1.12,1.12,0,0,0,12,7.05ZM8,13a2,2,0,1,1,2-2A2,2,0,0,1,8,13Z" style="fill: currentcolor;"></path></svg> Vulnerabilities</span>
+                        </th>
+                        <!-- <th scope="col"># Code Smells</th> -->
+                        <th scope="col">Maintainability
+                          <span class="note little-spacer-left">/ <svg class="little-spacer-right" height="16" version="1.1" viewBox="0 0 16 16" width="16" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 1.41421;"><path d="M8,15.1a7,7,0,1,0-7-7A7,7,0,0,0,8,15.1Zm.74-8.9,1.46-2.52a.29.29,0,0,1,.25-.14.3.3,0,0,1,.15,0,5.26,5.26,0,0,1,2.61,4.53.28.28,0,0,1-.29.29H10a.28.28,0,0,1-.29-.29,1.78,1.78,0,0,0-.88-1.51A.29.29,0,0,1,8.75,6.2Zm.11,3.44A.23.23,0,0,1,9,9.6a.29.29,0,0,1,.25.14l1.46,2.52a.18.18,0,0,1,0,.13.3.3,0,0,1-.15.27,5.3,5.3,0,0,1-5.23,0,.3.3,0,0,1-.1-.4L6.73,9.74A.29.29,0,0,1,7,9.6a.23.23,0,0,1,.14,0A1.79,1.79,0,0,0,8.86,9.64ZM5.33,3.59a.3.3,0,0,1,.41.1L7.2,6.21a.29.29,0,0,1-.1.4,1.79,1.79,0,0,0-.87,1.51.28.28,0,0,1-.29.29H3a.32.32,0,0,1-.32-.29A5.26,5.26,0,0,1,5.33,3.59Z" style="fill: currentcolor;"></path></svg> Code Smells</span>
+                        </th>
+                        <th scope="col">Coverage
+                          <span class="note little-spacer-left">/ <svg class="little-spacer-right" height="16" version="1.1" viewBox="0 0 16 16" width="16" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 1.41421;"><path d="M14.08 3.23a1 1 0 00-.67-.77L8.16 1a1.06 1.06 0 00-.5 0L2.41 2.46a.94.94 0 00-.67.77c-.08.57-.74 5.63 1.14 8.31A9 9 0 007.68 15a.85.85 0 00.23 0 .78.78 0 00.22 0 8.93 8.93 0 004.81-3.46c1.85-2.68 1.21-7.74 1.14-8.31zM12.21 8a6.15 6.15 0 01-.86 2.42A7.92 7.92 0 018 13V8zM8 3v5H3.59a24.29 24.29 0 010-3.82z" style="fill: currentcolor;"></path></svg> Unit Test</span>
+                        </th>
+                        <th scope="col">Quality Gate</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                      <th scope="col">Aplicación</th>
+                      <th scope="col">Project Name</th>
+                      <th scope="col">Talla</th>
+                      <th scope="col">Fecha Análisis</th>
+                      <!-- <th scope="col"># Bugs</th> -->
+                      <th scope="col">Reliability</th>
+                      <!-- <th scope="col"># Vulnerabilities</th> -->
+                      <th scope="col">Security</th>
+                      <!-- <th scope="col"># Code Smells</th> -->
+                      <th scope="col">Maintainability</th>
+                      <th scope="col">Coverage</th>
+                      <th scope="col">Quality Gate</th>
+                    </tr>
+                  </tfoot>
+                <tbody class="table-group-divider">
+                    {% for score in scores %}
+                    <tr>
+                      {% if score.tipo =="WF" %}
+                        <td><a href="{{ url_for('home.show_historico_project', project=score.aplicacion) }}">{{ score.aplicacion }}</a>
+                            <span class="badge text-bg-info rounded-pill"> {{ score.tipo }} </span>
+                        </td>
+                      {% else %}
+                        <td><a href="{{ url_for('home.show_historico_project', project=score.aplicacion) }}">{{ score.aplicacion }}</a></td>
+                      {% endif %}
+                      <td><a href="{{ url_for('home.show_historico_name', project=score.aplicacion, name=score.repo) }}">{{ score.repo }}</a></td>
+                      <td><i class="badge rounded-pill bg-secondary">{{ score.size }}</i></td>
+                      <td><a href="https://softwarequality-tc.shared-nonprod.cloud.si.orange.es/project/activity?id={{ score.project }}&selected_date={{ score.fecha }}"  target="_blank" rel="noopener noreferrer">{{ score.fecha }}</a></td>
+                      <td><i class="badge rounded-pill rating-{{score.reliability_rating}}">{{score.reliability_label}}</i> {{ score.bugs }}</td>
+                      <td><i class="badge rounded-pill rating-{{score.security_rating}}">{{score.security_label}}</i> {{ score.vulnerabilities }}</td>
+                      <td><i class="badge rounded-pill rating-{{score.sqale_rating}}">{{score.sqale_label}}</i> {{ score.code_smells }}</td>
+                      <td>{{ score.coverage }} %  -  {{ score.unit_tests}} </td>
+                      <td>
+                        {% if score.alert_status == "OK" %}
+                          <span class="badge text-bg-success rounded-pill">{{ score.alert_status }}</span> /
+                        {% elif score.alert_status == "WARN" %}
+                          <span class="badge text-bg-warning rounded-pill">{{ score.alert_status }}</span> /
+                        {% else %}
+                        <span class="badge text-bg-danger rounded-pill">{{ score.alert_status }}</span> / 
+                        {% endif %}
+                        <span class="badge rating-F rounded-pill">{{ score.quality_gate}}</span>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+  <script src="{{url_for('static',filename='js/datatables-simple-demo.js')}}"></script>
+{% endblock %}

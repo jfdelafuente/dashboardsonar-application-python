@@ -1,0 +1,44 @@
+{% block content %}
+<div class="row">
+    <div>
+        <input type="hidden" id="postId" name="postId" value="{{ project | safe }}" />
+        <input type="hidden" id="repoId" name="repoId" value="{{ repo | safe }}" />
+    </div>
+    <div class="col-lg-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-chart-bar me-1"></i>
+                Bugs Bar Chart
+            </div>
+            <div class="card-body"><canvas id="bugsBarChart" width="100%" height="50"></canvas></div>
+            <div class="card-footer small text-muted">Actualizado {{ date.strftime("%A, %d %B, %Y at %X") }}</div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-chart-bar me-1"></i>
+                Vulnerabilities Bar Chart
+            </div>
+            <div class="card-body"><canvas id="vulnerabilitiesBarChart" width="100%" height="50"></canvas></div>
+            <div class="card-footer small text-muted">Actualizado {{ date.strftime("%A, %d %B, %Y at %X") }}</div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-chart-bar me-1"></i>
+                Code Smells Bar Chart
+            </div>
+            <div class="card-body"><canvas id="codesmellsBarChart" width="100%" height="50"></canvas></div>
+            <div class="card-footer small text-muted">Actualizado {{ date.strftime("%A, %d %B, %Y at %X") }}</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="{{url_for('static',filename='assets/demo/chart-bar-bugs-dailys-repo.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/demo/chart-bar-vulnerabilities-dailys-repo.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/demo/chart-bar-codesmells-dailys-repo.js')}}"></script>
+{% endblock %}

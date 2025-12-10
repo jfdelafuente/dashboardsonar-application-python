@@ -1,0 +1,22 @@
+{% extends "layouts/base.html" %}
+{% import "bootstrap/utils.html" as utils %}
+
+{% block title %}User Page{% endblock %}
+
+{% block content %}
+<div id="layoutSidenav_content">
+  <main>
+    <div class="container-fluid px-4">
+      <h1 class="mt-4">Page User</h1>
+      <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active"></li>
+      </ol>
+        <h1 class="text-center">Welcome {{current_user.username}}!</h1>
+        <h2 class="text-center">{{ current_user.email }} </h2>
+        <h3 class="text-center">Usuario Creado: {{ user.created_on }} </h3>
+        <h3 class="text-center">Admin ? {{ user.is_admin }} </h3>
+    </div>
+  </main>
+  {% include "includes/incl_footer.html" %}
+</div>
+{% endblock content %}

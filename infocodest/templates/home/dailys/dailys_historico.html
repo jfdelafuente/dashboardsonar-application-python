@@ -1,0 +1,47 @@
+{% extends "layouts/base.html" %}
+{% import "bootstrap/utils.html" as utils %}
+{% block title %}Historico Dailys{% endblock %}
+
+{% block content %}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">Dailys</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"><a href="{{ url_for('home.home') }}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{{ url_for('home.dailys') }}">Dailys</a></li>
+                <li class="breadcrumb-item"><a href="{{ url_for('home.dailys_historico') }}">Aplicación</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    {% if project %}
+                        {{ project | safe }}
+                    {% endif %}
+                </li>
+            </ol>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    Consulta el histórico de SLAs Y SLOs
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{url_for('home.dailys_historico')}}">
+                        <select name="project_name" id="project_name" required="required" style="width:200px">
+                            <option value="" label="Select a proyect ... " selected="selected">Select a proyect ...
+                            </option>
+                            {% for app in apps %}
+                                <option value="{{ app.aplicacion}}">{{ app.aplicacion}}</option>
+                            {% endfor %}
+                        </select>
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        <input type="submit" value="Submit" class="btn btn-primary">
+                    </form>
+                </div>
+            </div>
+            {% if success %}
+            {% include "includes/incl_infobox.html" %}
+            {% endif %}
+            {% include "includes/incl_table_dailys.html" %}
+        </div>
+    </main>
+    {% include "includes/incl_footer.html" %}
+</div>
+{% endblock %}
