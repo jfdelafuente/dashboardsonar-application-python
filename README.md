@@ -1,127 +1,237 @@
-# Cómo construir una aplicación web completa con Python y SQLite3
+# Dashboard Sonar - Flask Application
 
-Ejecutamos por este orden:
+> Aplicación web para visualización y análisis de métricas de calidad de código desde SonarQube
 
-> python3.8 -m venv venv
+[![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Flask](https://img.shields.io/badge/flask-3.0.0-green.svg)](https://flask.palletsprojects.com/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-👉 Set Up for Unix
+---
 
-> $ virtualenv venv
-> $ source venv/bin/activate
-> $ pip3 install -r requirements.txt
+## 🎯 Proyecto de Refactorización
 
-🛠️ Set Up Flask Environment
+> **Estado Actual**: 📋 En preparación para refactorización arquitectónica
+>
+> **Objetivo**: Transformar la aplicación a una arquitectura en capas mantenible, ágil y eficaz
 
-> $ export FLASK_APP=run.py
-> $ export FLASK_ENV=development
-> $ export FLASK_DEBUG=true
+### 📚 Documentación Completa
 
-👉 Set Up for Windows
+Toda la documentación del proyecto de refactorización está organizada en el directorio [`docs/`](docs/):
 
-Install modules via VENV (windows)
-
-> $ virtualenv venv
-> $ .\venv\Scripts\activate
-> $ pip3 install -r requirements.txt
-
-🛠️ Set Up Flask Environment
-
-> $ # CMD
-> $ set FLASK_APP=run.py
-> $ set FLASK_ENV=development
-> $
-> $ # Powershell
-> $ $env:FLASK_APP = ".\run.py"
-> $ $env:FLASK_ENV = "Development"  --dEPRECATED
-> $ $env:FLASK_DEBUG = "true"
-
-🛠️ Start the app
-
-> $ flask run
-
-At this point, the app runs at <http://127.0.0.1:5000/>.
-
-## ✨ Start the app in Docker
-
-> **Step 1** - Download the code from the GH repository (using `GIT`)
-
-```bash
-# Get the code
-git clone https://sourcerepository-tc.shared-nonprod.cloud.si.orange.es/servconfigmanagement/dashboardsonar-application-python.git
-cd dashboardsonar-application-python
+```
+docs/
+├── README.md                    → Índice principal
+├── plan/                        → Plan de refactorización
+├── git/                         → Estrategia de versionado
+├── guides/                      → Guías de usuario
+└── templates/                   → Plantillas de commits y PRs
 ```
 
-> **Step 2** - Edit `.env` and set `DEBUG=True`. This will activate the `SQLite` persistance.
+### 🚀 Inicio Rápido
+
+**Para nuevos desarrolladores**:
+1. Lee **[docs/guides/INICIO_RAPIDO.md](docs/guides/INICIO_RAPIDO.md)** (5-10 min)
+2. Ejecuta el script de inicialización:
+   ```bash
+   ./scripts/init_git_workflow.sh
+   ```
+3. Revisa el **[índice de documentación](docs/README.md)**
+
+**Para entender el proyecto completo**:
+- 📋 **[Plan de Reorganización](docs/plan/PLAN_REORGANIZACION.md)** - Plan maestro de 10 fases
+- 🔀 **[Estrategia Git](docs/git/GIT_STRATEGY.md)** - Control de versiones detallado
+- 📖 **[Resumen](docs/guides/RESUMEN.md)** - Navegación entre documentos
+
+---
+
+## 📖 Documentación Original del Proyecto
+
+> Ver **[README_ORIGINAL.md](README_ORIGINAL.md)** para las instrucciones originales completas
+
+### Requisitos Previos
+
+- Python 3.8+
+- SQLite3
+- Virtualenv
+
+### Instalación Rápida
+
+#### Unix/Linux/Mac
 
 ```bash
-DEBUG=True
+python3.8 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+export FLASK_APP=run.py
+export FLASK_DEBUG=true
+flask run
 ```
 
-> **Step 3** - Start the APP in `Docker`
+#### Windows
 
 ```bash
-docker-compose up --build 
+python -m venv venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
+$env:FLASK_APP = ".\run.py"
+$env:FLASK_DEBUG = "true"
+flask run
 ```
 
-Visit `http://localhost:5085` in your browser. The app should be up & running.
+Aplicación disponible en: `http://127.0.0.1:5000/`
 
-(venv) python -m pytest --setup-show --cov=apps --cov-report=html
+### Docker
 
-ultimas modificaciones
+```bash
+echo "DEBUG=True" > .env
+docker-compose up --build
+```
 
-lanzar test_measures.ipynb para extraer los datos del proyecto de sonar.
-Esos datos se transforman y se creand dos nuevos ficheros; historico.csv y metricas.csv
+Visita `http://localhost:5085`
 
-Posteriormente se lanza init_db.py para recrear la bbdd y cargar los csv (historico, metrica y proveedores)
+---
 
-## Install pre-commit
+## 📁 Estructura del Proyecto
 
-$ pre-commit --version
-$ pre-commit install
-$ pre-commit run --all-files
-$ pre-commit uninstall
+```
+dashboardsonar-application-python/
+├── docs/                        # 📚 Documentación de refactorización
+│   ├── README.md               # Índice principal
+│   ├── plan/                   # Plan de reorganización
+│   ├── git/                    # Estrategia Git
+│   ├── guides/                 # Guías de usuario
+│   └── templates/              # Plantillas
+│
+├── infocodest/                 # Aplicación principal
+│   ├── __init__.py             # Factory pattern
+│   ├── extensions.py           # Extensiones Flask
+│   ├── accounts/               # Blueprint autenticación
+│   ├── api/                    # Blueprint API
+│   ├── charts/                 # Blueprint gráficos
+│   ├── home/                   # Blueprint home
+│   ├── models/                 # Modelos ORM
+│   ├── static/                 # Assets estáticos
+│   └── templates/              # Plantillas Jinja2
+│
+├── scripts/                    # Scripts de utilidad
+│   ├── init_git_workflow.sh   # Inicialización Git
+│   └── init_db.py             # Inicializar BD
+│
+├── tests/                      # Tests unitarios y funcionales
+├── migrations/                 # Migraciones Alembic
+├── config.py                   # Configuración
+├── run.py                      # Entry point
+└── requirements.txt            # Dependencias
+```
 
-## Connfiguración
+---
 
+## 🚀 Roadmap de Refactorización
+
+### Fases Planificadas
+
+| Fase | Descripción | Duración | Estado |
+|------|-------------|----------|--------|
+| 0 | Preparación | 30 min | ⏸️ Pendiente |
+| 1 | Capa de Repositorios | 2-3h | ⏸️ Pendiente |
+| 2 | Capa de Servicios | 3-4h | ⏸️ Pendiente |
+| 3 | Refactorizar Vistas | 2-3h | ⏸️ Pendiente |
+| 4-10 | ... | ... | ⏸️ Pendiente |
+
+**Total**: 14-20 horas estimadas
+
+Ver detalles completos en **[docs/plan/PLAN_REORGANIZACION.md](docs/plan/PLAN_REORGANIZACION.md)**
+
+### Objetivos de Calidad
+
+| Métrica | Actual | Objetivo |
+|---------|--------|----------|
+| Cobertura Tests | ~60% | >80% |
+| Líneas por Vista | ~100 | <30 |
+| Complejidad | >10 | <5 |
+
+---
+
+## 🧪 Tests
+
+```bash
+# Tests básicos
+python -m pytest --setup-show
+
+# Tests con cobertura
+python -m pytest --cov=infocodest --cov-report=html
+```
+
+---
+
+## 🗄️ Base de Datos
+
+### Configurar
+
+```bash
 mkdir datos
+```
 
-configurar .env
-
+Archivo `.env`:
+```env
 DEBUG=True
-
 FLASK_APP=run.py
-FLASK_ENV=development
 FLASK_DEBUG=False
-
 ASSETS_ROOT=/static/assets
+DATABASE=db.sqlite3
+```
 
-DATABASE = "db.sqlite3"
-DATOS_CSV = "sonar_salida_measure_etl_tc.csv"
-HISTORICO_CSV = "sonar_salida_historico_etl_tc.csv"
+### Migraciones
 
-## How to Apply Migrations Using Flask-Migrate
+```bash
+flask db init
+flask db migrate -m "Initial migration"
+flask db upgrade
+```
 
-Before we can seed our database, we need to set up database migrations using Flask-Migrate. This tool helps us manage database changes, such as creating tables and altering schemas, systematically.
+---
 
-Initialize the migrations folder by running the following command in your project directory:
+## 🤝 Contribuir
 
-> flask db init
+### Workflow
 
-This command creates a migrations directory in our project, which will store migration scripts.
+1. Lee **[docs/guides/INICIO_RAPIDO.md](docs/guides/INICIO_RAPIDO.md)**
+2. Crea rama: `git checkout -b feature/nombre`
+3. Sigue **[plantillas de commits](docs/templates/COMMIT_TEMPLATE.md)**
+4. Crea **[Pull Request](docs/templates/PR_TEMPLATE.md)**
 
-Generate a migration script that creates the necessary database tables based on your models:
+### Standards
 
-> flask db migrate -m "Initial migration"
+- **Commits**: [Conventional Commits](https://www.conventionalcommits.org/)
+- **Código**: PEP 8
+- **Tests**: Cobertura >80%
 
-This command scans your models and generates a new migration script in the migrations folder.
+---
 
-Apply the migration to create the tables in your database:
+## 📞 Documentación y Soporte
 
-> flask db upgrade
+- **Índice completo**: [docs/README.md](docs/README.md)
+- **Quick start**: [docs/guides/INICIO_RAPIDO.md](docs/guides/INICIO_RAPIDO.md)
+- **Estrategia Git**: [docs/git/GIT_STRATEGY.md](docs/git/GIT_STRATEGY.md)
+- **Plan completo**: [docs/plan/PLAN_REORGANIZACION.md](docs/plan/PLAN_REORGANIZACION.md)
 
-This command executes the migration script, creating the tables defined by your models in the database. Post this step, you will see an instance/db.sqlite file created.
+---
 
-## test
+## 🎉 Comenzar
 
-> python -m pytest --setup-show
-> python -m pytest --setup-show --cov=apps --cov-report=html
+```bash
+# 1. Leer documentación
+cat docs/README.md
+
+# 2. Inicializar Git workflow
+./scripts/init_git_workflow.sh
+
+# 3. Seguir guía de inicio
+cat docs/guides/INICIO_RAPIDO.md
+```
+
+---
+
+**¡Listo para transformar la aplicación! 🚀**
+
+Ver **[README_ORIGINAL.md](README_ORIGINAL.md)** para documentación técnica detallada.
