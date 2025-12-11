@@ -6,11 +6,11 @@ Este directorio contiene reportes detallados de cada fase de refactorización co
 
 ## 📁 Estructura
 
-```
+```text
 docs/reports/
 ├── README.md                    ← Estás aquí
 ├── phase-0-preparation.md       ✅ Completado
-├── phase-1-repositories.md      (Pendiente)
+├── phase-1-repositories.md      ✅ Completado
 ├── phase-2-services.md          (Pendiente)
 ├── phase-3-views.md             (Pendiente)
 └── ...
@@ -23,7 +23,7 @@ docs/reports/
 | Fase | Nombre | Estado | Fecha | Reporte |
 |------|--------|--------|-------|---------|
 | 0 | Preparation | ✅ Completado | 2025-12-11 | [phase-0-preparation.md](phase-0-preparation.md) |
-| 1 | Repository Layer | ⏸️ Pendiente | - | - |
+| 1 | Repository Layer | ✅ Completado | 2025-12-11 | [phase-1-repositories.md](phase-1-repositories.md) |
 | 2 | Service Layer | ⏸️ Pendiente | - | - |
 | 3 | View Refactoring | ⏸️ Pendiente | - | - |
 | 4 | Utilities System | ⏸️ Pendiente | - | - |
@@ -106,13 +106,13 @@ Phase: X
 
 ## 📊 Progreso General
 
-```
-Fases Completadas: 1/10 (10%)
+```text
+Fases Completadas: 2/10 (20%)
 Documentación: ████████████████████ 100% ✅
-Implementación: ██░░░░░░░░░░░░░░░░░░ 10%
+Implementación: ████░░░░░░░░░░░░░░░░ 20%
 
-Última fase: Phase 0 - Preparation ✅
-Próxima fase: Phase 1 - Repository Layer
+Última fase: Phase 1 - Repository Layer ✅
+Próxima fase: Phase 2 - Service Layer
 ```
 
 ---
