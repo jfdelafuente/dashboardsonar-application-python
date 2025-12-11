@@ -1,33 +1,45 @@
-from flask import flash, redirect, render_template, request, url_for
+from flask import flash, redirect, render_template, request, url_for, abort
 from flask_login import login_required, login_user, logout_user, current_user
 
-from infocodest.extensions import db
 from infocodest.accounts import accounts_bp
-from infocodest.models.users import User
 from infocodest.accounts.forms import LoginForm, RegisterForm, PasswordForm
 
-from infocodest.models.util import verify_pass
+from infocodest.services import AuthService
+
 
 @accounts_bp.route("/register", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated:
         flash("You are already registered.", "info")
         return redirect(url_for("home.home"))
+
     form = RegisterForm(request.form)
     if form.validate_on_submit():
-        user = User(username=form.username.data, password=form.password.data, email=form.email.data)
-        db.session.add(user)
-        db.session.commit()
-        
-        # Delete user from session
-        logout_user()
-        flash("Account created successfully.", "info")
-        return render_template(
-            "accounts/register.html",
-            msg="Account created successfully.",
-            success=True,
-            form=form
+        auth_service = AuthService()
+        success, user, error = auth_service.register_user(
+            username=form.username.data,
+            email=form.email.data,
+            password=form.password.data
         )
+
+        if success:
+            logout_user()
+            flash("Account created successfully.", "info")
+            return render_template(
+                "accounts/register.html",
+                msg="Account created successfully.",
+                success=True,
+                form=form
+            )
+        else:
+            flash(error, "danger")
+            return render_template(
+                "accounts/register.html",
+                msg=error,
+                success=False,
+                form=form
+            )
+
     return render_template("accounts/register.html", msg="", success=False, form=form)
 
 
@@ -36,16 +48,25 @@ def login():
     if current_user.is_authenticated:
         flash("You are already logged in.", "info")
         return redirect(url_for("home.home"))
+
     form = LoginForm(request.form)
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user and verify_pass(form.password.data, user.password):
+        auth_service = AuthService()
+        user = auth_service.authenticate_user(
+            username=form.username.data,
+            password=form.password.data
+        )
+
+        if user:
             login_user(user, remember=form.remember.data)
             print("Logged in successfully.")
             return redirect(url_for("home.home"))
         else:
             flash("Invalid username and/or password.", "danger")
-            return render_template("accounts/login.html", form=form, msg="Wrong user or password")
+            return render_template("accounts/login.html",
+                                 form=form,
+                                 msg="Wrong user or password")
+
     return render_template("accounts/login.html", form=form)
 
 
@@ -64,7 +85,12 @@ def password():
 
 @accounts_bp.route("/user/<username>")
 def user(username):
-    user = User.query.filter_by(username=username).first_or_404()
+    auth_service = AuthService()
+    user = auth_service.get_user_by_username(username)
+
+    if not user:
+        abort(404)
+
     return render_template("accounts/user.html", user=user)
 
 
