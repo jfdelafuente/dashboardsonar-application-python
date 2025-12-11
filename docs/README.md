@@ -22,9 +22,13 @@ docs/
 │   ├── INICIO_RAPIDO.md         Quick start 5-10 minutos
 │   └── RESUMEN.md               Navegación entre docs
 │
-└── 📝 templates/                (Plantillas)
-    ├── COMMIT_TEMPLATE.md       Template mensajes commit
-    └── PR_TEMPLATE.md           Template Pull Requests
+├── 📝 templates/                (Plantillas)
+│   ├── README.md                Guía de templates
+│   └── PHASE_REPORT_TEMPLATE.md Template reportes de fase
+│
+└── 📊 reports/                  (Reportes de Fases)
+    ├── README.md                Índice de reportes
+    └── phase-X-*.md             Reportes completados
 ```
 
 ---
