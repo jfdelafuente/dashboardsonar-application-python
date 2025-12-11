@@ -390,7 +390,7 @@ def get_by_id(self, id):  # ❌ Sin type hints
 
 ### Ya Cubierto en Template
 
-Ver: `docs/templates/COMMIT_TEMPLATE.md`
+Ver: [`.github/COMMIT_TEMPLATE.md`](../../.github/COMMIT_TEMPLATE.md)
 
 ### Checklist por Commit
 
@@ -406,7 +406,7 @@ Ver: `docs/templates/COMMIT_TEMPLATE.md`
 
 ### Ya Cubierto en Template
 
-Ver: `docs/templates/PR_TEMPLATE.md`
+Ver: [`.github/PULL_REQUEST_TEMPLATE.md`](../../.github/PULL_REQUEST_TEMPLATE.md)
 
 ### Checklist Específico por Fase
 
@@ -501,12 +501,12 @@ dashboardsonar-application-python/
 │   │   └── ...
 │   │
 │   └── templates/
-│       ├── PHASE_REPORT_TEMPLATE.md  # Plantilla de reporte
-│       ├── COMMIT_TEMPLATE.md        # Nivel 3: Commits
-│       └── PR_TEMPLATE.md            # Nivel 4: Pull Requests
+│       ├── README.md                 # Guía de templates
+│       └── PHASE_REPORT_TEMPLATE.md  # Plantilla de reporte
 │
 └── .github/
-    └── PULL_REQUEST_TEMPLATE.md      # GitHub auto-carga esto
+    ├── COMMIT_TEMPLATE.md            # Nivel 3: Commits
+    └── PULL_REQUEST_TEMPLATE.md      # Nivel 4: PRs (GitHub auto-carga)
 ```
 
 ---
