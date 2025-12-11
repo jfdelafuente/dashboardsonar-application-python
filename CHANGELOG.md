@@ -8,9 +8,100 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned
-- Phase 2: Service Layer
 - Phase 3: View Refactoring
 - Phase 4-10: See [PLAN_REORGANIZACION.md](docs/plan/PLAN_REORGANIZACION.md)
+
+## [1.3.0-phase-2] - 2025-12-11
+
+### Added
+- **Service Layer Pattern Implementation**: Complete business logic layer
+  - `infocodest/services/dashboard_service.py` (266 LOC) - KPI calculations with time-based variations
+  - `infocodest/services/metrica_service.py` (96 LOC) - Metrics aggregation and repository queries
+  - `infocodest/services/auth_service.py` (169 LOC) - User authentication and registration logic
+- **Dependency Injection**: Services inject repositories for testability and flexibility
+- **Complete Type Hints**: 100% type hint coverage with Python 3.10+ syntax
+- **Comprehensive Documentation**: Google-style docstrings on all 19 public methods
+- **Migration Documentation**: All docstrings include "Migrated from" references to original code
+- Phase 2 completion report: [docs/reports/phase-2-services.md](docs/reports/phase-2-services.md)
+
+### Changed
+- Updated `infocodest/services/__init__.py` to export all service classes
+
+### Performance
+- No performance changes yet (services not integrated with views)
+- **Future benefit**: Services enable caching strategies, transaction management, and complex business logic orchestration
+
+### Technical Debt
+- **Tests deferred to Phase 9** (consistent with Phase 1 decision)
+- **BaseService deferred**: Not created - only 3 services with minimal common logic (YAGNI principle)
+- **Input validation**: Service-level input validation deferred to Phase 4
+
+### Metrics
+- **Files created**: 4 new service files
+- **Lines of code**: 552 total (531 excluding __init__.py)
+- **Type hint coverage**: 100%
+- **Docstring coverage**: 100%
+- **Services**: 3 domain-specific (Dashboard, Metrica, Auth)
+- **Methods created**: 19 public methods + 3 private methods = 22 total
+- **Functions migrated**: 8 from models/database.py (100% migration)
+- **Phase duration**: 2 hours (estimated: 4.5-5.5 hours, 60% faster)
+- **Objectives completed**: 8/8 (100%)
+
+### Design Decisions
+
+#### 1. No BaseService (Deferred)
+- **Decision**: Do NOT create BaseService initially
+- **Rationale**: Only 3 services with minimal common logic, avoid premature abstraction (YAGNI)
+- **Trade-off**: Minor code duplication (~15 LOC) vs cleaner architecture
+
+#### 2. Dependency Injection Pattern
+- **Decision**: Services inject repositories via `__init__` with optional defaults
+- **Rationale**: Enables testing with mock repositories, flexible initialization
+- **Example**: `DashboardService(metrica_repo=None, historico_repo=None, daily_repo=None)`
+
+#### 3. Business Logic Placement
+- **Decision**: Services handle business logic; repositories only handle data access
+- **Examples**:
+  - ✅ `DashboardService._calculate_variation()` - business rule for percentage calculation
+  - ✅ `AuthService.register_user()` - validation + registration logic
+  - ❌ NOT in repositories - repositories only query/persist data
+
+#### 4. AuthService Scope
+- **Decision**: AuthService handles authentication logic, but NOT flask_login session management
+- **Services handle**: Authentication logic, registration, password verification
+- **Views handle**: Session management (login_user/logout_user), flash messages, redirects
+- **Rationale**: Session management is presentation-layer concern
+
+### Migration Guide
+
+**No breaking changes** - This phase only adds new code without modifying existing functionality.
+
+Future phases will migrate from:
+```python
+# Old (direct database.py calls in views)
+import infocodest.models.database as consulta
+dato = consulta.getDatosMetricas()
+
+# New (via service - Phase 3)
+from infocodest.services import DashboardService
+service = DashboardService()
+dato = service.get_kpi_overview()
+```
+
+**Migration Mapping** (models/database.py → services):
+- `definir_texto()` → `DashboardService._calculate_variation()`
+- `obtener_fecha_hace_dias()` → `DashboardService._get_date_n_days_ago()`
+- `calcular_datos()` → `DashboardService._format_kpi_response()`
+- `getDatosMetricas()` → `DashboardService.get_kpi_overview()`
+- `getDatosAplicacion()` → `DashboardService.get_kpi_by_application()`
+- `getDatosProveedor()` → `DashboardService.get_kpi_by_proveedor()`
+- `getDatosRepositorios()` → `DashboardService.get_kpi_by_repository()`
+- `getRepositorios()` → `MetricaService.get_applications_with_multiple_repos()`
+
+**Phase Report**: [docs/reports/phase-2-services.md](docs/reports/phase-2-services.md)
+**Branch**: `feature/refactor-phase-2-services`
+
+---
 
 ## [1.2.0-phase-1] - 2025-12-11
 
