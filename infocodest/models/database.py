@@ -3,6 +3,30 @@ import os
 import datetime
 import json
 from config import config
+import warnings
+from functools import wraps
+
+
+def deprecated(reason):
+    """Mark a function as deprecated.
+
+    Args:
+        reason: Message explaining what to use instead
+
+    Returns:
+        Decorator function that emits DeprecationWarning
+    """
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            warnings.warn(
+                f"{func.__name__} is deprecated: {reason}",
+                category=DeprecationWarning,
+                stacklevel=2
+            )
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator
 
 db_connection_string = r"sqlite:///" + os.environ['DATABASE']
 # db_connection_string = r"sqlite:///db.sqlite3"
@@ -14,6 +38,7 @@ engine = create_engine(
 )
 
 
+@deprecated("Use DashboardService._calculate_variation() instead")
 def definir_texto(v1, v2):
     if (v1==0) & (v2==0):
         avance = 0
@@ -31,6 +56,7 @@ def definir_texto(v1, v2):
     return round(avance, 1), comparativa
 
 
+@deprecated("Use DashboardService._get_date_n_days_ago() instead")
 def obtener_fecha_hace_dias(dias):
     start_date = datetime.datetime.now() - datetime.timedelta(dias)
     return start_date.strftime("%Y-%m-%d")
@@ -41,6 +67,7 @@ def ejecutar_consultas(conn, queries, params):
     return {key: value[0] if value is not None else 0 for key, value in results.items()}
 
 
+@deprecated("Use DashboardService._format_kpi_response() instead")
 def calcular_datos(datos, old_datos, keys):
     resultados = {}
     for key in keys:
@@ -58,6 +85,7 @@ def getDatosComunes(queries, params):
         return datos
 
 
+@deprecated("Use DashboardService.get_kpi_overview() instead")
 def getDatosMetricas():
     fecha = obtener_fecha_hace_dias(DAYS)
     queries = {
@@ -86,6 +114,7 @@ def getDatosMetricas():
     return calcular_datos(datos, old_datos, ['aplicaciones', 'repositorios', 'bugs', 'analisis', 'quality'])
 
 
+@deprecated("Use DashboardService.get_kpi_by_application() instead")
 def getDatosAplicacion(project):
     fecha = obtener_fecha_hace_dias(DAYS)
     queries = {
@@ -114,6 +143,7 @@ def getDatosAplicacion(project):
 
 
 
+@deprecated("Use DashboardService.get_kpi_by_proveedor() instead")
 def getDatosProveedor(proveedor):
     fecha = obtener_fecha_hace_dias(DAYS)
     queries = {
@@ -152,6 +182,7 @@ def getDatosProveedor(proveedor):
     return calcular_datos(datos, old_datos, ['aplicaciones', 'repositorios', 'bugs', 'analisis', 'quality'])
 
 
+@deprecated("Use MetricaService.get_applications_with_multiple_repos() instead")
 def getRepositorios():
     query_repos = text(
         "SELECT aplicacion, COUNT(*) AS NUM_REPO "
@@ -167,6 +198,7 @@ def getRepositorios():
     return repos
 
 
+@deprecated("Use DashboardService.get_kpi_by_repository() instead")
 def getDatosRepositorios(project, repo):
     fecha = obtener_fecha_hace_dias(DAYS)
     queries = {
