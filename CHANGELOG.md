@@ -8,11 +8,51 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned
-- Phase 0: Preparation
 - Phase 1: Repository Layer
 - Phase 2: Service Layer
 - Phase 3: View Refactoring
 - Phase 4-10: See [PLAN_REORGANIZACION.md](docs/plan/PLAN_REORGANIZACION.md)
+
+## [1.1.0-phase-0] - 2025-12-11
+
+### Added
+- Project directory structure for layered architecture:
+  - `infocodest/repositories/` - Data Access Layer (empty, ready for Phase 1)
+  - `infocodest/services/` - Business Logic Layer (empty, ready for Phase 2)
+  - `infocodest/utils/` - Shared utilities (empty)
+  - `infocodest/exceptions/` - Custom exceptions (empty)
+  - `config/` - Separated configuration module (empty)
+- Complete project backup in `backup_pre_refactor_20251211/`
+- Phase 0 completion report: [docs/reports/phase-0-preparation.md](docs/reports/phase-0-preparation.md)
+
+### Fixed
+- **CRITICAL**: `requirements.txt` encoding changed from UTF-16 to UTF-8
+  - Removed character spacing issues (��a l e m b i c → alembic)
+  - Normalized format to standard `package==version`
+  - Updated SQLAlchemy from `2.0.0b1` (beta) to `2.0.23` (stable)
+  - All 40 dependencies now properly formatted and pinned
+  - Cross-platform compatibility restored (Windows/Linux/Mac)
+
+### Technical Debt
+- Tests require `pip install -r requirements.txt` (deferred to development setup)
+- Missing `.editorconfig` file (priority: medium, planned for Phase 1)
+
+### Performance
+No performance changes in Phase 0 (preparation only).
+
+### Metrics
+- Directories created: 5 (all with `__init__.py`)
+- Files modified: 1 (requirements.txt)
+- Encoding issues fixed: 1 (critical)
+- Backup size: ~1.5 MB (complete project snapshot)
+- Phase duration: 1 hour (as estimated)
+- Objectives completed: 5/4 (125% - added critical fix)
+
+**Phase Report**: [docs/reports/phase-0-preparation.md](docs/reports/phase-0-preparation.md)
+**Branch**: `feature/refactor-phase-0-preparation`
+**Commit**: `b9164ee`
+
+---
 
 ## [1.0.0-baseline] - 2025-12-11
 

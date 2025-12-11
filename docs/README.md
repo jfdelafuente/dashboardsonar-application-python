@@ -22,9 +22,13 @@ docs/
 │   ├── INICIO_RAPIDO.md         Quick start 5-10 minutos
 │   └── RESUMEN.md               Navegación entre docs
 │
-└── 📝 templates/                (Plantillas)
-    ├── COMMIT_TEMPLATE.md       Template mensajes commit
-    └── PR_TEMPLATE.md           Template Pull Requests
+├── 📝 templates/                (Plantillas)
+│   ├── README.md                Guía de templates
+│   └── PHASE_REPORT_TEMPLATE.md Template reportes de fase
+│
+└── 📊 reports/                  (Reportes de Fases)
+    ├── README.md                Índice de reportes
+    └── phase-X-*.md             Reportes completados
 ```
 
 ---
@@ -60,8 +64,8 @@ docs/
    - Pull Requests
 
 3. **Plantillas**:
-   - [Template Commits](templates/COMMIT_TEMPLATE.md)
-   - [Template PRs](templates/PR_TEMPLATE.md)
+   - [Template Commits](../.github/COMMIT_TEMPLATE.md)
+   - [Template PRs](../.github/PULL_REQUEST_TEMPLATE.md)
 
 ### 👔 Soy Tech Lead / Arquitecto (45 min)
 
@@ -156,10 +160,10 @@ docs/
 
 | Plantilla | Uso | Ubicación |
 |-----------|-----|-----------|
-| **[COMMIT_TEMPLATE.md](templates/COMMIT_TEMPLATE.md)** | Mensajes de commit semánticos | Al hacer commits |
-| **[PR_TEMPLATE.md](templates/PR_TEMPLATE.md)** | Pull Requests consistentes | Al crear PRs |
+| **[COMMIT_TEMPLATE.md](../.github/COMMIT_TEMPLATE.md)** | Mensajes de commit semánticos | Al hacer commits |
+| **[PR_TEMPLATE.md](../.github/PULL_REQUEST_TEMPLATE.md)** | Pull Requests consistentes | Al crear PRs |
 
-#### [COMMIT_TEMPLATE.md](templates/COMMIT_TEMPLATE.md)
+#### [COMMIT_TEMPLATE.md](../.github/COMMIT_TEMPLATE.md)
 
 **Contenido**:
 - 📝 Formato estándar: `<tipo>(<ámbito>): <descripción>`
@@ -170,10 +174,10 @@ docs/
 
 **Configurar**:
 ```bash
-git config commit.template docs/templates/COMMIT_TEMPLATE.md
+git config commit.template docs/../.github/COMMIT_TEMPLATE.md
 ```
 
-#### [PR_TEMPLATE.md](templates/PR_TEMPLATE.md)
+#### [PR_TEMPLATE.md](../.github/PULL_REQUEST_TEMPLATE.md)
 
 **Contenido**:
 - 📋 Estructura estándar de PR
@@ -283,13 +287,13 @@ Para cada fase (N):
 
 ┌───────────────────────────────────────────────────────┐
 │ Escribir mensaje de commit                            │
-│ → templates/COMMIT_TEMPLATE.md                        │
+│ → ../.github/COMMIT_TEMPLATE.md                        │
 │   O: git commit (sin -m)                             │
 └───────────────────────────────────────────────────────┘
 
 ┌───────────────────────────────────────────────────────┐
 │ Crear Pull Request                                     │
-│ → templates/PR_TEMPLATE.md                            │
+│ → ../.github/PULL_REQUEST_TEMPLATE.md                            │
 │   (GitHub lo carga automáticamente)                   │
 └───────────────────────────────────────────────────────┘
 
@@ -338,7 +342,7 @@ Para cada fase (N):
 |----------|-----------|---------|
 | Arquitectura en capas | plan/PLAN_REORGANIZACION.md | "Arquitectura Objetivo" |
 | Crear rama Git | git/GIT_STRATEGY.md | "Workflow por Fase" |
-| Formato commit | templates/COMMIT_TEMPLATE.md | "Tipos de Commit" |
+| Formato commit | ../.github/COMMIT_TEMPLATE.md | "Tipos de Commit" |
 | Ejemplo código Fase 1 | plan/PLAN_REORGANIZACION.md | "FASE 1" |
 | Resolver conflictos | guides/INICIO_RAPIDO.md | "Problemas Comunes" |
 | Crear tag | git/GIT_STRATEGY.md | "Estrategia de Tagging" |
@@ -351,7 +355,7 @@ Para cada fase (N):
 |---------|-----------|------|
 | `git init` | git/GIT_STRATEGY.md | Inicialización |
 | `git checkout -b` | git/GIT_STRATEGY.md | Crear rama |
-| `git commit` | templates/COMMIT_TEMPLATE.md | Ejemplos |
+| `git commit` | ../.github/COMMIT_TEMPLATE.md | Ejemplos |
 | `git tag` | git/GIT_STRATEGY.md | Tagging |
 | `git reset` | guides/INICIO_RAPIDO.md | Correcciones |
 | `git merge` | git/GIT_STRATEGY.md | Merge strategy |
@@ -365,13 +369,13 @@ Para cada fase (N):
 - [ ] [INICIO_RAPIDO.md](guides/INICIO_RAPIDO.md) - 10 min
 - [ ] [PLAN_REORGANIZACION.md](plan/PLAN_REORGANIZACION.md) Fase 0 - 10 min
 - [ ] [GIT_STRATEGY.md](git/GIT_STRATEGY.md) Workflow - 15 min
-- [ ] [COMMIT_TEMPLATE.md](templates/COMMIT_TEMPLATE.md) - 5 min
+- [ ] [COMMIT_TEMPLATE.md](../.github/COMMIT_TEMPLATE.md) - 5 min
 
 ### Lectura Recomendada (1 hora)
 
 - [ ] [PLAN_REORGANIZACION.md](plan/PLAN_REORGANIZACION.md) Completo - 45 min
 - [ ] [RESUMEN.md](guides/RESUMEN.md) - 5 min
-- [ ] [PR_TEMPLATE.md](templates/PR_TEMPLATE.md) - 5 min
+- [ ] [PR_TEMPLATE.md](../.github/PULL_REQUEST_TEMPLATE.md) - 5 min
 
 ### Ejecutar
 
@@ -424,13 +428,13 @@ Para cada fase (N):
 
 1. ✅ Leer [INICIO_RAPIDO.md](guides/INICIO_RAPIDO.md)
 2. ✅ Revisar [PLAN_REORGANIZACION.md](plan/PLAN_REORGANIZACION.md) Fase 0
-3. ✅ Familiarizarse con [COMMIT_TEMPLATE.md](templates/COMMIT_TEMPLATE.md)
+3. ✅ Familiarizarse con [COMMIT_TEMPLATE.md](../.github/COMMIT_TEMPLATE.md)
 
 ### Mañana (empezar desarrollo)
 
 1. ✅ Crear rama `feature/refactor-phase-0-preparation`
 2. ✅ Implementar Fase 0 (30 min)
-3. ✅ Primer PR usando [PR_TEMPLATE.md](templates/PR_TEMPLATE.md)
+3. ✅ Primer PR usando [PR_TEMPLATE.md](../.github/PULL_REQUEST_TEMPLATE.md)
 
 ---
 
