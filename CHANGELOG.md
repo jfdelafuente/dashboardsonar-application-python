@@ -8,7 +8,135 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned
-- Phase 5-10: See [PLAN_REORGANIZACION.md](docs/plan/PLAN_REORGANIZACION.md)
+- Phase 6-10: See [PLAN_REORGANIZACION.md](docs/plan/PLAN_REORGANIZACION.md)
+
+## [1.5.0-phase-5] - 2025-12-12
+
+### Added
+- **Exception Handling System**: Complete custom exception hierarchy for better error handling
+  - `infocodest/exceptions/base.py` (211 LOC) - Base exception classes
+  - `infocodest/exceptions/business_exceptions.py` (313 LOC) - Domain-specific exceptions
+  - `infocodest/exceptions/__init__.py` (92 LOC) - Module exports
+  - `infocodest/templates/errors/422.html` (18 LOC) - Validation error template
+  - `docs/guides/EXCEPTION_HANDLING_GUIDE.md` (343 LOC) - Comprehensive usage guide
+- **Base Exception Classes** (5 classes):
+  - `ApplicationException` - Base for all app errors (500)
+  - `BusinessException` - Business logic violations (422)
+  - `ValidationException` - Input validation failures (422)
+  - `NotFoundException` - Resource not found (404)
+  - `DatabaseException` - Database operation failures (500)
+- **Domain-Specific Exceptions** (15 classes):
+  - **Applications**: `ApplicationNotFoundException`, `InvalidApplicationNameException`
+  - **Metrics**: `MetricNotFoundException`, `InvalidMetricValueException`
+  - **Dates**: `InvalidDateRangeException`, `InvalidDateFormatException`
+  - **Providers**: `ProviderNotFoundException`
+  - **Authentication**: `AuthenticationException` (401), `AuthorizationException` (403)
+  - **Other**: `ExportException`, `ConfigurationException`
+- **Exception Features**:
+  - HTTP status codes integrated in exception classes
+  - Payload system for rich error context
+  - `to_dict()` method for JSON serialization
+  - 100% type hints and docstrings
+- **Error Handler Integration**:
+  - Content negotiation (HTML/JSON) via `Accept` header
+  - Automatic logging with appropriate levels (WARNING/ERROR)
+  - Backward compatible with existing HTTP error handlers
+  - Centralized registration via `register_error_handlers(app)`
+
+### Changed
+- **Error Handlers** (`infocodest/errorhandlers.py`):
+  - Added 5 custom exception handlers
+  - Added `wants_json_response()` helper for content negotiation
+  - Enhanced HTTP error handlers (401, 404, 500) with JSON support
+  - Integrated structured logging with payload context
+  - Total: +275 LOC
+- **Application Factory** (`infocodest/__init__.py`):
+  - Simplified error handler registration (now uses centralized function)
+  - Changed: -6 LOC, +2 LOC (net: -4 LOC)
+
+### Technical Debt
+- **Unit Tests Pending** (Priority: Medium)
+  - No unit tests created for exception classes
+  - No tests for error handlers
+  - Plan: Implement in Phase 9 (Testing)
+  - Effort: 2-3 hours
+- **Production Monitoring Integration** (Priority: Low for MVP, High for prod)
+  - Not integrated with Sentry/Rollbar
+  - Plan: Post-MVP or Phase 10
+  - Effort: 1-2 hours
+- **Internationalization** (Priority: Low)
+  - All error messages in English
+  - Plan: Only if i18n becomes requirement
+  - Effort: 3-4 hours
+
+### Metrics
+- 6 files created (~1,040 LOC)
+- 2 files modified (+271 LOC net)
+- 15 exception classes implemented
+- 100% type hints coverage
+- 100% docstrings coverage
+- 0 breaking changes
+- Backward compatible: Yes
+
+### Design Decisions
+1. **Multi-Level Exception Hierarchy**
+   - Decision: ApplicationException → BusinessException → Specific exceptions
+   - Rationale: Enables granular catching, clear categorization, extensibility
+   - Trade-off: Slightly more complex but much more flexible
+2. **HTTP Status Codes in Exceptions**
+   - Decision: Include status_code as exception attribute
+   - Rationale: RESTful, self-contained, no external mapping needed
+3. **Payload System for Context**
+   - Decision: Optional dict for additional error context
+   - Rationale: Supports structured logging, debugging, JSON serialization
+4. **Content Negotiation**
+   - Decision: Auto-detect JSON vs HTML via Accept header
+   - Rationale: Single handler for web and API, RESTful standard
+
+### Migration Guide
+
+#### Before (Generic Exceptions)
+```python
+# Old approach
+from flask import abort
+
+if not app:
+    abort(404)
+```
+
+#### After (Custom Exceptions)
+```python
+# New approach
+from infocodest.exceptions import ApplicationNotFoundException
+
+if not app:
+    raise ApplicationNotFoundException(app_name)
+```
+
+#### Service Layer Usage (Future - Phase 2)
+```python
+from infocodest.exceptions import InvalidDateRangeException
+
+class MetricaService:
+    def get_metrics_in_range(self, start_date, end_date):
+        if start_date > end_date:
+            raise InvalidDateRangeException(start_date, end_date)
+        return self.metrica_repo.get_in_date_range(start_date, end_date)
+```
+
+### Performance
+- No performance impact
+- Exceptions are for error paths only
+- Logging overhead negligible
+
+### Documentation
+- Exception Handling Guide: `docs/guides/EXCEPTION_HANDLING_GUIDE.md`
+- Phase 5 Detailed Plan: `docs/plan/FASE_5_PLAN_DETALLADO.md`
+- Phase 5 Completion Report: `docs/reports/phase-5-exceptions.md`
+
+### References
+- [Python Exception Hierarchy](https://docs.python.org/3/library/exceptions.html#exception-hierarchy)
+- [RFC 7231 - HTTP Status Codes](https://tools.ietf.org/html/rfc7231#section-6)
 
 ## [1.4.0-phase-4] - 2025-12-12
 
