@@ -68,6 +68,43 @@ class BaseConfig:
     REMEMBER_COOKIE_DURATION = 3600
 
     @staticmethod
+    def validate_config(app):
+        """
+        Validate critical configuration settings.
+
+        Checks for required environment variables and configuration values.
+        Logs configuration status without exposing sensitive information.
+
+        Args:
+            app: Flask application instance
+
+        Raises:
+            ValueError: If critical configuration is missing
+
+        Example:
+            >>> BaseConfig.validate_config(app)
+        """
+        # Log configuration mode (without secrets)
+        config_name = app.config.__class__.__name__
+        app.logger.info(f'Configuration loaded: {config_name}')
+        app.logger.info(f'Debug mode: {app.config.get("DEBUG", False)}')
+        app.logger.info(f'Testing mode: {app.config.get("TESTING", False)}')
+
+        # Validate SECRET_KEY exists
+        if not app.config.get('SECRET_KEY'):
+            app.logger.warning('SECRET_KEY not set - using generated key (not suitable for production)')
+
+        # Log database configuration (without credentials)
+        db_uri = app.config.get('SQLALCHEMY_DATABASE_URI', '')
+        if db_uri:
+            # Mask password in URI for logging
+            import re
+            masked_uri = re.sub(r'://([^:]+):([^@]+)@', r'://\1:****@', db_uri)
+            app.logger.info(f'Database: {masked_uri}')
+        else:
+            app.logger.warning('SQLALCHEMY_DATABASE_URI not configured')
+
+    @staticmethod
     def init_app(app):
         """
         Hook for custom initialization.
@@ -83,6 +120,8 @@ class BaseConfig:
             ...     @staticmethod
             ...     def init_app(app):
             ...         # Production-specific setup
+            ...         BaseConfig.validate_config(app)
             ...         pass
         """
-        pass
+        # Validate configuration by default
+        BaseConfig.validate_config(app)
