@@ -5,17 +5,17 @@
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Flask](https://img.shields.io/badge/flask-3.0.0-green.svg)](https://flask.palletsprojects.com/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Refactoring](https://img.shields.io/badge/refactoring-50%25%20complete-yellow.svg)](docs/plan/PLAN_REORGANIZACION.md)
-[![Version](https://img.shields.io/badge/version-v1.5.0--phase--5-blue.svg)](CHANGELOG.md)
-[![Phases](https://img.shields.io/badge/phases-5%2F10%20done-success.svg)](docs/reports/)
+[![Refactoring](https://img.shields.io/badge/refactoring-60%25%20complete-yellow.svg)](docs/plan/PLAN_REORGANIZACION.md)
+[![Version](https://img.shields.io/badge/version-v1.6.0--phase--6-blue.svg)](CHANGELOG.md)
+[![Phases](https://img.shields.io/badge/phases-6%2F10%20done-success.svg)](docs/reports/)
 
 ---
 
 ## 🎯 Proyecto de Refactorización
 
-> **Estado Actual**: 🚀 **Fase 5 Completada** - 50% del proyecto completado
+> **Estado Actual**: 🚀 **Fase 6 Completada** - 60% del proyecto completado
 >
-> **Versión**: v1.5.0-phase-5
+> **Versión**: v1.6.0-phase-6
 >
 > **Objetivo**: Transformar la aplicación a una arquitectura en capas mantenible, ágil y eficaz
 
@@ -27,8 +27,8 @@ Toda la documentación del proyecto de refactorización está organizada en el d
 docs/
 ├── README.md                    → Índice principal
 ├── plan/                        → Plan de refactorización y planes detallados
-├── reports/                     → Reportes de fases completadas (0-5)
-├── guides/                      → Guías de usuario (Exception Handling, Inicio Rápido, etc.)
+├── reports/                     → Reportes de fases completadas (0-6)
+├── guides/                      → Guías de usuario (Configuration, Exception Handling, etc.)
 ├── git/                         → Estrategia de versionado
 └── templates/                   → Plantillas de commits y PRs
 ```
@@ -44,10 +44,12 @@ docs/
 3. Revisa el **[índice de documentación](docs/README.md)**
 
 **Para entender el proyecto completo**:
+
 - 📋 **[Plan de Reorganización](docs/plan/PLAN_REORGANIZACION.md)** - Plan maestro de 10 fases
-- 📊 **[Reportes de Fases](docs/reports/)** - Reportes completos de fases 0-5
+- 📊 **[Reportes de Fases](docs/reports/)** - Reportes completos de fases 0-6
 - 🔀 **[Estrategia Git](docs/git/GIT_STRATEGY.md)** - Control de versiones detallado
 - 📖 **[Resumen](docs/guides/RESUMEN.md)** - Navegación entre documentos
+- ⚙️ **[Configuration Guide](docs/guides/CONFIGURATION_GUIDE.md)** - Sistema modular de configuración
 - 🚨 **[Exception Handling Guide](docs/guides/EXCEPTION_HANDLING_GUIDE.md)** - Sistema de excepciones custom
 
 ---
