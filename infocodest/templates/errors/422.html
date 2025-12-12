@@ -1,0 +1,18 @@
+{% extends "layouts/base_errors.html" %}
+{% block title %}422 Error{% endblock %}
+{% block content %}
+<img class="mb-4 img-error" src="{{ url_for('static', filename='assets/img/error-404-monochrome.svg') }}">
+<h1 class="mb-2">422 - Unprocessable Entity</h1>
+{% if error_message %}
+    <p class="lead">{{ error_message }}</p>
+{% else %}
+    <p class="lead">The request was well-formed but contains invalid data.</p>
+{% endif %}
+{% if field %}
+    <p class="text-muted"><strong>Field:</strong> {{ field }}</p>
+{% endif %}
+<a href="{{ url_for('home.home') }}">
+    <i class="fas fa-arrow-left me-1"></i>
+    Return to Dashboard
+</a>
+{% endblock %}
