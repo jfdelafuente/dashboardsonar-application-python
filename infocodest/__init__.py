@@ -1,14 +1,8 @@
 from flask import Flask
-from .errorhandlers import error_401, error_404, error_500
 from flask_cors import CORS
 from .extensions import db, login_manager, migrate, bootstrap, csrf
 from .utils.logger import setup_logging
-
-def register_error_handlers(app):
-    # Registering Errorhandler
-    app.register_error_handler(401, error_401)
-    app.register_error_handler(404, error_404)
-    app.register_error_handler(500, error_500)
+from .errorhandlers import register_error_handlers
 
 
 def register_blueprints(app):
