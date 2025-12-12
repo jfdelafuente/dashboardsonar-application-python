@@ -20,6 +20,8 @@ docs/
 │
 ├── 📖 guides/                   (Guías de Usuario)
 │   ├── INICIO_RAPIDO.md         Quick start 5-10 minutos
+│   ├── CONFIGURATION_GUIDE.md   Sistema de configuración
+│   ├── EXCEPTION_HANDLING_GUIDE.md  Manejo de excepciones
 │   └── RESUMEN.md               Navegación entre docs
 │
 ├── 📝 templates/                (Plantillas)
@@ -130,6 +132,8 @@ docs/
 | Documento | Descripción | Tiempo | Prioridad |
 |-----------|-------------|--------|-----------|
 | **[INICIO_RAPIDO.md](guides/INICIO_RAPIDO.md)** | Quick start y comandos diarios | 5-10 min | 🔴 Alta |
+| **[CONFIGURATION_GUIDE.md](guides/CONFIGURATION_GUIDE.md)** | Sistema modular de configuración | 20-30 min | 🔴 Alta |
+| **[EXCEPTION_HANDLING_GUIDE.md](guides/EXCEPTION_HANDLING_GUIDE.md)** | Manejo de excepciones custom | 15-20 min | 🟡 Media |
 | **[RESUMEN.md](guides/RESUMEN.md)** | Navegación entre documentos | 5 min | 🟡 Media |
 
 #### [INICIO_RAPIDO.md](guides/INICIO_RAPIDO.md)
@@ -449,11 +453,11 @@ Fase 2:         ████████████████████ 100
 Fase 3:         ████████████████████ 100% ✅ (Vistas)
 Fase 4:         ████████████████████ 100% ✅ (Utilidades)
 Fase 5:         ████████████████████ 100% ✅ (Excepciones)
-Fase 6:         ░░░░░░░░░░░░░░░░░░░░   0% ⏭️ (Configuración)
+Fase 6:         ████████████████████ 100% ✅ (Configuración)
 Fases 7-10:     ░░░░░░░░░░░░░░░░░░░░   0% ⏸️
 
-Progreso total: ██████████░░░░░░░░░░  50% (5/10 fases)
-Próximo: Fase 6 - Configuración Mejorada
+Progreso total: ████████████░░░░░░░░  60% (6/10 fases)
+Próximo: Fase 7 - Seguridad Avanzada & Logging
 ```
 
 ---
@@ -472,6 +476,6 @@ Todo está preparado para iniciar la refactorización con:
 
 ---
 
-**Última actualización**: 2025-12-11
-**Versión**: 1.0.0
-**Mantenedor**: [Añadir nombre]
+**Última actualización**: 2025-12-12
+**Versión**: v1.6.0-phase-6
+**Mantenedor**: Dashboard Sonar Team
