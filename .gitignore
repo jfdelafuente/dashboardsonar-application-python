@@ -13,6 +13,7 @@ coverage.xml
 *.db
 *.sqlite3
 *.log
+*.log.*
 *.sqlite3-journal
 *.csv
 logs/
