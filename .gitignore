@@ -21,7 +21,14 @@ logs/
 # venv
 env
 venv
+
+# Environment configuration files (NEVER commit these - contain secrets)
 .env
+.env.local
+.env.*.local
+.env.production
+.env.development
+.env.testing
 
 # other
 .DS_Store
