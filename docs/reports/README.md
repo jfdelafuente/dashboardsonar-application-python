@@ -13,6 +13,8 @@ docs/reports/
 ├── phase-1-repositories.md      ✅ Completado
 ├── phase-2-services.md          ✅ Completado
 ├── phase-3-views.md             ✅ Completado
+├── phase-4-utilities.md         ✅ Completado
+├── phase-5-exceptions.md        ✅ Completado
 └── ...
 ```
 
@@ -26,8 +28,8 @@ docs/reports/
 | 1 | Repository Layer | ✅ Completado | 2025-12-11 | [phase-1-repositories.md](phase-1-repositories.md) |
 | 2 | Service Layer | ✅ Completado | 2025-12-11 | [phase-2-services.md](phase-2-services.md) |
 | 3 | View Refactoring | ✅ Completado | 2025-12-11 | [phase-3-views.md](phase-3-views.md) |
-| 4 | Utilities System | ⏸️ Pendiente | - | - |
-| 5 | Exception Handling | ⏸️ Pendiente | - | - |
+| 4 | Utilities System | ✅ Completado | 2025-12-12 | [phase-4-utilities.md](phase-4-utilities.md) |
+| 5 | Exception Handling | ✅ Completado | 2025-12-12 | [phase-5-exceptions.md](phase-5-exceptions.md) |
 | 6 | Configuration | ⏸️ Pendiente | - | - |
 | 7 | Dependencies | ⏸️ Pendiente | - | - |
 | 8 | Entry Points | ⏸️ Pendiente | - | - |
@@ -107,14 +109,14 @@ Phase: X
 ## 📊 Progreso General
 
 ```text
-Fases Completadas: 4/10 (40%)
+Fases Completadas: 5/10 (50%)
 Documentación: ████████████████████ 100% ✅
-Implementación: ████████░░░░░░░░░░░░ 40%
+Implementación: ██████████░░░░░░░░░░ 50%
 
-Última fase: Phase 3 - View Refactoring ✅
-Próxima fase: Phase 4 - Utilities System
+Última fase: Phase 5 - Exception Handling ✅
+Próxima fase: Phase 6 - Configuration System
 ```
 
 ---
 
-**Última actualización**: 2025-12-11
+**Última actualización**: 2025-12-12
