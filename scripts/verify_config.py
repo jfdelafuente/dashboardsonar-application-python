@@ -56,7 +56,16 @@ else:
 
 # Test 3: Verify each config class has required attributes
 print("\n[TEST 3] Verifying required attributes...")
-required_attributes = [
+
+# Base config only needs these
+base_required_attributes = [
+    'SECRET_KEY',
+    'SQLALCHEMY_TRACK_MODIFICATIONS',
+    'init_app'
+]
+
+# Environment configs need database URI
+env_required_attributes = [
     'SECRET_KEY',
     'SQLALCHEMY_TRACK_MODIFICATIONS',
     'SQLALCHEMY_DATABASE_URI',
@@ -67,7 +76,10 @@ for name, config_class in config_dict.items():
     print(f"\n  Testing {name}Config...")
     missing_attrs = []
 
-    for attr in required_attributes:
+    # Use different requirements for base vs environment configs
+    required_attrs = base_required_attributes if name == 'base' else env_required_attributes
+
+    for attr in required_attrs:
         if not hasattr(config_class, attr):
             missing_attrs.append(attr)
 
