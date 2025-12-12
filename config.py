@@ -2,8 +2,10 @@ from decouple import config
 import random
 import os
 import string
+import logging
 
 basedir = os.path.abspath(os.path.dirname(__file__))
+logger = logging.getLogger(__name__)
 
 
 class Config(object):
@@ -74,8 +76,8 @@ class ProductionConfig(Config):
                 DB_NAME
             )
         except Exception as e:
-            print('> Error: DBMS Exception: ' + str(e) )
-            print('> Fallback to SQLite ')
+            logger.error(f'DBMS Exception: {e}')
+            logger.info('Fallback to SQLite')
 
     # Security
     SESSION_COOKIE_HTTPONLY = True

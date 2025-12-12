@@ -2,6 +2,7 @@ from flask import Flask
 from .errorhandlers import error_401, error_404, error_500
 from flask_cors import CORS
 from .extensions import db, login_manager, migrate, bootstrap, csrf
+from .utils.logger import setup_logging
 
 def register_error_handlers(app):
     # Registering Errorhandler
@@ -37,10 +38,18 @@ def create_app(app_config):
     """Initialize the core application."""
     app = Flask(__name__)
     app.config.from_object(app_config)
+
+    # Setup logging first
+    setup_logging(app)
+
     with app.app_context():
         initialize_plugins(app)
         register_blueprints(app)
         register_error_handlers(app)
+
+        # Log application startup
+        app.logger.info(f'Application started - Config: {app_config.__name__}')
+
     return app
 
 
