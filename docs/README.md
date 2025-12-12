@@ -443,11 +443,17 @@ Para cada fase (N):
 ```
 Documentación:  ████████████████████ 100% ✅
 Herramientas:   ████████████████████ 100% ✅
-Inicialización: ░░░░░░░░░░░░░░░░░░░░   0% ⏸️
-Fase 0:         ░░░░░░░░░░░░░░░░░░░░   0% ⏸️
-Fases 1-10:     ░░░░░░░░░░░░░░░░░░░░   0% ⏸️
+Fase 0:         ████████████████████ 100% ✅ (Preparación)
+Fase 1:         ████████████████████ 100% ✅ (Repositorios)
+Fase 2:         ████████████████████ 100% ✅ (Servicios)
+Fase 3:         ████████████████████ 100% ✅ (Vistas)
+Fase 4:         ████████████████████ 100% ✅ (Utilidades)
+Fase 5:         ████████████████████ 100% ✅ (Excepciones)
+Fase 6:         ░░░░░░░░░░░░░░░░░░░░   0% ⏭️ (Configuración)
+Fases 7-10:     ░░░░░░░░░░░░░░░░░░░░   0% ⏸️
 
-Próximo: ./scripts/init_git_workflow.sh
+Progreso total: ██████████░░░░░░░░░░  50% (5/10 fases)
+Próximo: Fase 6 - Configuración Mejorada
 ```
 
 ---
