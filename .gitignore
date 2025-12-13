@@ -13,14 +13,27 @@ coverage.xml
 *.db
 *.sqlite3
 *.log
+*.log.*
 *.sqlite3-journal
 *.csv
 logs/
 
 # venv
-env
-venv
+env/
+venv/
+venv_*/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment configuration files (NEVER commit these - contain secrets)
 .env
+.env.local
+.env.*.local
+.env.production
+.env.development
+.env.testing
 
 # other
 .DS_Store
@@ -68,3 +81,11 @@ backup_*/
 
 # Coverage reports
 .coverage.*
+
+# Pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Dependency analysis temp files
+temp_current_deps.txt
+temp_*.txt

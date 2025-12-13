@@ -104,7 +104,7 @@ if [ "$GIT_INITIALIZED" = false ] || [ -z "$(git log -1 2>/dev/null)" ]; then
 - Tests passing (baseline coverage)
 
 This commit serves as the baseline for the refactoring project.
-Reference: PLAN_REORGANIZACION.md, GIT_STRATEGY.md"
+Reference: docs/plan/PLAN_REORGANIZACION.md, docs/git/GIT_STRATEGY.md"
 
     echo -e "${GREEN}✅ Commit baseline creado${NC}"
 else
@@ -312,7 +312,7 @@ if [ -n "$(git status --porcelain)" ]; then
 - Configured commit template
 - Ready for Phase 0
 
-Ref: GIT_STRATEGY.md
+Ref: docs/git/GIT_STRATEGY.md
 " || echo -e "${YELLOW}⚠️  No hay cambios para commitear${NC}"
 
     echo -e "${GREEN}✅ Configuración commiteada${NC}"
@@ -334,18 +334,21 @@ echo "   - Último commit: $(git log -1 --oneline)"
 echo "   - Tags: $(git tag -l | tr '\n' ', ' | sed 's/,$//')"
 echo ""
 echo "📚 Documentación:"
-echo "   - Plan completo: PLAN_REORGANIZACION.md"
-echo "   - Estrategia Git: GIT_STRATEGY.md"
+echo "   - Índice principal: docs/README.md"
+echo "   - Plan completo: docs/plan/PLAN_REORGANIZACION.md"
+echo "   - Estrategia Git: docs/git/GIT_STRATEGY.md"
+echo "   - Guía rápida: docs/guides/INICIO_RAPIDO.md"
 echo "   - Template PR: .github/PULL_REQUEST_TEMPLATE.md"
 echo "   - Template Commit: .github/COMMIT_TEMPLATE.md"
 echo ""
 echo "🚀 Próximos Pasos:"
 echo ""
-echo "   1. Revisar el PLAN_REORGANIZACION.md"
-echo "   2. Ejecutar Fase 0: Preparación"
+echo "   1. Revisar docs/README.md (índice completo)"
+echo "   2. Leer docs/guides/INICIO_RAPIDO.md"
+echo "   3. Ejecutar Fase 0: Preparación"
 echo "      $ git checkout -b feature/refactor-phase-0-preparation"
 echo ""
-echo "   3. Seguir el workflow de GIT_STRATEGY.md para cada fase"
+echo "   4. Seguir el workflow de docs/git/GIT_STRATEGY.md para cada fase"
 echo ""
 echo "💡 Comandos Útiles:"
 echo "   - Ver estado: git status"

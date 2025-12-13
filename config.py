@@ -1,9 +1,39 @@
+"""
+⚠️ DEPRECATED - This file is deprecated as of Phase 6
+
+New configuration system is in config/ module.
+This file is kept for backward compatibility only.
+Will be removed in Phase 10.
+
+Migration Guide:
+    The new config system provides better separation of concerns:
+
+    Old way (deprecated):
+        from config import config_dict
+
+    New way (recommended):
+        from config import config_dict
+
+    Usage remains the same:
+        config = config_dict['Development']
+        app = create_app(config)
+
+For more information, see:
+    - config/base.py - Base configuration
+    - config/development.py - Development config
+    - config/testing.py - Testing config
+    - config/production.py - Production config
+    - docs/guides/CONFIGURATION_GUIDE.md - Full guide (to be created)
+"""
+
 from decouple import config
 import random
 import os
 import string
+import logging
 
 basedir = os.path.abspath(os.path.dirname(__file__))
+logger = logging.getLogger(__name__)
 
 
 class Config(object):
@@ -74,8 +104,8 @@ class ProductionConfig(Config):
                 DB_NAME
             )
         except Exception as e:
-            print('> Error: DBMS Exception: ' + str(e) )
-            print('> Fallback to SQLite ')
+            logger.error(f'DBMS Exception: {e}')
+            logger.info('Fallback to SQLite')
 
     # Security
     SESSION_COOKIE_HTTPONLY = True
