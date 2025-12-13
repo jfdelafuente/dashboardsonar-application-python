@@ -5,17 +5,17 @@
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Flask](https://img.shields.io/badge/flask-3.0.0-green.svg)](https://flask.palletsprojects.com/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Refactoring](https://img.shields.io/badge/refactoring-60%25%20complete-yellow.svg)](docs/plan/PLAN_REORGANIZACION.md)
-[![Version](https://img.shields.io/badge/version-v1.6.0--phase--6-blue.svg)](CHANGELOG.md)
-[![Phases](https://img.shields.io/badge/phases-6%2F10%20done-success.svg)](docs/reports/)
+[![Refactoring](https://img.shields.io/badge/refactoring-70%25%20complete-yellow.svg)](docs/plan/PLAN_REORGANIZACION.md)
+[![Version](https://img.shields.io/badge/version-v1.7.0--phase--7-blue.svg)](CHANGELOG.md)
+[![Phases](https://img.shields.io/badge/phases-7%2F10%20done-success.svg)](docs/reports/)
 
 ---
 
 ## 🎯 Proyecto de Refactorización
 
-> **Estado Actual**: 🚀 **Fase 6 Completada** - 60% del proyecto completado
+> **Estado Actual**: 🚀 **Fase 7 Completada** - 70% del proyecto completado
 >
-> **Versión**: v1.6.0-phase-6
+> **Versión**: v1.7.0-phase-7
 >
 > **Objetivo**: Transformar la aplicación a una arquitectura en capas mantenible, ágil y eficaz
 
@@ -187,7 +187,7 @@ dashboardsonar-application-python/
 
 ## 🚀 Roadmap de Refactorización
 
-### Progreso Actual: 50% Completado (5/10 fases)
+### Progreso Actual: 70% Completado (7/10 fases)
 
 | Fase | Descripción | Duración | Estado | Reporte |
 |------|-------------|----------|--------|---------|
@@ -197,13 +197,13 @@ dashboardsonar-application-python/
 | 3 | Refactorizar Vistas | 2h | ✅ **Completado** | [Ver reporte](docs/reports/phase-3-views.md) |
 | 4 | Sistema de Utilidades | 1.5h | ✅ **Completado** | [Ver reporte](docs/reports/phase-4-utilities.md) |
 | 5 | Manejo de Excepciones | 1h | ✅ **Completado** | [Ver reporte](docs/reports/phase-5-exceptions.md) |
-| 6 | Configuración Mejorada | 1h | ⏭️ **Siguiente** | - |
-| 7 | Optimización Dependencias | 30 min | ⏸️ Pendiente | - |
-| 8 | Actualizar Entry Points | 30 min | ⏸️ Pendiente | - |
+| 6 | Configuración Mejorada | 1h | ✅ **Completado** | [Ver reporte](docs/reports/phase-6-configuration.md) |
+| 7 | Optimización Dependencias | 45 min | ✅ **Completado** | [Ver reporte](docs/reports/phase-7-dependencies.md) |
+| 8 | Actualizar Entry Points | 30 min | ⏭️ **Siguiente** | - |
 | 9 | Tests y Validación | 2-3h | ⏸️ Pendiente | - |
 | 10 | Documentación y Limpieza | 1h | ⏸️ Pendiente | - |
 
-**Progreso**: 10 horas completadas de 14-20 horas estimadas
+**Progreso**: 11.75 horas completadas de 14-20 horas estimadas
 
 Ver detalles completos en **[docs/plan/PLAN_REORGANIZACION.md](docs/plan/PLAN_REORGANIZACION.md)**
 
