@@ -64,6 +64,32 @@ docs/
 - SQLite3
 - Virtualenv
 
+### Instalación de Dependencias
+
+Para información completa sobre las dependencias del proyecto, consulta **[docs/DEPENDENCIES.md](docs/DEPENDENCIES.md)**
+
+#### Producción
+
+```bash
+# 1. Crear y activar entorno virtual
+python -m venv venv
+# Windows: .\venv\Scripts\activate
+# Linux/Mac: source venv/bin/activate
+
+# 2. Instalar dependencias
+pip install -r requirements.txt
+
+# 3. Verificar instalación
+python scripts/verify_requirements.py
+```
+
+#### Desarrollo
+
+```bash
+# Instalar dependencias de desarrollo (incluye las de producción)
+pip install -r requirements-dev.txt
+```
+
 ### Instalación Rápida
 
 #### Unix/Linux/Mac
