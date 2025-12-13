@@ -5,17 +5,17 @@
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Flask](https://img.shields.io/badge/flask-3.0.0-green.svg)](https://flask.palletsprojects.com/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Refactoring](https://img.shields.io/badge/refactoring-60%25%20complete-yellow.svg)](docs/plan/PLAN_REORGANIZACION.md)
-[![Version](https://img.shields.io/badge/version-v1.6.0--phase--6-blue.svg)](CHANGELOG.md)
-[![Phases](https://img.shields.io/badge/phases-6%2F10%20done-success.svg)](docs/reports/)
+[![Refactoring](https://img.shields.io/badge/refactoring-80%25%20complete-green.svg)](docs/plan/PLAN_REORGANIZACION.md)
+[![Version](https://img.shields.io/badge/version-v1.8.0--phase--8-blue.svg)](CHANGELOG.md)
+[![Phases](https://img.shields.io/badge/phases-8%2F10%20done-success.svg)](docs/reports/)
 
 ---
 
 ## 🎯 Proyecto de Refactorización
 
-> **Estado Actual**: 🚀 **Fase 6 Completada** - 60% del proyecto completado
+> **Estado Actual**: 🚀 **Fase 8 Completada** - 80% del proyecto completado
 >
-> **Versión**: v1.6.0-phase-6
+> **Versión**: v1.8.0-phase-8
 >
 > **Objetivo**: Transformar la aplicación a una arquitectura en capas mantenible, ágil y eficaz
 
@@ -27,7 +27,7 @@ Toda la documentación del proyecto de refactorización está organizada en el d
 docs/
 ├── README.md                    → Índice principal
 ├── plan/                        → Plan de refactorización y planes detallados
-├── reports/                     → Reportes de fases completadas (0-6)
+├── reports/                     → Reportes de fases completadas (0-8)
 ├── guides/                      → Guías de usuario (Configuration, Exception Handling, etc.)
 ├── git/                         → Estrategia de versionado
 └── templates/                   → Plantillas de commits y PRs
@@ -161,7 +161,7 @@ dashboardsonar-application-python/
 
 ## 🚀 Roadmap de Refactorización
 
-### Progreso Actual: 50% Completado (5/10 fases)
+### Progreso Actual: 80% Completado (8/10 fases)
 
 | Fase | Descripción | Duración | Estado | Reporte |
 |------|-------------|----------|--------|---------|
@@ -171,13 +171,13 @@ dashboardsonar-application-python/
 | 3 | Refactorizar Vistas | 2h | ✅ **Completado** | [Ver reporte](docs/reports/phase-3-views.md) |
 | 4 | Sistema de Utilidades | 1.5h | ✅ **Completado** | [Ver reporte](docs/reports/phase-4-utilities.md) |
 | 5 | Manejo de Excepciones | 1h | ✅ **Completado** | [Ver reporte](docs/reports/phase-5-exceptions.md) |
-| 6 | Configuración Mejorada | 1h | ⏭️ **Siguiente** | - |
-| 7 | Optimización Dependencias | 30 min | ⏸️ Pendiente | - |
-| 8 | Actualizar Entry Points | 30 min | ⏸️ Pendiente | - |
-| 9 | Tests y Validación | 2-3h | ⏸️ Pendiente | - |
+| 6 | Configuración Mejorada | 1h | ✅ **Completado** | [Ver reporte](docs/reports/phase-6-configuration.md) |
+| 7 | Optimización Dependencias | 45 min | ✅ **Completado** | [Ver reporte](docs/reports/phase-7-dependencies.md) |
+| 8 | Actualizar Entry Points | 45 min | ✅ **Completado** | [Ver reporte](docs/reports/phase-8-entrypoints.md) |
+| 9 | Tests y Validación | 2-3h | ⏭️ **Siguiente** | - |
 | 10 | Documentación y Limpieza | 1h | ⏸️ Pendiente | - |
 
-**Progreso**: 10 horas completadas de 14-20 horas estimadas
+**Progreso**: 12.5 horas completadas de 14-20 horas estimadas
 
 Ver detalles completos en **[docs/plan/PLAN_REORGANIZACION.md](docs/plan/PLAN_REORGANIZACION.md)**
 
