@@ -71,7 +71,7 @@
 
 ---
 
-### 5. 📝 [.github/COMMIT_TEMPLATE.md](../../.github/COMMIT_TEMPLATE.md)
+### 5. 📝 .github/COMMIT_TEMPLATE.md
 **Qué es**: Plantilla y guía para mensajes de commit
 **Cuándo usarlo**: Referencia al hacer commits
 
@@ -165,7 +165,7 @@ Para cada fase:
 2. Desarrollar según PLAN_REORGANIZACION.md Fase N
    └─> Código de ejemplo incluido
 
-3. Commits siguiendo [.github/COMMIT_TEMPLATE.md](../../.github/COMMIT_TEMPLATE.md)
+3. Commits siguiendo COMMIT_TEMPLATE.md
    └─> Mensajes semánticos
 
 4. PR usando PULL_REQUEST_TEMPLATE.md
@@ -204,7 +204,7 @@ Para cada fase:
 
 ┌───────────────────────────────────────────────────────┐
 │ Escribir mensaje de commit                            │
-│ → .github/COMMIT_TEMPLATE.md                          │
+│ → COMMIT_TEMPLATE.md                                  │
 │ O usar: git commit (sin -m)                          │
 └───────────────────────────────────────────────────────┘
 
@@ -237,7 +237,7 @@ Para cada fase:
 | PLAN_REORGANIZACION.md | Visión completa | 30-45 min |
 | GIT_STRATEGY.md | Referencia Git | 15-20 min |
 | PULL_REQUEST_TEMPLATE.md | Crear PRs consistentes | 2 min/uso |
-| [.github/COMMIT_TEMPLATE.md](../../.github/COMMIT_TEMPLATE.md) | Commits semánticos | 1 min/uso |
+| COMMIT_TEMPLATE.md | Commits semánticos | 1 min/uso |
 | RESUMEN_DOCUMENTACION.md | Navegar docs | 5 min |
 
 ---
@@ -251,7 +251,7 @@ Antes de empezar las fases:
 - [x] GIT_STRATEGY.md creado
 - [x] INICIO_RAPIDO_GIT.md creado
 - [x] PULL_REQUEST_TEMPLATE.md creado
-- [x] .github/COMMIT_TEMPLATE.md creado
+- [x] COMMIT_TEMPLATE.md creado
 - [x] RESUMEN_DOCUMENTACION.md creado
 
 ### Herramientas
@@ -332,7 +332,7 @@ git checkout -b feature/refactor-phase-1-repositories
 |----------|-----------|---------|
 | Arquitectura en capas | PLAN_REORGANIZACION.md | "Arquitectura Objetivo" |
 | Crear rama | GIT_STRATEGY.md | "Workflow por Fase" |
-| Formato commit | [.github/COMMIT_TEMPLATE.md](../../.github/COMMIT_TEMPLATE.md) | "Tipos de Commit" |
+| Formato commit | COMMIT_TEMPLATE.md | "Tipos de Commit" |
 | Ejemplo código Fase 1 | PLAN_REORGANIZACION.md | "FASE 1" |
 | Resolver conflictos | INICIO_RAPIDO_GIT.md | "Problemas Comunes" |
 | Crear tag | GIT_STRATEGY.md | "Estrategia de Tagging" |
@@ -344,7 +344,7 @@ git checkout -b feature/refactor-phase-1-repositories
 |---------|-----------|---------|
 | `git init` | GIT_STRATEGY.md | "Inicialización" |
 | `git checkout -b` | GIT_STRATEGY.md | "Crear rama de Feature" |
-| `git commit` | [.github/COMMIT_TEMPLATE.md](../../.github/COMMIT_TEMPLATE.md) | Todos los ejemplos |
+| `git commit` | COMMIT_TEMPLATE.md | Todos los ejemplos |
 | `git tag` | GIT_STRATEGY.md | "Estrategia de Tagging" |
 | `git reset` | INICIO_RAPIDO_GIT.md | "Correcciones" |
 | `git merge` | GIT_STRATEGY.md | "Estrategia de Merge" |
@@ -360,7 +360,7 @@ git checkout -b feature/refactor-phase-1-repositories
 
 ### Para Desarrolladores Experimentados
 1. Revisar: GIT_STRATEGY.md (workflow específico)
-2. Referencia: [.github/COMMIT_TEMPLATE.md](../../.github/COMMIT_TEMPLATE.md) (semántica)
+2. Referencia: COMMIT_TEMPLATE.md (semántica)
 3. Implementar: Seguir PLAN_REORGANIZACION.md
 
 ### Para Tech Leads
@@ -382,8 +382,8 @@ git checkout -b feature/refactor-phase-1-repositories
 → PLAN_REORGANIZACION.md (ejemplos por fase)
 
 **Formato de commits/PRs**
-→ [.github/COMMIT_TEMPLATE.md](../../.github/COMMIT_TEMPLATE.md)
-→ [.github/PULL_REQUEST_TEMPLATE.md](../../.github/PULL_REQUEST_TEMPLATE.md)
+→ COMMIT_TEMPLATE.md
+→ PULL_REQUEST_TEMPLATE.md
 
 **Navegación de docs**
 → Este archivo (RESUMEN_DOCUMENTACION.md)
@@ -426,21 +426,15 @@ git tag -l
 ## 📊 Estado del Proyecto
 
 ```
-Estado Actual: 🚀 FASE 5 COMPLETADA - 50% DEL PROYECTO
+Estado Actual: ✅ PREPARADO PARA INICIAR
 
-Documentación:  ████████████████████ 100%
-Herramientas:   ████████████████████ 100%
-Inicialización: ████████████████████ 100% ✅
-Fase 0:         ████████████████████ 100% ✅ (Preparación)
-Fase 1:         ████████████████████ 100% ✅ (Repositorios)
-Fase 2:         ████████████████████ 100% ✅ (Servicios)
-Fase 3:         ████████████████████ 100% ✅ (Vistas)
-Fase 4:         ████████████████████ 100% ✅ (Utilidades)
-Fase 5:         ████████████████████ 100% ✅ (Excepciones)
-Fase 6-10:      ░░░░░░░░░░░░░░░░░░░░   0%
+Documentación: ████████████████████ 100%
+Herramientas:  ████████████████████ 100%
+Inicialización: ░░░░░░░░░░░░░░░░░░░░   0% (ejecutar script)
+Fase 0:        ░░░░░░░░░░░░░░░░░░░░   0%
+Fase 1-10:     ░░░░░░░░░░░░░░░░░░░░   0%
 
-Progreso Total: ██████████░░░░░░░░░░  50% (5/10 fases)
-Próximo: Fase 6 - Configuración Mejorada
+Próximo: Ejecutar scripts/init_git_workflow.sh
 ```
 
 ---
