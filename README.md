@@ -5,17 +5,17 @@
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Flask](https://img.shields.io/badge/flask-3.0.0-green.svg)](https://flask.palletsprojects.com/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Refactoring](https://img.shields.io/badge/refactoring-60%25%20complete-yellow.svg)](docs/plan/PLAN_REORGANIZACION.md)
-[![Version](https://img.shields.io/badge/version-v1.6.0--phase--6-blue.svg)](CHANGELOG.md)
-[![Phases](https://img.shields.io/badge/phases-6%2F10%20done-success.svg)](docs/reports/)
+[![Refactoring](https://img.shields.io/badge/refactoring-70%25%20complete-yellow.svg)](docs/plan/PLAN_REORGANIZACION.md)
+[![Version](https://img.shields.io/badge/version-v1.7.0--phase--7-blue.svg)](CHANGELOG.md)
+[![Phases](https://img.shields.io/badge/phases-7%2F10%20done-success.svg)](docs/reports/)
 
 ---
 
 ## 🎯 Proyecto de Refactorización
 
-> **Estado Actual**: 🚀 **Fase 6 Completada** - 60% del proyecto completado
+> **Estado Actual**: 🚀 **Fase 7 Completada** - 70% del proyecto completado
 >
-> **Versión**: v1.6.0-phase-6
+> **Versión**: v1.7.0-phase-7
 >
 > **Objetivo**: Transformar la aplicación a una arquitectura en capas mantenible, ágil y eficaz
 
@@ -46,11 +46,12 @@ docs/
 **Para entender el proyecto completo**:
 
 - 📋 **[Plan de Reorganización](docs/plan/PLAN_REORGANIZACION.md)** - Plan maestro de 10 fases
-- 📊 **[Reportes de Fases](docs/reports/)** - Reportes completos de fases 0-6
+- 📊 **[Reportes de Fases](docs/reports/)** - Reportes completos de fases 0-7
 - 🔀 **[Estrategia Git](docs/git/GIT_STRATEGY.md)** - Control de versiones detallado
 - 📖 **[Resumen](docs/guides/RESUMEN.md)** - Navegación entre documentos
 - ⚙️ **[Configuration Guide](docs/guides/CONFIGURATION_GUIDE.md)** - Sistema modular de configuración
 - 🚨 **[Exception Handling Guide](docs/guides/EXCEPTION_HANDLING_GUIDE.md)** - Sistema de excepciones custom
+- 📦 **[Dependencies Guide](docs/DEPENDENCIES.md)** - Guía completa de gestión de dependencias
 
 ---
 
@@ -63,6 +64,32 @@ docs/
 - Python 3.8+
 - SQLite3
 - Virtualenv
+
+### Instalación de Dependencias
+
+Para información completa sobre las dependencias del proyecto, consulta **[docs/DEPENDENCIES.md](docs/DEPENDENCIES.md)**
+
+#### Producción
+
+```bash
+# 1. Crear y activar entorno virtual
+python -m venv venv
+# Windows: .\venv\Scripts\activate
+# Linux/Mac: source venv/bin/activate
+
+# 2. Instalar dependencias
+pip install -r requirements.txt
+
+# 3. Verificar instalación
+python scripts/verify_requirements.py
+```
+
+#### Desarrollo
+
+```bash
+# Instalar dependencias de desarrollo (incluye las de producción)
+pip install -r requirements-dev.txt
+```
 
 ### Instalación Rápida
 
@@ -161,7 +188,7 @@ dashboardsonar-application-python/
 
 ## 🚀 Roadmap de Refactorización
 
-### Progreso Actual: 50% Completado (5/10 fases)
+### Progreso Actual: 70% Completado (7/10 fases)
 
 | Fase | Descripción | Duración | Estado | Reporte |
 |------|-------------|----------|--------|---------|
@@ -171,13 +198,13 @@ dashboardsonar-application-python/
 | 3 | Refactorizar Vistas | 2h | ✅ **Completado** | [Ver reporte](docs/reports/phase-3-views.md) |
 | 4 | Sistema de Utilidades | 1.5h | ✅ **Completado** | [Ver reporte](docs/reports/phase-4-utilities.md) |
 | 5 | Manejo de Excepciones | 1h | ✅ **Completado** | [Ver reporte](docs/reports/phase-5-exceptions.md) |
-| 6 | Configuración Mejorada | 1h | ⏭️ **Siguiente** | - |
-| 7 | Optimización Dependencias | 30 min | ⏸️ Pendiente | - |
-| 8 | Actualizar Entry Points | 30 min | ⏸️ Pendiente | - |
+| 6 | Configuración Mejorada | 1h | ✅ **Completado** | [Ver reporte](docs/reports/phase-6-configuration.md) |
+| 7 | Optimización Dependencias | 45 min | ✅ **Completado** | [Ver reporte](docs/reports/phase-7-dependencies.md) |
+| 8 | Actualizar Entry Points | 30 min | ⏭️ **Siguiente** | - |
 | 9 | Tests y Validación | 2-3h | ⏸️ Pendiente | - |
 | 10 | Documentación y Limpieza | 1h | ⏸️ Pendiente | - |
 
-**Progreso**: 10 horas completadas de 14-20 horas estimadas
+**Progreso**: 11.75 horas completadas de 14-20 horas estimadas
 
 Ver detalles completos en **[docs/plan/PLAN_REORGANIZACION.md](docs/plan/PLAN_REORGANIZACION.md)**
 
@@ -218,6 +245,16 @@ Ver detalles completos en **[docs/plan/PLAN_REORGANIZACION.md](docs/plan/PLAN_RE
 - ✅ **Docstrings** - Google-style en todas las funciones
 - ✅ **Semantic Commits** - Conventional Commits en todo el proyecto
 - ✅ **Code Reviews** - Pull Requests documentados para cada fase
+
+#### Gestión de Dependencias (Fase 7)
+
+- ✅ **Dependencies Optimization** - 47% reducción en requirements.txt (38→20 paquetes)
+- ✅ **100% Version Pinning** - Todas las dependencias con versiones exactas
+- ✅ **Production/Dev Separation** - requirements.txt vs requirements-dev.txt
+- ✅ **Dependency Verification** - Scripts automáticos de verificación (2)
+- ✅ **UTF-8 Encoding** - requirements-dev.txt recreado correctamente
+- ✅ **Comprehensive Documentation** - docs/DEPENDENCIES.md (350+ LOC)
+- ✅ **Organized by Category** - 10 categorías en producción, 3 en desarrollo
 
 ---
 
@@ -289,7 +326,9 @@ flask db upgrade
 
 ### Guías Técnicas
 
+- **Configuration System**: [docs/guides/CONFIGURATION_GUIDE.md](docs/guides/CONFIGURATION_GUIDE.md)
 - **Exception Handling**: [docs/guides/EXCEPTION_HANDLING_GUIDE.md](docs/guides/EXCEPTION_HANDLING_GUIDE.md)
+- **Dependencies Management**: [docs/DEPENDENCIES.md](docs/DEPENDENCIES.md)
 - **Documentar Cambios**: [docs/guides/DOCUMENTAR_CAMBIOS.md](docs/guides/DOCUMENTAR_CAMBIOS.md)
 
 ### Reportes de Fases
@@ -300,6 +339,8 @@ flask db upgrade
 - **Phase 3**: [Vistas](docs/reports/phase-3-views.md)
 - **Phase 4**: [Utilidades](docs/reports/phase-4-utilities.md)
 - **Phase 5**: [Excepciones](docs/reports/phase-5-exceptions.md)
+- **Phase 6**: [Configuración](docs/reports/phase-6-configuration.md)
+- **Phase 7**: [Dependencias](docs/reports/phase-7-dependencies.md)
 
 ---
 
