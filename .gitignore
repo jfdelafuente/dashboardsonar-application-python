@@ -19,8 +19,13 @@ coverage.xml
 logs/
 
 # venv
-env
-venv
+env/
+venv/
+venv_*/
+.venv/
+ENV/
+env.bak/
+venv.bak/
 
 # Environment configuration files (NEVER commit these - contain secrets)
 .env
@@ -76,3 +81,11 @@ backup_*/
 
 # Coverage reports
 .coverage.*
+
+# Pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Dependency analysis temp files
+temp_current_deps.txt
+temp_*.txt
