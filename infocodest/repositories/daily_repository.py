@@ -317,6 +317,98 @@ class DailyRepository(BaseRepository[Daily]):
             .scalar()
         ) or 0
 
+    def count_aplicaciones_by_date_and_repo(self, fecha: str, aplicacion: str, repo: str) -> int:
+        """Count applications for a specific date, application and repository.
+
+        Args:
+            fecha: Date string (format: YYYY-MM-DD)
+            aplicacion: Application name
+            repo: Repository name
+
+        Returns:
+            Count (typically 0 or 1)
+        """
+        return (
+            self.session.query(func.count(func.distinct(Daily.aplicacion)))
+            .filter(
+                and_(
+                    Daily.created_on == fecha,
+                    Daily.aplicacion == aplicacion,
+                    Daily.repo == repo
+                )
+            )
+            .scalar()
+        ) or 0
+
+    def count_repos_by_date_and_repo(self, fecha: str, aplicacion: str, repo: str) -> int:
+        """Count repositories for a specific date, application and repository.
+
+        Args:
+            fecha: Date string (format: YYYY-MM-DD)
+            aplicacion: Application name
+            repo: Repository name
+
+        Returns:
+            Count (typically 0 or 1)
+        """
+        return (
+            self.session.query(func.count(Daily.repo))
+            .filter(
+                and_(
+                    Daily.created_on == fecha,
+                    Daily.aplicacion == aplicacion,
+                    Daily.repo == repo
+                )
+            )
+            .scalar()
+        ) or 0
+
+    def sum_bugs_by_date_and_repo(self, fecha: str, aplicacion: str, repo: str) -> int:
+        """Sum bugs for a specific date, application and repository.
+
+        Args:
+            fecha: Date string (format: YYYY-MM-DD)
+            aplicacion: Application name
+            repo: Repository name
+
+        Returns:
+            Total bugs
+        """
+        return (
+            self.session.query(func.sum(Daily.num_bugs))
+            .filter(
+                and_(
+                    Daily.created_on == fecha,
+                    Daily.aplicacion == aplicacion,
+                    Daily.repo == repo
+                )
+            )
+            .scalar()
+        ) or 0
+
+    def sum_analisis_by_date_and_repo(self, fecha: str, aplicacion: str, repo: str) -> int:
+        """Sum analysis count for a specific date, application and repository.
+
+        Args:
+            fecha: Date string (format: YYYY-MM-DD)
+            aplicacion: Application name
+            repo: Repository name
+
+        Returns:
+            Total analysis count
+        """
+        return (
+            self.session.query(func.sum(Daily.num_analisis))
+            .filter(
+                and_(
+                    Daily.created_on == fecha,
+                    Daily.aplicacion == aplicacion,
+                    Daily.repo == repo
+                )
+            )
+            .scalar()
+        ) or 0
+
     def get_quality_by_date_and_repo(self, fecha: str, aplicacion: str, repo: str) -> Optional[int]:
         """Get quality gate value for a specific date, application and repository.
 
