@@ -75,7 +75,7 @@ class DashboardService:
             'repositorios': self.metrica_repo.count(),
             'bugs': self.metrica_repo.sum_bugs(),
             'analisis': self.historico_repo.count(),
-            'quality': self.historico_repo.count_by_alert_status('OK'),
+            'quality': self.historico_repo.count_quality_ok(),
         }
 
         # Metrics from N days ago (from Daily aggregates)
@@ -108,7 +108,7 @@ class DashboardService:
             'repositorios': self.metrica_repo.count_distinct_repos_by_aplicacion(aplicacion),
             'bugs': self.metrica_repo.sum_bugs_by_aplicacion(aplicacion),
             'analisis': self.historico_repo.count_by_aplicacion(aplicacion),
-            'quality': self.historico_repo.count_by_aplicacion_and_alert_status(aplicacion, 'OK'),
+            'quality': self.historico_repo.count_quality_ok_by_aplicacion(aplicacion),
         }
 
         # Metrics from N days ago
@@ -141,7 +141,7 @@ class DashboardService:
             'repositorios': self.metrica_repo.count_by_proveedor(proveedor),
             'bugs': self.metrica_repo.sum_bugs_by_proveedor(proveedor),
             'analisis': self.historico_repo.count_by_proveedor(proveedor),
-            'quality': self.historico_repo.count_by_proveedor_and_alert_status(proveedor, 'OK'),
+            'quality': self.historico_repo.count_quality_ok_by_proveedor(proveedor),
         }
 
         # Metrics from N days ago
@@ -175,7 +175,7 @@ class DashboardService:
             'repositorios': self.metrica_repo.count_by_aplicacion_and_repo(aplicacion, repo),
             'bugs': self.metrica_repo.sum_bugs_by_aplicacion_and_repo(aplicacion, repo),
             'analisis': self.historico_repo.count_by_aplicacion_and_repo(aplicacion, repo),
-            'quality': self.historico_repo.count_by_aplicacion_repo_and_alert_status(aplicacion, repo, 'OK'),
+            'quality': self.historico_repo.count_quality_ok_by_repo(aplicacion, repo),
         }
 
         # Metrics from N days ago
