@@ -8,7 +8,7 @@ from typing import Optional
 
 from infocodest.repositories.user_repository import UserRepository
 from infocodest.models.users import User
-from infocodest.models.util import verify_pass
+from infocodest.utils.security import verify_pass
 
 
 class AuthService:

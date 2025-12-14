@@ -2,7 +2,7 @@ from datetime import datetime
 from flask_login import UserMixin
 from infocodest.extensions import db
 
-from infocodest.models.util import hash_pass
+from infocodest.utils.security import hash_pass
 
 
 class User(UserMixin, db.Model):

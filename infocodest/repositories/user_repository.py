@@ -107,7 +107,7 @@ class UserRepository(BaseRepository[User]):
         Raises:
             SQLAlchemyError: If the database operation fails
         """
-        from infocodest.models.util import hash_pass
+        from infocodest.utils.security import hash_pass
         user.password = hash_pass(new_password)
         return self.update(user)
 
