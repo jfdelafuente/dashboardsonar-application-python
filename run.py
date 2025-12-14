@@ -14,7 +14,7 @@ import os
 from sys import exit
 from flask_minify import Minify
 from infocodest import create_app
-from config import config_dict
+from config import config_dict  # New config system from config/ module (Phase 6)
 from dotenv import load_dotenv, find_dotenv
 
 # Load environment variables from .env file

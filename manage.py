@@ -7,7 +7,7 @@ from flask.cli import FlaskGroup
 from infocodest import create_app
 from infocodest.extensions import db
 from infocodest.models.users import User
-from config import config_dict
+from config import config_dict  # New config system from config/ module (Phase 6)
 
 cli = FlaskGroup(create_app(config_dict["Testing"]))
 

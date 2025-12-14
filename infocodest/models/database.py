@@ -2,7 +2,6 @@ from sqlalchemy import create_engine, text
 import os
 import datetime
 import json
-from config import config
 import warnings
 from functools import wraps
 

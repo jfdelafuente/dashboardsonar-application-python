@@ -1,7 +1,7 @@
 import pytest
 from infocodest import create_app
 from infocodest.extensions import db
-from config import TestingConfig
+from config import TestingConfig  # New config system from config/ module (Phase 6)
 from infocodest.models.users import User
 
 
