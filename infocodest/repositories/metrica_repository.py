@@ -227,6 +227,84 @@ class MetricaRepository(BaseRepository[Metrica]):
             .scalar()
         ) or 0
 
+    def count_aplicaciones_by_aplicacion(self, aplicacion: str) -> int:
+        """Count applications for a specific application (returns 0 or 1).
+
+        Args:
+            aplicacion: Application name
+
+        Returns:
+            1 if application exists, 0 otherwise
+        """
+        return (
+            self.session.query(func.count(func.distinct(Metrica.aplicacion)))
+            .filter(Metrica.aplicacion == aplicacion)
+            .scalar()
+        ) or 0
+
+    def count_aplicaciones_by_aplicacion_and_repo(self, aplicacion: str, repo: str) -> int:
+        """Count applications for a specific application and repository (returns 0 or 1).
+
+        Args:
+            aplicacion: Application name
+            repo: Repository name
+
+        Returns:
+            1 if application exists for the repository, 0 otherwise
+        """
+        return (
+            self.session.query(func.count(func.distinct(Metrica.aplicacion)))
+            .filter(
+                and_(
+                    Metrica.aplicacion == aplicacion,
+                    Metrica.repo == repo
+                )
+            )
+            .scalar()
+        ) or 0
+
+    def count_by_aplicacion_and_repo(self, aplicacion: str, repo: str) -> int:
+        """Count repositories for a specific application and repository (returns 0 or 1).
+
+        Args:
+            aplicacion: Application name
+            repo: Repository name
+
+        Returns:
+            1 if repository exists, 0 otherwise
+        """
+        return (
+            self.session.query(func.count(Metrica.repo))
+            .filter(
+                and_(
+                    Metrica.aplicacion == aplicacion,
+                    Metrica.repo == repo
+                )
+            )
+            .scalar()
+        ) or 0
+
+    def sum_bugs_by_aplicacion_and_repo(self, aplicacion: str, repo: str) -> int:
+        """Sum bugs for a specific application and repository.
+
+        Args:
+            aplicacion: Application name
+            repo: Repository name
+
+        Returns:
+            Total bugs for the repository
+        """
+        return (
+            self.session.query(func.sum(Metrica.bugs))
+            .filter(
+                and_(
+                    Metrica.aplicacion == aplicacion,
+                    Metrica.repo == repo
+                )
+            )
+            .scalar()
+        ) or 0
+
     def get_repositorios_count_by_aplicacion(self) -> List[Tuple[str, int]]:
         """Get repository count grouped by application.
 

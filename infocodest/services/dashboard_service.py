@@ -81,7 +81,7 @@ class DashboardService:
         # Metrics from N days ago (from Daily aggregates)
         old = {
             'aplicaciones': self.daily_repo.count_distinct_aplicaciones_by_date(fecha),
-            'repositorios': self.daily_repo.count_by_date(fecha),
+            'repositorios': self.daily_repo.count_repos_by_date(fecha),
             'bugs': self.daily_repo.sum_bugs_by_date(fecha),
             'analisis': self.daily_repo.sum_analisis_by_date(fecha),
             'quality': self.daily_repo.sum_quality_by_date(fecha),
@@ -104,8 +104,8 @@ class DashboardService:
 
         # Current application metrics
         current = {
-            'aplicaciones': self.metrica_repo.count_distinct_aplicaciones_by_aplicacion(aplicacion),
-            'repositorios': self.metrica_repo.count_distinct_repos_by_aplicacion(aplicacion),
+            'aplicaciones': self.metrica_repo.count_aplicaciones_by_aplicacion(aplicacion),
+            'repositorios': self.metrica_repo.count_by_aplicacion(aplicacion),
             'bugs': self.metrica_repo.sum_bugs_by_aplicacion(aplicacion),
             'analisis': self.historico_repo.count_by_aplicacion(aplicacion),
             'quality': self.historico_repo.count_quality_ok_by_aplicacion(aplicacion),
@@ -113,11 +113,11 @@ class DashboardService:
 
         # Metrics from N days ago
         old = {
-            'aplicaciones': self.daily_repo.count_distinct_aplicaciones_by_date_and_aplicacion(fecha, aplicacion),
-            'repositorios': self.daily_repo.count_distinct_repos_by_date_and_aplicacion(fecha, aplicacion),
-            'bugs': self.daily_repo.sum_bugs_by_date_and_aplicacion(fecha, aplicacion),
-            'analisis': self.daily_repo.sum_analisis_by_date_and_aplicacion(fecha, aplicacion),
-            'quality': self.daily_repo.sum_quality_by_date_and_aplicacion(fecha, aplicacion),
+            'aplicaciones': self.daily_repo.count_aplicaciones_by_date_and_app(fecha, aplicacion),
+            'repositorios': self.daily_repo.count_repos_by_date_and_app(fecha, aplicacion),
+            'bugs': self.daily_repo.sum_bugs_by_date_and_app(fecha, aplicacion),
+            'analisis': self.daily_repo.sum_analisis_by_date_and_app(fecha, aplicacion),
+            'quality': self.daily_repo.sum_quality_by_date_and_app(fecha, aplicacion),
         }
 
         return self._format_kpi_response(current, old, ['aplicaciones', 'repositorios', 'bugs', 'analisis', 'quality'])
@@ -137,8 +137,8 @@ class DashboardService:
 
         # Current provider metrics
         current = {
-            'aplicaciones': self.metrica_repo.count_distinct_aplicaciones_by_proveedor(proveedor),
-            'repositorios': self.metrica_repo.count_by_proveedor(proveedor),
+            'aplicaciones': self.metrica_repo.count_by_proveedor(proveedor),
+            'repositorios': self.metrica_repo.count_repos_by_proveedor(proveedor),
             'bugs': self.metrica_repo.sum_bugs_by_proveedor(proveedor),
             'analisis': self.historico_repo.count_by_proveedor(proveedor),
             'quality': self.historico_repo.count_quality_ok_by_proveedor(proveedor),
@@ -146,8 +146,8 @@ class DashboardService:
 
         # Metrics from N days ago
         old = {
-            'aplicaciones': self.daily_repo.count_distinct_aplicaciones_by_date_and_proveedor(fecha, proveedor),
-            'repositorios': self.daily_repo.count_by_date_and_proveedor(fecha, proveedor),
+            'aplicaciones': self.daily_repo.count_aplicaciones_by_date_and_proveedor(fecha, proveedor),
+            'repositorios': self.daily_repo.count_repos_by_date_and_proveedor(fecha, proveedor),
             'bugs': self.daily_repo.sum_bugs_by_date_and_proveedor(fecha, proveedor),
             'analisis': self.daily_repo.sum_analisis_by_date_and_proveedor(fecha, proveedor),
             'quality': self.daily_repo.sum_quality_by_date_and_proveedor(fecha, proveedor),
@@ -171,7 +171,7 @@ class DashboardService:
 
         # Current repository metrics
         current = {
-            'aplicaciones': self.metrica_repo.count_distinct_aplicaciones_by_aplicacion_and_repo(aplicacion, repo),
+            'aplicaciones': self.metrica_repo.count_aplicaciones_by_aplicacion_and_repo(aplicacion, repo),
             'repositorios': self.metrica_repo.count_by_aplicacion_and_repo(aplicacion, repo),
             'bugs': self.metrica_repo.sum_bugs_by_aplicacion_and_repo(aplicacion, repo),
             'analisis': self.historico_repo.count_by_aplicacion_and_repo(aplicacion, repo),
@@ -180,11 +180,11 @@ class DashboardService:
 
         # Metrics from N days ago
         old = {
-            'aplicaciones': self.daily_repo.count_distinct_aplicaciones_by_date_aplicacion_and_repo(fecha, aplicacion, repo),
-            'repositorios': self.daily_repo.count_by_date_aplicacion_and_repo(fecha, aplicacion, repo),
-            'bugs': self.daily_repo.sum_bugs_by_date_aplicacion_and_repo(fecha, aplicacion, repo),
-            'analisis': self.daily_repo.sum_analisis_by_date_aplicacion_and_repo(fecha, aplicacion, repo),
-            'quality': self.daily_repo.get_quality_by_date_aplicacion_and_repo(fecha, aplicacion, repo),
+            'aplicaciones': self.daily_repo.count_aplicaciones_by_date_and_repo(fecha, aplicacion, repo),
+            'repositorios': self.daily_repo.count_repos_by_date_and_repo(fecha, aplicacion, repo),
+            'bugs': self.daily_repo.sum_bugs_by_date_and_repo(fecha, aplicacion, repo),
+            'analisis': self.daily_repo.sum_analisis_by_date_and_repo(fecha, aplicacion, repo),
+            'quality': self.daily_repo.get_quality_by_date_and_repo(fecha, aplicacion, repo),
         }
 
         return self._format_kpi_response(current, old, ['aplicaciones', 'repositorios', 'bugs', 'analisis', 'quality'])
