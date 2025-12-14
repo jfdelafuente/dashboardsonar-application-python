@@ -137,8 +137,8 @@ class DashboardService:
 
         # Current provider metrics
         current = {
-            'aplicaciones': self.metrica_repo.count_distinct_aplicaciones_by_proveedor(proveedor),
-            'repositorios': self.metrica_repo.count_by_proveedor(proveedor),
+            'aplicaciones': self.metrica_repo.count_by_proveedor(proveedor),
+            'repositorios': self.metrica_repo.count_repos_by_proveedor(proveedor),
             'bugs': self.metrica_repo.sum_bugs_by_proveedor(proveedor),
             'analisis': self.historico_repo.count_by_proveedor(proveedor),
             'quality': self.historico_repo.count_quality_ok_by_proveedor(proveedor),
