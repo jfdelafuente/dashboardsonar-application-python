@@ -43,7 +43,7 @@ Nos comprometemos a hacer de la participación en este proyecto una experiencia 
 
 1. **Fork** el repositorio
 2. **Clone** tu fork localmente
-3. **Configura** el entorno de desarrollo ([ver DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md))
+3. **Configura** el entorno de desarrollo ([ver DEVELOPMENT_GUIDE.md](docs/DEVELOPMENT_GUIDE.md))
 4. **Crea** una rama para tu contribución
 
 ### Flujo de Trabajo
@@ -396,7 +396,7 @@ Contexto adicional, screenshots, mockups, etc.
 
 ## 🏗️ Arquitectura del Proyecto
 
-Ver [ARCHITECTURE.md](ARCHITECTURE.md) para entender:
+Ver [ARCHITECTURE.md](docs/ARCHITECTURE.md) para entender:
 
 - Arquitectura en capas
 - Patrones de diseño utilizados
@@ -416,10 +416,10 @@ Ver [ARCHITECTURE.md](ARCHITECTURE.md) para entender:
 
 ### Documentación
 
-- [DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md) - Setup y desarrollo
-- [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) - Migrar código legacy
-- [API_DOCUMENTATION.md](API_DOCUMENTATION.md) - Documentación de API
-- [ARCHITECTURE.md](ARCHITECTURE.md) - Arquitectura del sistema
+- [DEVELOPMENT_GUIDE.md](docs/DEVELOPMENT_GUIDE.md) - Setup y desarrollo
+- [MIGRATION_GUIDE.md](docs/migration/MIGRATION_GUIDE.md) - Migrar código legacy
+- [API_DOCUMENTATION.md](docs/api/API_DOCUMENTATION.md) - Documentación de API
+- [ARCHITECTURE.md](docs/ARCHITECTURE.md) - Arquitectura del sistema
 
 ### Herramientas
 

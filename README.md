@@ -10,7 +10,7 @@
 [![Phases](https://img.shields.io/badge/phases-10%2F10%20done-brightgreen.svg)](docs/reports/)
 [![Tests](https://img.shields.io/badge/tests-202%20passing-success.svg)](tests/)
 [![Coverage](https://img.shields.io/badge/coverage->80%25-success.svg)](tests/)
-[![Architecture](https://img.shields.io/badge/architecture-layered-blue.svg)](ARCHITECTURE.md)
+[![Architecture](https://img.shields.io/badge/architecture-layered-blue.svg)](docs/ARCHITECTURE.md)
 
 ---
 
@@ -28,11 +28,11 @@
 
 #### Documentación Técnica Principal
 
-- 🏗️ **[ARCHITECTURE.md](ARCHITECTURE.md)** - Arquitectura completa del sistema
-- 🚀 **[DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md)** - Guía de desarrollo
-- 🔄 **[MIGRATION_GUIDE.md](MIGRATION_GUIDE.md)** - Migración de código legacy
-- 📡 **[API_DOCUMENTATION.md](API_DOCUMENTATION.md)** - Documentación de API
-- 🚢 **[DEPLOYMENT.md](DEPLOYMENT.md)** - Guía de despliegue
+- 🏗️ **[ARCHITECTURE.md](docs/ARCHITECTURE.md)** - Arquitectura completa del sistema
+- 🚀 **[DEVELOPMENT_GUIDE.md](docs/DEVELOPMENT_GUIDE.md)** - Guía de desarrollo
+- 🔄 **[MIGRATION_GUIDE.md](docs/migration/MIGRATION_GUIDE.md)** - Migración de código legacy
+- 📡 **[API_DOCUMENTATION.md](docs/api/API_DOCUMENTATION.md)** - Documentación de API
+- 🚢 **[DEPLOYMENT.md](docs/deployment/DEPLOYMENT.md)** - Guía de despliegue
 - 🤝 **[CONTRIBUTING.md](CONTRIBUTING.md)** - Cómo contribuir
 
 #### Documentación del Proyecto
@@ -40,6 +40,22 @@
 ```text
 docs/
 ├── README.md                    → Índice principal
+├── ARCHITECTURE.md              → Arquitectura del sistema
+├── DEVELOPMENT_GUIDE.md         → Guía de desarrollo
+│
+├── api/                         → Documentación de API
+│   ├── README.md
+│   └── API_DOCUMENTATION.md
+│
+├── deployment/                  → Guías de despliegue
+│   ├── README.md
+│   ├── DEPLOYMENT.md
+│   └── examples/                → Configs de ejemplo
+│
+├── migration/                   → Migración de código legacy
+│   ├── README.md
+│   └── MIGRATION_GUIDE.md
+│
 ├── plan/                        → Plan de reorganización (10 fases)
 ├── reports/                     → Reportes completos (Phases 0-10)
 ├── guides/                      → Guías especializadas

@@ -11,6 +11,21 @@
 ```
 docs/
 ├── README.md                    ← Estás aquí (índice principal)
+├── ARCHITECTURE.md              Arquitectura del sistema
+├── DEVELOPMENT_GUIDE.md         Guía de desarrollo
+│
+├── 📡 api/                      (Documentación de API)
+│   ├── README.md                Índice de API
+│   └── API_DOCUMENTATION.md     Documentación completa de API
+│
+├── 🚢 deployment/               (Despliegue en Producción)
+│   ├── README.md                Índice de deployment
+│   ├── DEPLOYMENT.md            Guía completa de despliegue
+│   └── examples/                Configuraciones de ejemplo
+│
+├── 🔄 migration/                (Migración de Código Legacy)
+│   ├── README.md                Índice de migración
+│   └── MIGRATION_GUIDE.md       Guía de migración paso a paso
 │
 ├── 📋 plan/                     (Plan de Refactorización)
 │   └── PLAN_REORGANIZACION.md   Plan maestro de 10 fases
@@ -30,7 +45,7 @@ docs/
 │
 └── 📊 reports/                  (Reportes de Fases)
     ├── README.md                Índice de reportes
-    └── phase-X-*.md             Reportes completados
+    └── phase-X-*.md             Reportes completados (0-10)
 ```
 
 ---
