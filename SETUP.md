@@ -292,9 +292,63 @@ DB_NAME=dashboardsonar
 pip install pymysql
 ```
 
-### Inicializar Base de Datos
+### Inicializar Base de Datos y Crear Usuario Admin
 
-#### Usar Flask-Migrate (Recomendado)
+#### Opción 1: Script Automatizado (RECOMENDADO)
+
+La forma más sencilla de inicializar la base de datos y crear el usuario administrador es usando el script automatizado:
+
+**Windows:**
+```bash
+# Asegúrate de activar el entorno virtual primero
+venv\Scripts\activate
+
+# Ejecutar script de setup (modo interactivo)
+setup_database.bat
+
+# O especificar el entorno
+setup_database.bat Development
+setup_database.bat Production
+```
+
+**Linux/macOS:**
+```bash
+# Asegúrate de activar el entorno virtual primero
+source venv/bin/activate
+
+# Dar permisos de ejecución (solo primera vez)
+chmod +x setup_database.sh
+
+# Ejecutar script de setup (modo interactivo)
+./setup_database.sh
+
+# O especificar el entorno
+./setup_database.sh Development
+./setup_database.sh Production
+```
+
+**Modo No Interactivo (para scripts/CI/CD):**
+
+```bash
+# Con credenciales por defecto
+python scripts/setup_database.py --config Development --non-interactive
+
+# Con credenciales personalizadas
+python scripts/setup_database.py --config Production --non-interactive \
+  --username myadmin \
+  --email admin@miempresa.com \
+  --password mi_contraseña_segura
+```
+
+El script automatizado:
+
+- ✅ Crea todas las tablas de la base de datos
+- ✅ Crea el usuario administrador
+- ✅ Valida que no haya errores
+- ✅ Permite personalizar credenciales
+- ✅ Muestra información clara del proceso
+
+#### Opción 2: Usar Flask-Migrate
 
 ```bash
 # Inicializar migraciones (solo primera vez)
@@ -307,7 +361,9 @@ flask db migrate -m "Initial migration"
 flask db upgrade
 ```
 
-#### Crear Tablas Directamente (Alternativa)
+Luego crear el usuario admin manualmente (ver Opción 4).
+
+#### Opción 3: Crear Tablas Directamente
 
 Si `flask db` no funciona, usa el shell de Python:
 
@@ -322,28 +378,33 @@ python
 >>> exit()
 ```
 
-### Crear Usuario Administrador
+Luego crear el usuario admin manualmente (ver Opción 4).
+
+#### Opción 4: Crear Usuario Administrador Manualmente
+
+Si necesitas crear un usuario admin manualmente:
 
 ```python
 python
 
 >>> from infocodest import create_app
 >>> from infocodest.extensions import db
->>> from infocodest.models.users import Users
->>> from infocodest.utils.security import hash_pass
+>>> from infocodest.models.users import User
 
 >>> app = create_app()
 >>> with app.app_context():
-...     admin = Users(
+...     admin = User(
 ...         username='admin',
 ...         email='admin@example.com',
-...         password=hash_pass('admin123')
+...         password='admin123'
 ...     )
 ...     db.session.add(admin)
 ...     db.session.commit()
 ...     print("Usuario admin creado")
 >>> exit()
 ```
+
+**Nota:** El modelo `User` hashea automáticamente la contraseña en su constructor, no es necesario usar `hash_pass()` directamente.
 
 ---
 
