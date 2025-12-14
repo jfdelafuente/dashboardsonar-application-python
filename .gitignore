@@ -89,3 +89,7 @@ pip-delete-this-directory.txt
 # Dependency analysis temp files
 temp_current_deps.txt
 temp_*.txt
+
+# Local setup scripts (environment-specific)
+setup_venv.bat
+activate_venv.bat
