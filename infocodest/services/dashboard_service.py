@@ -104,8 +104,8 @@ class DashboardService:
 
         # Current application metrics
         current = {
-            'aplicaciones': self.metrica_repo.count_distinct_aplicaciones_by_aplicacion(aplicacion),
-            'repositorios': self.metrica_repo.count_distinct_repos_by_aplicacion(aplicacion),
+            'aplicaciones': self.metrica_repo.count_aplicaciones_by_aplicacion(aplicacion),
+            'repositorios': self.metrica_repo.count_by_aplicacion(aplicacion),
             'bugs': self.metrica_repo.sum_bugs_by_aplicacion(aplicacion),
             'analisis': self.historico_repo.count_by_aplicacion(aplicacion),
             'quality': self.historico_repo.count_quality_ok_by_aplicacion(aplicacion),
@@ -171,7 +171,7 @@ class DashboardService:
 
         # Current repository metrics
         current = {
-            'aplicaciones': self.metrica_repo.count_distinct_aplicaciones_by_aplicacion_and_repo(aplicacion, repo),
+            'aplicaciones': self.metrica_repo.count_aplicaciones_by_aplicacion_and_repo(aplicacion, repo),
             'repositorios': self.metrica_repo.count_by_aplicacion_and_repo(aplicacion, repo),
             'bugs': self.metrica_repo.sum_bugs_by_aplicacion_and_repo(aplicacion, repo),
             'analisis': self.historico_repo.count_by_aplicacion_and_repo(aplicacion, repo),
