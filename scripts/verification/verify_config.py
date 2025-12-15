@@ -5,20 +5,22 @@ Configuration Verification Script
 Verifies that all configuration classes load correctly.
 
 Usage:
-    python scripts/verify_config.py
+    python scripts/verification/verify_config.py
 
 Exit codes:
     0: All configurations verified successfully
     1: Import errors or validation failures
 
 Created: Phase 6 - Configuration System
+Updated: Scripts reorganization - Moved to scripts/verification/
 """
 
 import sys
 import os
 
 # Add project root to Python path
-project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Script is in scripts/verification/, so go up two levels to reach project root
+project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, project_root)
 
 print("=" * 60)
