@@ -1,6 +1,36 @@
-from scripts.utils.utils import extract_from_csv, load_to_csv
+"""
+ETL Module
+==========
+
+Extract, Transform, Load operations for SonarQube metrics data.
+
+Functions:
+    - transformar_metricas: Transform raw metrics data
+    - transformar_historico: Transform historical analysis data
+    - transformar_stats: Transform aggregated statistics
+
+Created: Post-Phase 10 - ETL operations
+"""
+
+import sys
+from pathlib import Path
 import pandas as pd
 import numpy as np
+
+# Support both absolute and relative imports
+try:
+    # Try relative import first (when used as a package)
+    from ..utils.utils import extract_from_csv, load_to_csv
+except ImportError:
+    try:
+        # Try absolute import (when scripts is in sys.path)
+        from scripts.utils.utils import extract_from_csv, load_to_csv
+    except ImportError:
+        # Fallback: add scripts to path and import
+        scripts_dir = Path(__file__).parent.parent.absolute()
+        if str(scripts_dir) not in sys.path:
+            sys.path.insert(0, str(scripts_dir))
+        from utils.utils import extract_from_csv, load_to_csv
 
 
 def transformar_metricas(datos_in):
