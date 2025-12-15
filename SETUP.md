@@ -2,6 +2,88 @@
 
 Esta guía proporciona instrucciones completas para configurar y poner en marcha la aplicación Dashboard Sonar desde cero.
 
+---
+
+## Descripción de la Aplicación
+
+**Dashboard Sonar** es una aplicación web desarrollada con Flask que proporciona análisis, visualización y seguimiento de métricas de calidad de código provenientes de SonarQube.
+
+### Funcionalidad Principal
+
+La aplicación permite a los equipos de desarrollo:
+
+#### 1. **Visualización de Métricas de Calidad**
+
+- **Dashboard Principal**: Vista consolidada de métricas de calidad de código de todos los repositorios
+- **Análisis por Aplicación**: Métricas agrupadas por aplicación/proyecto
+- **Tendencias Temporales**: Evolución histórica de las métricas a lo largo del tiempo
+- **Indicadores de Calidad**: Bugs, vulnerabilidades, code smells, cobertura de tests, duplicación de código
+
+#### 2. **Gestión de Repositorios**
+
+- Seguimiento de múltiples repositorios y proyectos
+- Clasificación por tipo de aplicación y proveedor
+- Etiquetado de tamaño de repositorio (XS, S, M, L, XL)
+- Estado de Quality Gates (OK/ERROR)
+
+#### 3. **Análisis de Métricas**
+
+- **Reliability Rating**: Evaluación de confiabilidad del código (A-E)
+- **Security Rating**: Calificación de seguridad (A-E)
+- **Maintainability (SQALE)**: Índice de mantenibilidad técnica
+- **Coverage**: Porcentaje de cobertura de pruebas unitarias
+- **Duplicación**: Densidad de líneas duplicadas (DLOC)
+- **Complejidad Ciclomática**: Medición de complejidad del código
+
+#### 4. **Seguimiento Histórico**
+
+- Almacenamiento de análisis históricos de SonarQube
+- Comparación de métricas entre diferentes fechas
+- Identificación de tendencias de mejora o deterioro
+- Snapshots diarios para análisis temporal
+
+#### 5. **Gestión de Proveedores**
+
+- Asociación de aplicaciones con proveedores externos
+- Clasificación por tipo de proveedor
+- Trazabilidad de responsabilidades
+
+#### 6. **Estadísticas Agregadas**
+
+- Contadores de repositorios por aplicación
+- Cantidad de repositorios con calificación "A"
+- Conteo de Quality Gates aprobados (OK)
+- Estadísticas globales del ecosistema
+
+#### 7. **Auditoría y Registros**
+
+- Registro de procesos de carga de datos
+- Auditoría de análisis realizados
+- Estadísticas globales por fecha
+- Trazabilidad de cambios
+
+### Arquitectura de Datos
+
+La aplicación gestiona 7 tablas principales:
+
+1. **metricas**: Métricas actuales de cada repositorio
+2. **historico**: Histórico completo de todos los análisis
+3. **daily**: Snapshots diarios agregados por repositorio
+4. **stats**: Estadísticas agregadas por aplicación
+5. **proveedor**: Relación aplicación-proveedor
+6. **registros**: Auditoría de procesos y estadísticas globales
+7. **users**: Usuarios del sistema (autenticación)
+
+### Casos de Uso
+
+- **Gestores de Proyecto**: Monitoreo del estado general de calidad
+- **Tech Leads**: Análisis de tendencias y áreas de mejora
+- **Desarrolladores**: Revisión de métricas de sus repositorios
+- **Quality Assurance**: Seguimiento de compliance y quality gates
+- **Management**: Reportes de estadísticas globales
+
+---
+
 ## Tabla de Contenidos
 
 1. [Requisitos Previos](#requisitos-previos)
