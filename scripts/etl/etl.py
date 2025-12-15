@@ -1,4 +1,4 @@
-from utils.utils import extract_from_csv, load_to_csv
+from scripts.utils.utils import extract_from_csv, load_to_csv
 import pandas as pd
 import numpy as np
 
