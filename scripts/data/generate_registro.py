@@ -39,7 +39,8 @@ from datetime import datetime, date
 import time
 
 # Add project root to Python path
-project_root = Path(__file__).parent.parent.absolute()
+# Script is in scripts/data/, so go up two levels to reach project root
+project_root = Path(__file__).parent.parent.parent.absolute()
 sys.path.insert(0, str(project_root))
 
 from infocodest import create_app

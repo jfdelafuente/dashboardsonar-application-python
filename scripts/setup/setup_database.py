@@ -6,7 +6,7 @@ Database Setup Script
 Initializes the database and creates an admin user.
 
 Usage:
-    python scripts/setup_database.py [--config CONFIG]
+    python scripts/setup/setup_database.py [--config CONFIG]
 
 Options:
     --config CONFIG    Configuration to use (Development, Production, Testing)
@@ -14,15 +14,16 @@ Options:
 
 Examples:
     # Development database with default admin
-    python scripts/setup_database.py
+    python scripts/setup/setup_database.py
 
     # Production database with custom credentials
-    python scripts/setup_database.py --config Production
+    python scripts/setup/setup_database.py --config Production
 
     # Testing database
-    python scripts/setup_database.py --config Testing
+    python scripts/setup/setup_database.py --config Testing
 
 Created: Post-Phase 10 - Database Initialization
+Updated: Scripts reorganization - Moved to scripts/setup/
 """
 
 import sys
@@ -30,7 +31,8 @@ import argparse
 from pathlib import Path
 
 # Add project root to Python path
-project_root = Path(__file__).parent.parent.absolute()
+# Script is in scripts/setup/, so go up two levels to reach project root
+project_root = Path(__file__).parent.parent.parent.absolute()
 sys.path.insert(0, str(project_root))
 
 from infocodest import create_app
