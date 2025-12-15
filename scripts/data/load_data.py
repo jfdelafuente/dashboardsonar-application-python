@@ -10,29 +10,42 @@ Supports loading:
 - Historico (historical analysis data)
 - Proveedor (provider information)
 
+Configuration:
+    Default filenames and data directory can be configured via environment variables:
+    - DATA_DIR: Directory containing CSV files (default: ./datos)
+    - METRICAS_FILENAME: Metricas CSV filename (default: metricas.csv)
+    - HISTORICO_FILENAME: Historico CSV filename (default: historico.csv)
+    - PROVEEDORES_FILENAME: Proveedores CSV filename (default: proveedores.csv)
+
 Usage:
-    python scripts/load_data.py [--config CONFIG] [--data-dir DIR]
+    python scripts/data/load_data.py [--config CONFIG] [--data-dir DIR]
 
 Options:
     --config CONFIG     Configuration to use (Development, Production, Testing)
-    --data-dir DIR      Directory containing CSV files (default: ./datos)
-    --metricas FILE     Specific metricas CSV file
-    --historico FILE    Specific historico CSV file
-    --proveedores FILE  Specific proveedores CSV file
+    --data-dir DIR      Directory containing CSV files (overrides config)
+    --metricas FILE     Specific metricas CSV file (overrides config)
+    --historico FILE    Specific historico CSV file (overrides config)
+    --proveedores FILE  Specific proveedores CSV file (overrides config)
     --skip-transform    Skip ETL transformation step
     --batch-size N      Batch size for bulk inserts (default: 1000)
 
 Examples:
-    # Load all data from ./datos directory
-    python scripts/load_data.py
+    # Load all data using config defaults
+    python scripts/data/load_data.py
+
+    # Load with custom data directory
+    python scripts/data/load_data.py --data-dir /path/to/data
 
     # Load specific files
-    python scripts/load_data.py --metricas datos/metricas.csv --proveedores datos/proveedores.csv
+    python scripts/data/load_data.py --metricas datos/custom_metricas.csv
 
-    # Production with custom data directory
-    python scripts/load_data.py --config Production --data-dir /path/to/data
+    # Production with environment variables
+    export DATA_DIR=/production/data
+    export METRICAS_FILENAME=prod_metricas.csv
+    python scripts/data/load_data.py --config Production
 
 Created: Post-Phase 10 - Data Loading
+Updated: Configuration system - Add configurable filenames
 """
 
 import sys
@@ -256,8 +269,8 @@ def main():
     parser.add_argument(
         '--data-dir',
         type=str,
-        default='./datos',
-        help='Directory containing CSV files (default: ./datos)'
+        default=None,  # Will use config value if not specified
+        help='Directory containing CSV files (default: from config or ./datos)'
     )
     parser.add_argument(
         '--metricas',
@@ -307,11 +320,23 @@ def main():
     # Create Flask application
     app = create_app(config_class)
 
+    # Get data directory from config if not specified
+    data_dir = args.data_dir or app.config.get('DATA_DIR', './datos')
+
+    # Get default filenames from config
+    metricas_filename = app.config.get('METRICAS_FILENAME', 'metricas.csv')
+    historico_filename = app.config.get('HISTORICO_FILENAME', 'historico.csv')
+    proveedores_filename = app.config.get('PROVEEDORES_FILENAME', 'proveedores.csv')
+
     print("\n" + "="*60)
     print("Data Loading Script")
     print("="*60)
     print(f"Configuration: {config_name}")
-    print(f"Data directory: {args.data_dir}")
+    print(f"Data directory: {data_dir}")
+    print(f"Default filenames:")
+    print(f"  - Metricas: {metricas_filename}")
+    print(f"  - Historico: {historico_filename}")
+    print(f"  - Proveedores: {proveedores_filename}")
     print(f"Batch size: {args.batch_size}")
     print("="*60 + "\n")
 
@@ -324,8 +349,8 @@ def main():
 
     try:
         # Load metricas
-        if args.metricas or os.path.exists(os.path.join(args.data_dir, 'metricas.csv')):
-            metricas_file = args.metricas or os.path.join(args.data_dir, 'metricas.csv')
+        if args.metricas or os.path.exists(os.path.join(data_dir, metricas_filename)):
+            metricas_file = args.metricas or os.path.join(data_dir, metricas_filename)
 
             if args.skip_transform:
                 print(f"⚠️  Skipping transformation, loading directly from {metricas_file}")
@@ -339,8 +364,8 @@ def main():
                 print(f"  Duration: {time.time() - start_time:.2f} seconds\n")
 
         # Load historico
-        if args.historico or os.path.exists(os.path.join(args.data_dir, 'historico.csv')):
-            historico_file = args.historico or os.path.join(args.data_dir, 'historico.csv')
+        if args.historico or os.path.exists(os.path.join(data_dir, historico_filename)):
+            historico_file = args.historico or os.path.join(data_dir, historico_filename)
 
             if args.skip_transform:
                 print(f"⚠️  Skipping transformation, loading directly from {historico_file}")
@@ -353,8 +378,8 @@ def main():
                 print(f"  Duration: {time.time() - start_time:.2f} seconds\n")
 
         # Load proveedores
-        if args.proveedores or os.path.exists(os.path.join(args.data_dir, 'proveedores.csv')):
-            proveedores_file = args.proveedores or os.path.join(args.data_dir, 'proveedores.csv')
+        if args.proveedores or os.path.exists(os.path.join(data_dir, proveedores_filename)):
+            proveedores_file = args.proveedores or os.path.join(data_dir, proveedores_filename)
             start_time = time.time()
             stats['proveedores'] = load_proveedores_from_csv(app, proveedores_file, args.batch_size)
             print(f"  Duration: {time.time() - start_time:.2f} seconds\n")
