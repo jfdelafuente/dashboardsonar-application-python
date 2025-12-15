@@ -9,6 +9,8 @@ Environment variables:
     TESTING: Enable testing mode (default: False)
     HOST: Server host (default: 127.0.0.1)
     PORT: Server port (default: 5000)
+
+Updated: Phase 1 Improvements - Use shared utilities from config.utils
 """
 import os
 import sys
@@ -17,46 +19,7 @@ from dotenv import load_dotenv
 
 from infocodest import create_app
 from config import config_dict
-
-
-def str_to_bool(value: str, default: bool = False) -> bool:
-    """
-    Convert string to boolean safely.
-
-    Accepts: 'true', '1', 'yes', 'on' (case-insensitive)
-    Returns default if value is None or empty.
-
-    Args:
-        value: String value to convert
-        default: Default boolean value if conversion fails
-
-    Returns:
-        Boolean value
-    """
-    if not value:
-        return default
-    return value.lower() in ('true', '1', 'yes', 'on')
-
-
-def mask_db_uri(uri: str) -> str:
-    """
-    Mask password in database URI for secure logging.
-
-    Converts: postgresql://user:password@host/db
-    To:       postgresql://user:***@host/db
-
-    Args:
-        uri: Database connection URI
-
-    Returns:
-        URI with masked password
-    """
-    if '@' in uri and ':' in uri:
-        parts = uri.split('@')
-        if ':' in parts[0]:
-            protocol_and_user = parts[0].rsplit(':', 1)
-            return f"{protocol_and_user[0]}:***@{parts[1]}"
-    return uri
+from config.utils import str_to_bool, mask_db_uri
 
 
 def get_port(default: int = 5000) -> int:

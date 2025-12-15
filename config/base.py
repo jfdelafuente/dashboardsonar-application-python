@@ -7,11 +7,13 @@ Shared configuration for all environments.
 All environment-specific configs inherit from BaseConfig.
 
 Created: Phase 6 - Configuration System
+Updated: Phase 1 Improvements - Use shared mask_db_uri utility
 """
 
 import os
 import secrets
 from pathlib import Path
+from .utils import mask_db_uri
 
 # Base directory (project root)
 basedir = Path(__file__).parent.parent.absolute()
@@ -97,9 +99,8 @@ class BaseConfig:
         # Log database configuration (without credentials)
         db_uri = app.config.get('SQLALCHEMY_DATABASE_URI', '')
         if db_uri:
-            # Mask password in URI for logging
-            import re
-            masked_uri = re.sub(r'://([^:]+):([^@]+)@', r'://\1:****@', db_uri)
+            # Mask password in URI for logging using shared utility
+            masked_uri = mask_db_uri(db_uri)
             app.logger.info(f'Database: {masked_uri}')
         else:
             app.logger.warning('SQLALCHEMY_DATABASE_URI not configured')

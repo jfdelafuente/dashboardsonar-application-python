@@ -5,11 +5,13 @@ Production Configuration
 Configuration for production environment.
 
 Created: Phase 6 - Configuration System
+Updated: Phase 1 Improvements - Added SECRET_KEY validation and URI escaping
 """
 
 import os
 import logging
 from logging.handlers import SysLogHandler
+from urllib.parse import quote_plus
 from config.base import BaseConfig, basedir
 
 
@@ -19,6 +21,15 @@ class ProductionConfig(BaseConfig):
     # Production mode
     DEBUG = False
     TESTING = False
+
+    # ==========================================
+    # Security - SECRET_KEY (validated in init_app)
+    # ==========================================
+
+    SECRET_KEY = os.getenv('SECRET_KEY')
+
+    # If not set, will be validated in init_app() when actually used
+    # This allows importing the config module without failing
 
     # ==========================================
     # Database Configuration
@@ -31,15 +42,30 @@ class ProductionConfig(BaseConfig):
     DB_PORT = os.getenv('DB_PORT')
     DB_NAME = os.getenv('DB_NAME')
 
-    # Build database URI if all required vars are present
+    # Build database URI with proper escaping
     if all([DB_ENGINE, DB_USERNAME, DB_NAME]):
-        SQLALCHEMY_DATABASE_URI = (
-            f'{DB_ENGINE}://{DB_USERNAME}:{DB_PASSWORD}'
-            f'@{DB_HOST}:{DB_PORT}/{DB_NAME}'
-        )
+        # Escape username and password to handle special characters
+        username_escaped = quote_plus(DB_USERNAME)
+        password_escaped = quote_plus(DB_PASSWORD) if DB_PASSWORD else ''
+
+        if password_escaped:
+            SQLALCHEMY_DATABASE_URI = (
+                f'{DB_ENGINE}://{username_escaped}:{password_escaped}'
+                f'@{DB_HOST}:{DB_PORT}/{DB_NAME}'
+            )
+        else:
+            # No password case
+            SQLALCHEMY_DATABASE_URI = (
+                f'{DB_ENGINE}://{username_escaped}'
+                f'@{DB_HOST}:{DB_PORT}/{DB_NAME}'
+            )
     else:
-        # Fallback to SQLite
+        # Fallback to SQLite with warning
         SQLALCHEMY_DATABASE_URI = f"sqlite:///{basedir / 'db.sqlite3'}"
+        print(
+            "Warning: Missing database environment variables. "
+            "Required: DB_ENGINE, DB_USERNAME, DB_NAME. Falling back to SQLite."
+        )
 
     # ==========================================
     # Security Settings
@@ -65,11 +91,40 @@ class ProductionConfig(BaseConfig):
         """
         Production-specific initialization.
 
-        Sets up SysLog handler for production logging.
+        Validates SECRET_KEY and sets up SysLog handler for production logging.
 
         Args:
             app: Flask application instance
+
+        Raises:
+            ValueError: If SECRET_KEY is missing, too short, or set to default value
         """
+        # Validate SECRET_KEY in production
+        secret_key = app.config.get('SECRET_KEY')
+
+        # Validate SECRET_KEY is set
+        if not secret_key:
+            raise ValueError(
+                "SECRET_KEY environment variable is required in production.\n"
+                "Generate one with: python -c \"import secrets; print(secrets.token_hex(32))\""
+            )
+
+        # Validate SECRET_KEY is not the default value
+        if secret_key == 'your-secret-key-here-change-in-production':
+            raise ValueError(
+                "SECRET_KEY is still set to the default value.\n"
+                "Generate a new one with: python -c \"import secrets; print(secrets.token_hex(32))\""
+            )
+
+        # Validate SECRET_KEY has minimum length
+        if len(secret_key) < 32:
+            raise ValueError(
+                f"SECRET_KEY must be at least 32 characters (current: {len(secret_key)}).\n"
+                "Generate one with: python -c \"import secrets; print(secrets.token_hex(32))\""
+            )
+
+        app.logger.info("SECRET_KEY validation passed")
+
         # Add SysLog handler
         syslog_handler = SysLogHandler()
         syslog_handler.setLevel(logging.WARNING)
