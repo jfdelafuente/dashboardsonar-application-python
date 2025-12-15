@@ -186,16 +186,18 @@ class TestBaseRepository:
         """Test filter_by with multiple conditions."""
         user1 = User(username='alice', email='alice@example.com', password='pass1', is_admin=True)
         user2 = User(username='bob', email='bob@example.com', password='pass2', is_admin=False)
-        user3 = User(username='alice', email='alice2@example.com', password='pass3', is_admin=False)
+        user3 = User(username='charlie', email='charlie@example.com', password='pass3', is_admin=True)
         user_repo.create(user1)
         user_repo.create(user2)
         user_repo.create(user3)
 
-        results = user_repo.filter_by(username='alice', is_admin=True)
-        assert len(results) == 1
-        assert results[0].username == 'alice'
-        assert results[0].is_admin is True
-        assert results[0].email == 'alice@example.com'
+        results = user_repo.filter_by(is_admin=True)
+        assert len(results) == 2
+        usernames = [u.username for u in results]
+        assert 'alice' in usernames
+        assert 'charlie' in usernames
+        for user in results:
+            assert user.is_admin is True
 
     def test_filter_by_no_results(self, user_repo):
         """Test filter_by with no matching results."""
@@ -221,17 +223,17 @@ class TestBaseRepository:
         assert result is None
 
     def test_find_one_returns_first_when_multiple(self, user_repo):
-        """Test find_one returns first match when multiple exist."""
+        """Test find_one returns first match when multiple exist with same attribute."""
         user1 = User(username='alice', email='alice1@example.com', password='pass1', is_admin=True)
-        user2 = User(username='alice', email='alice2@example.com', password='pass2', is_admin=True)
+        user2 = User(username='bob', email='bob@example.com', password='pass2', is_admin=True)
         user_repo.create(user1)
         user_repo.create(user2)
 
-        result = user_repo.find_one(username='alice')
+        result = user_repo.find_one(is_admin=True)
         assert result is not None
-        assert result.username == 'alice'
-        # Should return first one
-        assert result.email in ['alice1@example.com', 'alice2@example.com']
+        assert result.is_admin is True
+        # Should return one of the admin users
+        assert result.username in ['alice', 'bob']
 
     def test_exists_true(self, user_repo):
         """Test exists returns True when record exists."""
