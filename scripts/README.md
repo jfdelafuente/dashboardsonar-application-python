@@ -1,8 +1,23 @@
 # Scripts Directory
 
-This directory contains utility scripts for managing the Dashboard Sonar application.
+This directory contains utility scripts for managing the Dashboard Sonar application, organized by function.
 
-## Database Setup Script
+## 📁 Directory Structure
+
+```text
+scripts/
+├── setup/              # Initial configuration scripts (run once)
+├── verification/       # Environment validation scripts
+├── data/               # Data processing scripts (regular use)
+├── legacy/             # Deprecated scripts (backward compatibility)
+├── etl/                # ETL operations
+├── sql/                # SQL schemas and queries
+└── utils/              # Shared utilities
+```
+
+## 🚀 Setup Scripts (`scripts/setup/`)
+
+Scripts for initial project configuration. Run these once during setup.
 
 ### setup_database.py
 
@@ -23,13 +38,13 @@ Automated script to initialize the database and create an admin user.
 
 ```bash
 # Development environment (default)
-python scripts/setup_database.py
+python scripts/setup/setup_database.py
 
 # Production environment
-python scripts/setup_database.py --config Production
+python scripts/setup/setup_database.py --config Production
 
 # Testing environment
-python scripts/setup_database.py --config Testing
+python scripts/setup/setup_database.py --config Testing
 ```
 
 The script will prompt you for:
@@ -42,10 +57,10 @@ The script will prompt you for:
 
 ```bash
 # With default credentials
-python scripts/setup_database.py --config Development --non-interactive
+python scripts/setup/setup_database.py --config Development --non-interactive
 
 # With custom credentials
-python scripts/setup_database.py \
+python scripts/setup/setup_database.py \
   --config Production \
   --non-interactive \
   --username myadmin \
@@ -61,41 +76,159 @@ python scripts/setup_database.py \
 - `--email EMAIL`: Admin email (default: admin@example.com)
 - `--password PASSWORD`: Admin password (default: admin123)
 
-#### Helper Scripts
+### init_git_workflow.sh
 
-**Windows: `setup_database.bat`**
-
-Wrapper script for Windows users:
+Configures Git workflow, hooks, and branch protection rules.
 
 ```bash
-# Run from project root
-setup_database.bat
-
-# Specify environment
-setup_database.bat Production
+bash scripts/setup/init_git_workflow.sh
 ```
 
-**Linux/macOS: `setup_database.sh`**
+## ✅ Verification Scripts (`scripts/verification/`)
 
-Wrapper script for Linux/macOS users:
+Scripts for validating your environment configuration.
+
+### verify_config.py
+
+Verifies that all configuration settings are correct.
 
 ```bash
-# Make executable (first time only)
-chmod +x setup_database.sh
-
-# Run from project root
-./setup_database.sh
-
-# Specify environment
-./setup_database.sh Production
+python scripts/verification/verify_config.py
 ```
 
-#### Examples
+### verify_dependencies.py
 
-**Example 1: First-time setup in development**
+Checks that all required dependencies are installed.
 
 ```bash
-$ python scripts/setup_database.py
+python scripts/verification/verify_dependencies.py
+```
+
+### verify_requirements.py
+
+Validates requirements.txt for consistency and security.
+
+```bash
+python scripts/verification/verify_requirements.py
+```
+
+## 📊 Data Scripts (`scripts/data/`)
+
+Scripts for data loading and processing. These can be run on-demand or scheduled.
+
+### load_data.py
+
+Loads initial data from CSV files into the database.
+
+```bash
+# Load all data from default directory (./datos)
+python scripts/data/load_data.py
+
+# Load from specific directory
+python scripts/data/load_data.py --data-dir /path/to/csv/files
+
+# Production environment
+python scripts/data/load_data.py --config Production
+```
+
+### generate_daily.py
+
+Generates daily snapshots of aggregated metrics per repository.
+
+```bash
+# Generate for today
+python scripts/data/generate_daily.py
+
+# Generate for specific date
+python scripts/data/generate_daily.py --date 2024-01-15
+
+# Clear existing data for date before generating
+python scripts/data/generate_daily.py --date 2024-01-15 --clear-date
+
+# Production environment
+python scripts/data/generate_daily.py --config Production
+```
+
+### generate_registro.py
+
+Creates audit/process registry records with global statistics.
+
+```bash
+# Generate registry for today
+python scripts/data/generate_registro.py
+
+# Custom process name
+python scripts/data/generate_registro.py --process-name "Monthly Report"
+```
+
+### generate_stats.py
+
+Generates aggregated statistics from metricas table.
+
+```bash
+# Generate statistics
+python scripts/data/generate_stats.py
+
+# Clear existing stats before regenerating
+python scripts/data/generate_stats.py --clear
+
+# Production environment
+python scripts/data/generate_stats.py --config Production
+```
+
+## 🔄 ETL Scripts (`scripts/etl/`)
+
+Extract, Transform, Load operations.
+
+### etl.py
+
+ETL operations and data transformations.
+
+```bash
+python scripts/etl/etl.py
+```
+
+## 🗃️ SQL Files (`scripts/sql/`)
+
+SQL schemas and queries used by scripts.
+
+- `schema.sql` - Main database schema
+- `daily.sql` - Daily metrics table schema
+- `stats.sql` - Statistics table schema
+- `registro.sql` - Registry table schema
+- `proveedores.sql` - Providers table schema
+
+## 🛠️ Utilities (`scripts/utils/`)
+
+Shared utility functions used across scripts.
+
+### utils.py
+
+Common utility functions for CSV processing, data extraction, etc.
+
+```python
+from scripts.utils.utils import extract_from_csv, load_to_csv
+```
+
+## 📦 Legacy Scripts (`scripts/legacy/`)
+
+⚠️ **DEPRECATED**: These scripts are from the older system architecture.
+
+**Do not use for new development.** They are maintained temporarily for backward compatibility.
+
+- `database.py` - Legacy database operations ❌ Use `infocodest.extensions.db` instead
+- `init_db.py` - Old initialization ❌ Use `scripts/setup/setup_database.py` instead
+- `daily.py` - Legacy daily processing ❌ Use `scripts/data/generate_daily.py` instead
+- `estadisticas.py` - Legacy statistics ❌ Use `scripts/data/generate_stats.py` instead
+- `proveedores.py` - Legacy provider management
+- `registro.py` - Legacy registry ❌ Use `scripts/data/generate_registro.py` instead
+
+## 🔍 Examples
+
+### First-time setup in development
+
+```bash
+$ python scripts/setup/setup_database.py
 
 ============================================================
 Database Setup
@@ -144,10 +277,10 @@ You can now login with:
 ============================================================
 ```
 
-**Example 2: Production setup with custom credentials**
+### Production setup with custom credentials
 
 ```bash
-$ python scripts/setup_database.py --config Production
+$ python scripts/setup/setup_database.py --config Production
 
 ============================================================
 Admin User Configuration
@@ -162,10 +295,10 @@ Continue? [y/N]: y
 ✓ Database setup completed successfully!
 ```
 
-**Example 3: Automated setup for CI/CD**
+### Automated setup for CI/CD
 
 ```bash
-python scripts/setup_database.py \
+python scripts/setup/setup_database.py \
   --config Production \
   --non-interactive \
   --username cicd_admin \
@@ -173,7 +306,7 @@ python scripts/setup_database.py \
   --password $ADMIN_PASSWORD
 ```
 
-#### Troubleshooting
+## 🔍 Troubleshooting
 
 **Error: "Virtual environment not activated"**
 
@@ -197,7 +330,7 @@ Make sure you're running the script from the project root directory:
 
 ```bash
 cd /path/to/dashboardsonar-application-python
-python scripts/setup_database.py
+python scripts/setup/setup_database.py
 ```
 
 **Error: "SQLALCHEMY_DATABASE_URI not configured"**
@@ -213,7 +346,7 @@ DB_PORT=5432
 DB_NAME=dashboardsonar
 ```
 
-#### Security Notes
+## 🔐 Security Notes
 
 ⚠️ **IMPORTANT SECURITY CONSIDERATIONS:**
 
@@ -223,34 +356,10 @@ DB_NAME=dashboardsonar
 4. **Environment Variables**: For automated deployments, use environment variables instead of hardcoded passwords
 5. **HTTPS Only**: Always use HTTPS in production to protect credentials in transit
 
-#### What the Script Does
+## 📚 Additional Documentation
 
-1. **Loads Configuration**: Selects the appropriate config (Development/Production/Testing)
-2. **Creates Tables**: Uses SQLAlchemy to create all database tables defined in models
-3. **Checks Existing Users**: Verifies if admin user already exists to prevent duplicates
-4. **Hashes Password**: Uses secure PBKDF2-HMAC-SHA512 hashing for password storage
-5. **Creates Admin User**: Inserts the admin user into the database
-6. **Validates**: Ensures all operations completed successfully
+For more information, see:
 
-## Other Scripts
-
-### Legacy Scripts
-
-The following scripts are from the legacy system and may require updates:
-
-- `database.py` - Legacy database operations (deprecated)
-- `estadisticas.py` - Statistics generation
-- `proveedores.py` - Provider management
-- `registro.py` - Registration operations
-- `daily.py` - Daily metrics processing
-- `init_db.py` - Old initialization script (use `setup_database.py` instead)
-
-### Verification Scripts
-
-- `verify_config.py` - Verify configuration settings
-- `verify_dependencies.py` - Check installed dependencies
-- `verify_requirements.py` - Validate requirements.txt
-
----
-
-For more information, see the main [SETUP.md](../SETUP.md) documentation.
+- [SETUP.md](../SETUP.md) - Main setup documentation
+- [config/README.md](../config/README.md) - Configuration system
+- [docs/MEJORAS_CONFIGURACION.md](../docs/MEJORAS_CONFIGURACION.md) - Configuration improvements
