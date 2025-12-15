@@ -72,14 +72,18 @@ def create_app(app_config) -> Flask:
 
     Initialization order:
         1. Load configuration
-        2. Setup structured logging
-        3. Initialize extensions
-        4. Register blueprints
-        5. Register error handlers
-        6. Log startup information
+        2. Validate configuration (via init_app)
+        3. Setup structured logging
+        4. Initialize extensions
+        5. Register blueprints
+        6. Register error handlers
+        7. Log startup information
     """
     app = Flask(__name__)
     app.config.from_object(app_config)
+
+    # Validate configuration (calls validate_config internally)
+    app_config.init_app(app)
 
     # Setup logging first
     setup_logging(app)
