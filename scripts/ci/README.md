@@ -200,6 +200,55 @@ export SMOKE_TEST_URL=http://staging.example.com
 
 ---
 
+### 🚀 deploy-production.sh - Production Deployment
+
+Deploys to production with blue-green strategy and safety checks.
+
+**Features**:
+
+- Blue-green deployment for zero-downtime
+- Automatic backup before deployment
+- Version tag validation
+- Pre-deployment testing
+- Automatic rollback on failure
+- Safety confirmation prompts
+
+**Usage**:
+
+```bash
+# Deploy specific version
+./scripts/ci/deploy-production.sh --version v1.2.3
+
+# Force deployment (skip confirmations)
+./scripts/ci/deploy-production.sh --version v1.2.3 --force
+
+# Dry run
+./scripts/ci/deploy-production.sh --version v1.2.3 --dry-run
+```
+
+**Required**: `PRODUCTION_HOST`, `PRODUCTION_USER`, `PRODUCTION_PATH`
+
+---
+
+### ⏪ rollback.sh - Production Rollback
+
+Rolls back production to previous backup.
+
+**Usage**:
+
+```bash
+# List available backups
+./scripts/ci/rollback.sh --list-backups
+
+# Rollback to specific backup
+./scripts/ci/rollback.sh --timestamp 20231215_143022
+
+# Force rollback (skip confirmations)
+./scripts/ci/rollback.sh --timestamp 20231215_143022 --force
+```
+
+---
+
 ## Running All Checks Locally
 
 To run all checks before pushing:
