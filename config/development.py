@@ -22,10 +22,11 @@ class DevelopmentConfig(BaseConfig):
     DEVELOPMENT = True
 
     # Database - configurable SQLite filename
-    db_name = os.getenv('DB_NAME', 'db.sqlite3')
+    # Use SQLITE_DB_FILE for Development SQLite database (not DB_NAME which is for Production PostgreSQL)
+    sqlite_db_file = os.getenv('SQLITE_DB_FILE', 'db.sqlite3')
     SQLALCHEMY_DATABASE_URI = build_database_uri(
         engine='sqlite',
-        sqlite_path=basedir / db_name
+        sqlite_path=basedir / sqlite_db_file
     )
     SQLALCHEMY_ECHO = True  # Show SQL queries in console
 

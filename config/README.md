@@ -46,9 +46,11 @@ Hereda de BaseConfig y añade:
 | Variable          | Tipo    | Default              | Descripción                           |
 |-------------------|---------|----------------------|---------------------------------------|
 | `DEBUG`           | boolean | `True`               | Modo debug activado                   |
-| `DB_NAME`         | string  | `db.sqlite3`         | Nombre del archivo SQLite             |
+| `SQLITE_DB_FILE`  | string  | `db.sqlite3`         | Nombre del archivo SQLite para desarrollo |
 
 **Base de datos:** SQLite en `db.sqlite3`
+
+**Nota:** `SQLITE_DB_FILE` es diferente de `DB_NAME` (usado en Production para PostgreSQL/MySQL)
 
 ### ProductionConfig
 
@@ -78,9 +80,11 @@ Hereda de BaseConfig y añade:
 | Variable          | Tipo    | Default              | Descripción                           |
 |-------------------|---------|----------------------|---------------------------------------|
 | `TESTING`         | boolean | `True`               | Modo testing activado                 |
-| `DB_NAME`         | string  | `testdb.sqlite3`     | Nombre del archivo SQLite de testing  |
+| `SQLITE_DB_FILE`  | string  | `testdb.sqlite3`     | Nombre del archivo SQLite para testing |
 
 **Base de datos:** SQLite en `testdb.sqlite3`
+
+**Nota:** `SQLITE_DB_FILE` es diferente de `DB_NAME` (usado en Production para PostgreSQL/MySQL)
 
 ## Generar SECRET_KEY
 
@@ -132,7 +136,59 @@ debug = str_to_bool(os.getenv('DEBUG'))  # Acepta: true, 1, yes, on
 testing = str_to_bool(os.getenv('TESTING'), default=False)
 ```
 
-## Ejemplo de .env para Producción
+## Ejemplos de .env
+
+### Para Desarrollo (Development)
+
+```bash
+# ==========================================
+# Security
+# ==========================================
+SECRET_KEY=dev-secret-key-not-for-production
+
+# ==========================================
+# Application Settings
+# ==========================================
+DEBUG=True
+TESTING=False
+FLASK_DEBUG=1
+
+# ==========================================
+# Database Configuration (SQLite)
+# ==========================================
+# Para Development/Testing: usar SQLITE_DB_FILE
+SQLITE_DB_FILE=db.sqlite3
+
+# ==========================================
+# Application Settings
+# ==========================================
+DAYS_COMPARISON=15
+ASSETS_ROOT=/static/assets
+LOG_LEVEL=DEBUG
+```
+
+### Para Testing
+
+```bash
+# ==========================================
+# Application Settings
+# ==========================================
+DEBUG=True
+TESTING=True
+FLASK_DEBUG=1
+
+# ==========================================
+# Database Configuration (SQLite)
+# ==========================================
+SQLITE_DB_FILE=testdb.sqlite3
+
+# ==========================================
+# Application Settings
+# ==========================================
+LOG_LEVEL=DEBUG
+```
+
+### Para Producción (Production)
 
 ```bash
 # ==========================================
@@ -148,8 +204,9 @@ TESTING=False
 FLASK_DEBUG=0
 
 # ==========================================
-# Database Configuration
+# Database Configuration (PostgreSQL/MySQL)
 # ==========================================
+# Para Production: usar DB_ENGINE, DB_USERNAME, DB_NAME, etc.
 DB_ENGINE=postgresql
 DB_USERNAME=dashuser
 DB_PASS=my@secure:pass#123
@@ -166,6 +223,12 @@ LOG_LEVEL=WARNING
 ```
 
 **Nota:** Las contraseñas con caracteres especiales (@, :, /, #) se escapan automáticamente usando `urllib.parse.quote_plus`.
+
+**Importante:**
+
+- `SQLITE_DB_FILE`: Nombre de archivo SQLite (solo Development/Testing)
+- `DB_NAME`: Nombre de base de datos PostgreSQL/MySQL (solo Production)
+- Son variables diferentes para propósitos diferentes
 
 ## Solución de Problemas
 
