@@ -46,7 +46,7 @@ echo [+] Configuration: %CONFIG%
 echo.
 
 REM Run the setup script
-python scripts\setup_database.py --config %CONFIG%
+python scripts\setup\setup_database.py --config %CONFIG%
 
 if %ERRORLEVEL% EQU 0 (
     echo.

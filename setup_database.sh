@@ -42,7 +42,7 @@ echo "[+] Configuration: $CONFIG"
 echo ""
 
 # Run the setup script
-python scripts/setup_database.py --config "$CONFIG"
+python scripts/setup/setup_database.py --config "$CONFIG"
 
 if [ $? -eq 0 ]; then
     echo ""

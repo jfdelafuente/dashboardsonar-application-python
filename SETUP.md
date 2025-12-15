@@ -424,10 +424,10 @@ chmod +x setup_database.sh
 
 ```bash
 # Con credenciales por defecto
-python scripts/setup_database.py --config Development --non-interactive
+python scripts/setup/setup_database.py --config Development --non-interactive
 
 # Con credenciales personalizadas
-python scripts/setup_database.py --config Production --non-interactive \
+python scripts/setup/setup_database.py --config Production --non-interactive \
   --username myadmin \
   --email admin@miempresa.com \
   --password mi_contraseña_segura
