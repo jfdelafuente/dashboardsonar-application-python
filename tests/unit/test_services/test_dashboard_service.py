@@ -162,6 +162,7 @@ class TestDashboardService:
 
     def test_get_kpi_by_repositorio(self, service, mock_metrica_repo, mock_historico_repo, mock_daily_repo):
         """Test repository-specific KPI calculation."""
+        aplicacion = 'TestApp'
         repositorio = 'test-repo'
 
         # Arrange - Current metrics
@@ -177,7 +178,7 @@ class TestDashboardService:
         mock_daily_repo.sum_quality_by_date_and_repo.return_value = 7
 
         # Act
-        result = service.get_kpi_by_repositorio(repositorio)
+        result = service.get_kpi_by_repository(aplicacion, repositorio)
 
         # Assert
         assert result['repositorios'] == 1
