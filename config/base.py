@@ -9,15 +9,21 @@ All environment-specific configs inherit from BaseConfig.
 Created: Phase 6 - Configuration System
 Updated: Phase 1 Improvements - Use shared mask_db_uri utility
 Updated: Phase 2 Improvements - Use str_to_bool, validate ASSETS_ROOT
+Updated: Phase 3 Improvements - Add comprehensive type hints
 """
+
+from __future__ import annotations
 
 import os
 import secrets
+import logging
 from pathlib import Path
+from typing import ClassVar, Optional
+
 from .utils import mask_db_uri, str_to_bool
 
 # Base directory (project root)
-basedir = Path(__file__).parent.parent.absolute()
+basedir: Path = Path(__file__).parent.parent.absolute()
 
 
 class BaseConfig:
@@ -27,54 +33,51 @@ class BaseConfig:
     # Security Settings
     # ==========================================
 
-    SECRET_KEY = os.getenv('SECRET_KEY', None)
-    if not SECRET_KEY:
-        SECRET_KEY = secrets.token_hex(32)
-
-    CSRF_ENABLED = True
-    WTF_CSRF_ENABLED = True
+    SECRET_KEY: ClassVar[str] = os.getenv('SECRET_KEY', None) or secrets.token_hex(32)
+    CSRF_ENABLED: ClassVar[bool] = True
+    WTF_CSRF_ENABLED: ClassVar[bool] = True
 
     # ==========================================
     # Database Settings
     # ==========================================
 
-    SQLALCHEMY_TRACK_MODIFICATIONS = str_to_bool(
+    SQLALCHEMY_TRACK_MODIFICATIONS: ClassVar[bool] = str_to_bool(
         os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS'),
         default=False
     )
-    SQLALCHEMY_ECHO = False
-    BCRYPT_LOG_ROUNDS = 13
+    SQLALCHEMY_ECHO: ClassVar[bool] = False
+    BCRYPT_LOG_ROUNDS: ClassVar[int] = 13
 
     # ==========================================
     # Assets Settings
     # ==========================================
 
-    ASSETS_ROOT = os.getenv('ASSETS_ROOT', '/static/assets')
+    ASSETS_ROOT: ClassVar[str] = os.getenv('ASSETS_ROOT', '/static/assets')
 
     # ==========================================
     # Application Settings
     # ==========================================
 
-    FLASK_APP = os.getenv('FLASK_APP', 'run.py')
-    DAYS_COMPARISON = int(os.getenv('DAYS_COMPARISON', '15'))
+    FLASK_APP: ClassVar[str] = os.getenv('FLASK_APP', 'run.py')
+    DAYS_COMPARISON: ClassVar[int] = int(os.getenv('DAYS_COMPARISON', '15'))
 
     # ==========================================
     # Logging Settings
     # ==========================================
 
-    LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
-    LOG_DIR = basedir / 'logs'
+    LOG_LEVEL: ClassVar[str] = os.getenv('LOG_LEVEL', 'INFO')
+    LOG_DIR: ClassVar[Path] = basedir / 'logs'
 
     # ==========================================
     # Session/Cookie Settings
     # ==========================================
 
-    SESSION_COOKIE_HTTPONLY = True
-    REMEMBER_COOKIE_HTTPONLY = True
-    REMEMBER_COOKIE_DURATION = 3600
+    SESSION_COOKIE_HTTPONLY: ClassVar[bool] = True
+    REMEMBER_COOKIE_HTTPONLY: ClassVar[bool] = True
+    REMEMBER_COOKIE_DURATION: ClassVar[int] = 3600
 
     @staticmethod
-    def validate_config(app):
+    def validate_config(app: 'Flask') -> None:
         """
         Validate critical configuration settings.
 
@@ -133,8 +136,22 @@ class BaseConfig:
             else:
                 app.logger.info(f"ASSETS_ROOT validated: {assets_root}")
 
+        # Configure logging level from LOG_LEVEL
+        log_level_str = app.config.get('LOG_LEVEL', 'INFO').upper()
+        try:
+            log_level = getattr(logging, log_level_str)
+            app.logger.setLevel(log_level)
+            app.logger.info(f"Logging level set to: {log_level_str}")
+        except AttributeError:
+            app.logger.warning(
+                f"Invalid LOG_LEVEL '{log_level_str}'. "
+                "Valid values: DEBUG, INFO, WARNING, ERROR, CRITICAL. "
+                "Defaulting to INFO."
+            )
+            app.logger.setLevel(logging.INFO)
+
     @staticmethod
-    def init_app(app):
+    def init_app(app: 'Flask') -> None:
         """
         Hook for custom initialization.
 

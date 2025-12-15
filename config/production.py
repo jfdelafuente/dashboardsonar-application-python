@@ -6,11 +6,15 @@ Configuration for production environment.
 
 Created: Phase 6 - Configuration System
 Updated: Phase 1 Improvements - Added SECRET_KEY validation and URI escaping
+Updated: Phase 3 Improvements - Add comprehensive type hints
 """
+
+from __future__ import annotations
 
 import os
 import logging
 from logging.handlers import SysLogHandler
+from typing import ClassVar, Optional
 from config.base import BaseConfig, basedir
 from config.utils import build_database_uri
 
@@ -19,14 +23,14 @@ class ProductionConfig(BaseConfig):
     """Production-specific configuration."""
 
     # Production mode
-    DEBUG = False
-    TESTING = False
+    DEBUG: ClassVar[bool] = False
+    TESTING: ClassVar[bool] = False
 
     # ==========================================
     # Security - SECRET_KEY (validated in init_app)
     # ==========================================
 
-    SECRET_KEY = os.getenv('SECRET_KEY')
+    SECRET_KEY: ClassVar[Optional[str]] = os.getenv('SECRET_KEY')
 
     # If not set, will be validated in init_app() when actually used
     # This allows importing the config module without failing
@@ -35,12 +39,12 @@ class ProductionConfig(BaseConfig):
     # Database Configuration
     # ==========================================
 
-    DB_ENGINE = os.getenv('DB_ENGINE')
-    DB_USERNAME = os.getenv('DB_USERNAME')
-    DB_PASSWORD = os.getenv('DB_PASS')
-    DB_HOST = os.getenv('DB_HOST')
-    DB_PORT = os.getenv('DB_PORT')
-    DB_NAME = os.getenv('DB_NAME')
+    DB_ENGINE: ClassVar[Optional[str]] = os.getenv('DB_ENGINE')
+    DB_USERNAME: ClassVar[Optional[str]] = os.getenv('DB_USERNAME')
+    DB_PASSWORD: ClassVar[Optional[str]] = os.getenv('DB_PASS')
+    DB_HOST: ClassVar[Optional[str]] = os.getenv('DB_HOST')
+    DB_PORT: ClassVar[Optional[str]] = os.getenv('DB_PORT')
+    DB_NAME: ClassVar[Optional[str]] = os.getenv('DB_NAME')
 
     # Build database URI using centralized function
     if all([DB_ENGINE, DB_USERNAME, DB_NAME]):
@@ -70,23 +74,23 @@ class ProductionConfig(BaseConfig):
     # Security Settings
     # ==========================================
 
-    SESSION_COOKIE_HTTPONLY = True
-    SESSION_COOKIE_SECURE = True  # Only HTTPS
-    REMEMBER_COOKIE_HTTPONLY = True
-    REMEMBER_COOKIE_SECURE = True
-    REMEMBER_COOKIE_DURATION = 3600
+    SESSION_COOKIE_HTTPONLY: ClassVar[bool] = True
+    SESSION_COOKIE_SECURE: ClassVar[bool] = True  # Only HTTPS
+    REMEMBER_COOKIE_HTTPONLY: ClassVar[bool] = True
+    REMEMBER_COOKIE_SECURE: ClassVar[bool] = True
+    REMEMBER_COOKIE_DURATION: ClassVar[int] = 3600
 
     # ==========================================
     # Logging
     # ==========================================
 
-    LOG_LEVEL = 'WARNING'
+    LOG_LEVEL: ClassVar[str] = 'WARNING'
 
     # Debug toolbar
-    DEBUG_TB_ENABLED = False
+    DEBUG_TB_ENABLED: ClassVar[bool] = False
 
     @staticmethod
-    def init_app(app):
+    def init_app(app: 'Flask') -> None:
         """
         Production-specific initialization.
 
