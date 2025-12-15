@@ -238,9 +238,20 @@ SECRET_KEY=genera_tu_clave_secreta_aqui
 # Application Settings
 # ==========================================
 
+# Flask application entry point
 FLASK_APP=run.py
+
+# Debug mode (valores aceptados: true/1/yes/on o false/0/no/off, case-insensitive)
+# IMPORTANTE: FLASK_DEBUG y DEBUG deben estar sincronizados
+# Para desarrollo: FLASK_DEBUG=1 y DEBUG=True
+# Para producción: FLASK_DEBUG=0 y DEBUG=False
 FLASK_DEBUG=0
 DEBUG=False
+TESTING=False
+
+# Configuración del servidor
+HOST=127.0.0.1
+PORT=5000
 
 # Días de comparación para métricas históricas (default: 15)
 DAYS_COMPARISON=15
@@ -504,6 +515,51 @@ python run.py
 ```
 
 La aplicación estará disponible en: http://127.0.0.1:5000
+
+### Variables de Entorno Soportadas
+
+La aplicación soporta las siguientes variables de entorno que pueden configurarse en `.env`:
+
+#### Variables de Debug Mode
+
+| Variable | Valores Aceptados | Default | Descripción |
+|----------|-------------------|---------|-------------|
+| `DEBUG` | `true`, `1`, `yes`, `on` (case-insensitive) o `false`, `0`, `no`, `off` | `False` | Activa modo debug de la aplicación |
+| `FLASK_DEBUG` | `1` o `0` | `0` | Activa modo debug de Flask |
+| `TESTING` | `true`, `1`, `yes`, `on` o `false`, `0`, `no`, `off` | `False` | Activa modo testing |
+
+**IMPORTANTE:** `FLASK_DEBUG` y `DEBUG` deben estar sincronizados:
+- **Desarrollo:** `FLASK_DEBUG=1` y `DEBUG=True`
+- **Producción:** `FLASK_DEBUG=0` y `DEBUG=False`
+
+#### Variables de Servidor
+
+| Variable | Tipo | Default | Descripción |
+|----------|------|---------|-------------|
+| `HOST` | IP | `127.0.0.1` | IP del servidor (usar `0.0.0.0` para acceso externo) |
+| `PORT` | Número (1024-65535) | `5000` | Puerto del servidor |
+
+**Ejemplos de configuración:**
+
+```bash
+# Desarrollo local
+DEBUG=True
+FLASK_DEBUG=1
+HOST=127.0.0.1
+PORT=5000
+
+# Desarrollo accesible desde red local
+DEBUG=True
+FLASK_DEBUG=1
+HOST=0.0.0.0
+PORT=8000
+
+# Producción
+DEBUG=False
+FLASK_DEBUG=0
+HOST=0.0.0.0
+PORT=5000
+```
 
 ### Modo Producción
 
