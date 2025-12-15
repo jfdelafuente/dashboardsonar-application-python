@@ -60,11 +60,11 @@ class TestDashboardService:
         mock_metrica_repo.count.return_value = 50
         mock_metrica_repo.sum_bugs.return_value = 100
         mock_historico_repo.count.return_value = 200
-        mock_historico_repo.count_by_alert_status.return_value = 150
+        mock_historico_repo.count_quality_ok.return_value = 150
 
         # Arrange - Old metrics (from 15 days ago)
         mock_daily_repo.count_distinct_aplicaciones_by_date.return_value = 8
-        mock_daily_repo.count_by_date.return_value = 45
+        mock_daily_repo.count_repos_by_date.return_value = 45
         mock_daily_repo.sum_bugs_by_date.return_value = 120
         mock_daily_repo.sum_analisis_by_date.return_value = 180
         mock_daily_repo.sum_quality_by_date.return_value = 140
@@ -92,25 +92,25 @@ class TestDashboardService:
         mock_metrica_repo.count.assert_called_once()
         mock_metrica_repo.sum_bugs.assert_called_once()
         mock_historico_repo.count.assert_called_once()
-        mock_historico_repo.count_by_alert_status.assert_called_once_with('OK')
+        mock_historico_repo.count_quality_ok.assert_called_once()
 
     def test_get_kpi_by_application(self, service, mock_metrica_repo, mock_historico_repo, mock_daily_repo):
         """Test application-specific KPI calculation."""
         aplicacion = 'TestApp'
 
         # Arrange - Current metrics
-        mock_metrica_repo.count_distinct_aplicaciones_by_aplicacion.return_value = 1
-        mock_metrica_repo.count_distinct_repos_by_aplicacion.return_value = 5
+        mock_metrica_repo.count_aplicaciones_by_aplicacion.return_value = 1
+        mock_metrica_repo.count_by_aplicacion.return_value = 5
         mock_metrica_repo.sum_bugs_by_aplicacion.return_value = 20
         mock_historico_repo.count_by_aplicacion.return_value = 30
-        mock_historico_repo.count_by_aplicacion_and_alert_status.return_value = 25
+        mock_historico_repo.count_quality_ok_by_aplicacion.return_value = 25
 
         # Arrange - Old metrics
-        mock_daily_repo.count_distinct_aplicaciones_by_date_and_aplicacion.return_value = 1
-        mock_daily_repo.count_distinct_repos_by_date_and_aplicacion.return_value = 4
-        mock_daily_repo.sum_bugs_by_date_and_aplicacion.return_value = 18
-        mock_daily_repo.sum_analisis_by_date_and_aplicacion.return_value = 28
-        mock_daily_repo.sum_quality_by_date_and_aplicacion.return_value = 23
+        mock_daily_repo.count_aplicaciones_by_date_and_app.return_value = 1
+        mock_daily_repo.count_repos_by_date_and_app.return_value = 4
+        mock_daily_repo.sum_bugs_by_date_and_app.return_value = 18
+        mock_daily_repo.sum_analisis_by_date_and_app.return_value = 28
+        mock_daily_repo.sum_quality_by_date_and_app.return_value = 23
 
         # Act
         result = service.get_kpi_by_application(aplicacion)
@@ -123,25 +123,25 @@ class TestDashboardService:
         assert result['quality'] == 25
 
         # Verify correct parameters passed
-        mock_metrica_repo.count_distinct_repos_by_aplicacion.assert_called_once_with(aplicacion)
+        mock_metrica_repo.count_by_aplicacion.assert_called_once_with(aplicacion)
         mock_metrica_repo.sum_bugs_by_aplicacion.assert_called_once_with(aplicacion)
         mock_historico_repo.count_by_aplicacion.assert_called_once_with(aplicacion)
-        mock_historico_repo.count_by_aplicacion_and_alert_status.assert_called_once_with(aplicacion, 'OK')
+        mock_historico_repo.count_quality_ok_by_aplicacion.assert_called_once_with(aplicacion)
 
     def test_get_kpi_by_proveedor(self, service, mock_metrica_repo, mock_historico_repo, mock_daily_repo):
         """Test provider-specific KPI calculation."""
         proveedor = 'TestProvider'
 
         # Arrange - Current metrics
-        mock_metrica_repo.count_distinct_aplicaciones_by_proveedor.return_value = 3
-        mock_metrica_repo.count_by_proveedor.return_value = 15
+        mock_metrica_repo.count_by_proveedor.return_value = 3
+        mock_metrica_repo.count_repos_by_proveedor.return_value = 15
         mock_metrica_repo.sum_bugs_by_proveedor.return_value = 50
         mock_historico_repo.count_by_proveedor.return_value = 60
-        mock_historico_repo.count_by_proveedor_and_alert_status.return_value = 45
+        mock_historico_repo.count_quality_ok_by_proveedor.return_value = 45
 
         # Arrange - Old metrics
-        mock_daily_repo.count_distinct_aplicaciones_by_date_and_proveedor.return_value = 3
-        mock_daily_repo.count_by_date_and_proveedor.return_value = 12
+        mock_daily_repo.count_aplicaciones_by_date_and_proveedor.return_value = 3
+        mock_daily_repo.count_repos_by_date_and_proveedor.return_value = 12
         mock_daily_repo.sum_bugs_by_date_and_proveedor.return_value = 48
         mock_daily_repo.sum_analisis_by_date_and_proveedor.return_value = 55
         mock_daily_repo.sum_quality_by_date_and_proveedor.return_value = 42
@@ -157,8 +157,8 @@ class TestDashboardService:
         assert result['quality'] == 45
 
         # Verify correct parameters
-        mock_metrica_repo.count_distinct_aplicaciones_by_proveedor.assert_called_once_with(proveedor)
         mock_metrica_repo.count_by_proveedor.assert_called_once_with(proveedor)
+        mock_metrica_repo.count_repos_by_proveedor.assert_called_once_with(proveedor)
 
     def test_get_kpi_by_repositorio(self, service, mock_metrica_repo, mock_historico_repo, mock_daily_repo):
         """Test repository-specific KPI calculation."""
@@ -166,29 +166,33 @@ class TestDashboardService:
         repositorio = 'test-repo'
 
         # Arrange - Current metrics
-        mock_metrica_repo.count_by_repo.return_value = 1
-        mock_metrica_repo.sum_bugs_by_repo.return_value = 5
-        mock_historico_repo.count_by_repo.return_value = 10
-        mock_historico_repo.count_by_repo_and_alert_status.return_value = 8
+        mock_metrica_repo.count_aplicaciones_by_aplicacion_and_repo.return_value = 1
+        mock_metrica_repo.count_by_aplicacion_and_repo.return_value = 1
+        mock_metrica_repo.sum_bugs_by_aplicacion_and_repo.return_value = 5
+        mock_historico_repo.count_by_aplicacion_and_repo.return_value = 10
+        mock_historico_repo.count_quality_ok_by_repo.return_value = 8
 
         # Arrange - Old metrics
-        mock_daily_repo.count_by_date_and_repo.return_value = 1
+        mock_daily_repo.count_aplicaciones_by_date_and_repo.return_value = 1
+        mock_daily_repo.count_repos_by_date_and_repo.return_value = 1
         mock_daily_repo.sum_bugs_by_date_and_repo.return_value = 6
         mock_daily_repo.sum_analisis_by_date_and_repo.return_value = 9
-        mock_daily_repo.sum_quality_by_date_and_repo.return_value = 7
+        mock_daily_repo.get_quality_by_date_and_repo.return_value = 7
 
         # Act
         result = service.get_kpi_by_repository(aplicacion, repositorio)
 
         # Assert
+        assert result['aplicaciones'] == 1
         assert result['repositorios'] == 1
         assert result['bugs'] == 5
         assert result['analisis'] == 10
         assert result['quality'] == 8
 
         # Verify correct parameters
-        mock_metrica_repo.count_by_repo.assert_called_once_with(repositorio)
-        mock_metrica_repo.sum_bugs_by_repo.assert_called_once_with(repositorio)
+        mock_metrica_repo.count_aplicaciones_by_aplicacion_and_repo.assert_called_once_with(aplicacion, repositorio)
+        mock_metrica_repo.count_by_aplicacion_and_repo.assert_called_once_with(aplicacion, repositorio)
+        mock_metrica_repo.sum_bugs_by_aplicacion_and_repo.assert_called_once_with(aplicacion, repositorio)
 
     def test_percentage_variation_increase(self, service, mock_metrica_repo, mock_historico_repo, mock_daily_repo):
         """Test percentage variation calculation for increase scenario."""
