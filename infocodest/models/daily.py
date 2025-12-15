@@ -4,13 +4,29 @@ from infocodest.extensions import db
 
 
 class Daily(db.Model):
-    """Data model for user accounts."""
+    """
+    Daily Model
+
+    Daily aggregated metrics per application.
+
+    Attributes:
+        id: Primary key
+        aplicacion: Application name (unique)
+        repo: Number of repositories for this application
+        proveedor: Provider/vendor information
+        created_on: Record creation timestamp
+        num_bugs: Number of bugs detected
+        num_vulnerabilities: Number of vulnerabilities detected
+        num_code_smells: Number of code smells detected
+        num_quality: Quality metric count
+        num_analisis: Number of analyses performed
+    """
 
     __tablename__ = "daily"
 
     id = db.Column(db.Integer, primary_key=True)
     aplicacion = db.Column(db.String(64), index=False, unique=True, nullable=False)
-    repo = db.Column(db.Integer, index=True, unique=True, nullable=False)
+    repo = db.Column(db.Integer, index=True, unique=False, nullable=False)  # Fixed: removed unique=True
     proveedor = db.Column(db.Text, index=False, unique=False, nullable=True)
     created_on = db.Column(db.DateTime(), unique=False, nullable=True)
     num_bugs = db.Column(db.Integer, index=False, unique=False, nullable=False)
