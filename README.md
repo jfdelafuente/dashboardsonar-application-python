@@ -5,6 +5,7 @@
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Flask](https://img.shields.io/badge/flask-3.0.0-green.svg)](https://flask.palletsprojects.com/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![CI/CD](https://img.shields.io/badge/CI%2FCD-automated-brightgreen.svg)](.github/workflows/)
 [![Refactoring](https://img.shields.io/badge/refactoring-100%25%20complete-brightgreen.svg)](docs/plan/PLAN_REORGANIZACION.md)
 [![Version](https://img.shields.io/badge/version-v1.10.0--phase--10-blue.svg)](CHANGELOG.md)
 [![Phases](https://img.shields.io/badge/phases-10%2F10%20done-brightgreen.svg)](docs/reports/)
@@ -382,6 +383,46 @@ python -m pytest --setup-show
 # Tests con cobertura
 python -m pytest --cov=infocodest --cov-report=html
 ```
+
+---
+
+## 🔄 CI/CD Automation
+
+The project includes automated Continuous Integration and Continuous Deployment workflows using GitHub Actions.
+
+### CI Pipeline
+
+Every Pull Request to `develop` or `main` branches automatically runs:
+
+- **Code Quality & Linting** - Flake8 and Black checks
+- **Security Scanning** - Safety and Bandit security analysis
+- **Unit Tests** - Runs on Python 3.10, 3.11, and 3.12
+- **Integration Tests** - Full application integration testing
+- **Build Validation** - Verify imports and configuration
+- **Coverage Reports** - Uploaded to Codecov
+
+### Running CI Checks Locally
+
+```bash
+# Install development dependencies
+pip install -r requirements-dev.txt
+
+# Code quality
+flake8 infocodest/
+black --check infocodest/
+
+# Security scanning
+safety check
+bandit -r infocodest/
+
+# Run tests with coverage
+pytest tests/ -v --cov=infocodest --cov-report=html
+```
+
+### CI/CD Documentation
+
+- **Workflows**: [.github/README.md](.github/README.md)
+- **CI/CD Plan**: [docs/plan/PLAN_CICD_AUTOMATION.md](docs/plan/PLAN_CICD_AUTOMATION.md)
 
 ---
 
