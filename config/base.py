@@ -76,6 +76,15 @@ class BaseConfig:
     REMEMBER_COOKIE_HTTPONLY: ClassVar[bool] = True
     REMEMBER_COOKIE_DURATION: ClassVar[int] = 3600
 
+    # ==========================================
+    # Data Files Settings
+    # ==========================================
+
+    DATA_DIR: ClassVar[str] = os.getenv('DATA_DIR', './datos')
+    METRICAS_FILENAME: ClassVar[str] = os.getenv('METRICAS_FILENAME', 'metricas.csv')
+    HISTORICO_FILENAME: ClassVar[str] = os.getenv('HISTORICO_FILENAME', 'historico.csv')
+    PROVEEDORES_FILENAME: ClassVar[str] = os.getenv('PROVEEDORES_FILENAME', 'proveedores.csv')
+
     @staticmethod
     def validate_config(app: 'Flask') -> None:
         """

@@ -32,12 +32,16 @@ El entorno se selecciona en `run.py` basándose en las variables `DEBUG` y `TEST
 
 Variables opcionales con valores por defecto:
 
-| Variable          | Tipo    | Default           | Descripción                              |
-|-------------------|---------|-------------------|------------------------------------------|
-| `SECRET_KEY`      | string  | auto-generado     | Clave secreta para sesiones (⚠️ requerido en producción) |
-| `DAYS_COMPARISON` | integer | `15`              | Días para comparación de métricas        |
-| `ASSETS_ROOT`     | string  | `/static/assets`  | Ruta raíz para assets estáticos          |
-| `LOG_LEVEL`       | string  | `INFO`            | Nivel de logging                         |
+| Variable                | Tipo    | Default           | Descripción                              |
+|-------------------------|---------|-------------------|------------------------------------------|
+| `SECRET_KEY`            | string  | auto-generado     | Clave secreta para sesiones (⚠️ requerido en producción) |
+| `DAYS_COMPARISON`       | integer | `15`              | Días para comparación de métricas        |
+| `ASSETS_ROOT`           | string  | `/static/assets`  | Ruta raíz para assets estáticos          |
+| `LOG_LEVEL`             | string  | `INFO`            | Nivel de logging                         |
+| `DATA_DIR`              | string  | `./datos`         | Directorio con archivos CSV de datos     |
+| `METRICAS_FILENAME`     | string  | `metricas.csv`    | Nombre del archivo CSV de métricas       |
+| `HISTORICO_FILENAME`    | string  | `historico.csv`   | Nombre del archivo CSV de histórico      |
+| `PROVEEDORES_FILENAME`  | string  | `proveedores.csv` | Nombre del archivo CSV de proveedores    |
 
 ### DevelopmentConfig
 
