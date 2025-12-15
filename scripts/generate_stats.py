@@ -52,9 +52,13 @@ from infocodest.models.metricas import Metrica
 # Import repositories
 from infocodest.repositories.metrica_repository import MetricaRepository
 
+# Add scripts directory to path for ETL imports
+scripts_dir = Path(__file__).parent.absolute()
+sys.path.insert(0, str(scripts_dir))
+
 # Import ETL if available
 try:
-    from scripts.etl.etl import transformar_stats
+    from etl.etl import transformar_stats
     HAS_ETL = True
 except ImportError:
     HAS_ETL = False

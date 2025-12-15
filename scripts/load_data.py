@@ -55,10 +55,14 @@ from infocodest.models.metricas import Metrica
 from infocodest.models.historico import Historico
 from infocodest.models.proveedor import Proveedor
 
+# Add scripts directory to path for ETL imports
+scripts_dir = Path(__file__).parent.absolute()
+sys.path.insert(0, str(scripts_dir))
+
 # Import ETL utilities
 try:
-    from scripts.utils.utils import extract_from_csv
-    from scripts.etl.etl import transformar_metricas, transformar_historico
+    from utils.utils import extract_from_csv
+    from etl.etl import transformar_metricas, transformar_historico
     HAS_ETL = True
 except ImportError:
     HAS_ETL = False
