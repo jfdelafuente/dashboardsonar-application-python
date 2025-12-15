@@ -141,7 +141,7 @@ class ValidationException(BusinessException):
         super().__init__(message, status_code=422, payload=payload)
 
 
-class NotFoundException(ApplicationException):
+class NotFoundException(BusinessException):
     """
     Exception for resource not found errors.
 
@@ -151,6 +151,7 @@ class NotFoundException(ApplicationException):
     Notes:
         - Status code: 404
         - Includes resource type and identifier
+        - Subclass of BusinessException
     """
 
     def __init__(

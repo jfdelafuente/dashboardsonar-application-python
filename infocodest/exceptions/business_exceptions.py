@@ -172,7 +172,7 @@ class InvalidDateRangeException(ValidationException):
         if reason:
             message += f": {reason}"
         elif start_date and end_date:
-            message += f": start_date ({start_date}) must be <= end_date ({end_date})"
+            message += f": start date ({start_date}) must be <= end date ({end_date})"
 
         super().__init__(message, field="date_range", payload=payload)
 
