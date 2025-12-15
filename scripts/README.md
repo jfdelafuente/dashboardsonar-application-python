@@ -9,6 +9,7 @@ scripts/
 ├── setup/              # Initial configuration scripts (run once)
 ├── verification/       # Environment validation scripts
 ├── data/               # Data processing scripts (regular use)
+├── ci/                 # CI/CD automation scripts
 ├── legacy/             # Deprecated scripts (backward compatibility)
 ├── etl/                # ETL operations
 ├── sql/                # SQL schemas and queries
@@ -175,6 +176,60 @@ python scripts/data/generate_stats.py --clear
 # Production environment
 python scripts/data/generate_stats.py --config Production
 ```
+
+## 🔄 CI/CD Scripts (`scripts/ci/`)
+
+Automation scripts for Continuous Integration and Continuous Deployment.
+
+These scripts are used by GitHub Actions workflows but can also be run locally.
+
+### lint.sh
+
+Code quality checks with auto-fix support.
+
+```bash
+# Check code quality
+./scripts/ci/lint.sh
+
+# Auto-fix issues
+./scripts/ci/lint.sh --fix
+```
+
+**Tools**: Black, isort, Flake8, Pylint, mypy
+
+### test.sh
+
+Run test suite with coverage reporting.
+
+```bash
+# Run all tests with coverage
+./scripts/ci/test.sh
+
+# Run only unit tests
+./scripts/ci/test.sh --unit
+
+# Run with HTML coverage report
+./scripts/ci/test.sh --html --verbose
+```
+
+### security.sh
+
+Security vulnerability scanning.
+
+```bash
+# Run all security scans
+./scripts/ci/security.sh
+
+# Scan only dependencies
+./scripts/ci/security.sh --dependencies
+
+# Fail on high severity issues
+./scripts/ci/security.sh --fail-on-high
+```
+
+**Tools**: Safety (dependencies), Bandit (code security)
+
+**Documentation**: See [scripts/ci/README.md](ci/README.md) for detailed usage.
 
 ## 🔄 ETL Scripts (`scripts/etl/`)
 
