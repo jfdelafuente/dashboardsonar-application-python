@@ -115,6 +115,91 @@ Runs security vulnerability scans on dependencies and code.
 
 ---
 
+### 🚀 deploy-staging.sh - Staging Deployment
+
+Deploys the application to the staging environment via SSH.
+
+**Features**:
+
+- Automatic backup before deployment
+- Git pull and dependency installation
+- Database migrations
+- Application restart
+- Post-deployment smoke tests
+
+**Usage**:
+```bash
+# Deploy current develop branch
+./scripts/ci/deploy-staging.sh
+
+# Deploy specific branch
+./scripts/ci/deploy-staging.sh --branch feature/new-feature
+
+# Skip backup (faster, riskier)
+./scripts/ci/deploy-staging.sh --skip-backup
+
+# Skip smoke tests
+./scripts/ci/deploy-staging.sh --skip-tests
+
+# Dry run (show what would be done)
+./scripts/ci/deploy-staging.sh --dry-run
+```
+
+**Required environment variables**:
+
+- `STAGING_HOST` - Staging server hostname or IP
+- `STAGING_USER` - SSH username
+- `STAGING_PATH` - Deployment path on server
+- `STAGING_SSH_KEY` - Path to SSH private key (optional)
+
+**Exit codes**:
+
+- `0` - Deployment successful
+- `1` - Deployment failed
+
+---
+
+### ✅ smoke-tests.sh - Post-Deployment Tests
+
+Runs basic health checks after deployment to verify application is working.
+
+**Tests performed**:
+
+- Health check (root endpoint)
+- Login page accessibility
+- Static assets loading
+- API health endpoint
+- Database connectivity
+- Response time check (< 3 seconds)
+- HTTP status codes validation
+- Error page detection
+
+**Usage**:
+```bash
+# Test local deployment
+./scripts/ci/smoke-tests.sh
+
+# Test remote server
+./scripts/ci/smoke-tests.sh --url http://staging.example.com
+
+# With custom timeout
+./scripts/ci/smoke-tests.sh --timeout 15
+
+# Verbose output
+./scripts/ci/smoke-tests.sh --verbose
+
+# Using environment variable
+export SMOKE_TEST_URL=http://staging.example.com
+./scripts/ci/smoke-tests.sh
+```
+
+**Exit codes**:
+
+- `0` - All tests passed
+- `1` - One or more tests failed
+
+---
+
 ## Running All Checks Locally
 
 To run all checks before pushing:

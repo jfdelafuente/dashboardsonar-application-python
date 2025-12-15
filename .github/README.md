@@ -51,6 +51,49 @@ The CI/CD pipeline is designed to ensure code quality, security, and reliability
 - Integration tests failures are warnings only
 - Code quality issues are reported but don't block
 
+---
+
+### CD - Staging Deployment (`cd-staging.yml`)
+
+**Trigger**: Automatic on push to `develop` branch, or manual via `workflow_dispatch`
+
+**Purpose**: Automatically deploy to staging environment for testing
+
+**Jobs**:
+
+1. **Pre-Deployment Validation**
+   - Quick syntax check of all Python files
+   - Run critical unit tests (fail-fast mode)
+   - Ensure code compiles before deployment
+
+2. **Deploy to Staging**
+   - Connect to staging server via SSH
+   - Pull latest code from `develop` branch
+   - Install/update dependencies
+   - Run database migrations
+   - Restart application service
+   - Uses GitHub Environment: `staging`
+
+3. **Smoke Tests**
+   - Wait for application to stabilize
+   - Test critical endpoints (root, login, API)
+   - Verify response times < 3 seconds
+   - Check for error pages
+   - Validate HTTP status codes
+
+4. **Deployment Notification**
+   - Send Slack notification (if configured)
+   - Create deployment summary
+   - Report deployment status
+
+**Requirements**:
+
+- GitHub Environment `staging` must be configured
+- Required secrets: `STAGING_SSH_KEY`, `STAGING_HOST`, `STAGING_USER`, `STAGING_PATH`
+- Optional: `SLACK_WEBHOOK_URL` for notifications
+
+**Deployment URL**: Displayed in GitHub Environment after deployment
+
 ## Environment Variables
 
 The workflows use the following environment variables:
