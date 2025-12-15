@@ -60,14 +60,10 @@ class ProductionConfig(BaseConfig):
         except ValueError as e:
             raise ValueError(f"Database configuration error: {e}")
     else:
-        # Fallback to SQLite with warning
+        # Fallback to SQLite (warning will be shown in init_app if this config is used)
         SQLALCHEMY_DATABASE_URI = build_database_uri(
             engine='sqlite',
             sqlite_path=basedir / 'db.sqlite3'
-        )
-        print(
-            "Warning: Missing database environment variables. "
-            "Required: DB_ENGINE, DB_USERNAME, DB_NAME. Falling back to SQLite."
         )
 
     # ==========================================
@@ -127,6 +123,20 @@ class ProductionConfig(BaseConfig):
             )
 
         app.logger.info("SECRET_KEY validation passed")
+
+        # Check if using SQLite fallback due to missing database variables
+        db_uri = app.config.get('SQLALCHEMY_DATABASE_URI', '')
+        if 'sqlite' in db_uri.lower():
+            if not all([
+                ProductionConfig.DB_ENGINE,
+                ProductionConfig.DB_USERNAME,
+                ProductionConfig.DB_NAME
+            ]):
+                app.logger.warning(
+                    "Missing database environment variables. "
+                    "Required: DB_ENGINE, DB_USERNAME, DB_NAME. "
+                    "Falling back to SQLite."
+                )
 
         # Add SysLog handler
         syslog_handler = SysLogHandler()
