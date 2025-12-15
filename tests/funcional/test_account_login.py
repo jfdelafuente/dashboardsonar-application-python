@@ -64,10 +64,11 @@ def test_correct_register(test_client: FlaskClient):
                                 data=dict(username="test_user",
                                 email="test_user@gmail.com",
                                 password="test_user",
+                                confirm_password="test_user",
                                 is_admin=False),
                                 follow_redirects=True)
     assert response.status_code == 200
-    assert b'Register - Account created successfully.' in response.data
+    assert b'Account created successfully.' in response.data
 
 
 def test_user_already_register(test_client: FlaskClient, init_database: None):
@@ -76,8 +77,9 @@ def test_user_already_register(test_client: FlaskClient, init_database: None):
                                 data=dict(username="lolo",
                                 email="lolo@gmail",
                                 password="lolololo",
+                                confirm_password="lolololo",
                                 is_admin=True),
                                 follow_redirects=True,
                 )
     assert response.status_code == 200
-    assert b'Register - Username already registered' in response.data
+    assert b'Username already registered.' in response.data
