@@ -11,8 +11,8 @@ Updated: Phase 1 Improvements - Added SECRET_KEY validation and URI escaping
 import os
 import logging
 from logging.handlers import SysLogHandler
-from urllib.parse import quote_plus
 from config.base import BaseConfig, basedir
+from config.utils import build_database_uri
 
 
 class ProductionConfig(BaseConfig):
@@ -42,26 +42,25 @@ class ProductionConfig(BaseConfig):
     DB_PORT = os.getenv('DB_PORT')
     DB_NAME = os.getenv('DB_NAME')
 
-    # Build database URI with proper escaping
+    # Build database URI using centralized function
     if all([DB_ENGINE, DB_USERNAME, DB_NAME]):
-        # Escape username and password to handle special characters
-        username_escaped = quote_plus(DB_USERNAME)
-        password_escaped = quote_plus(DB_PASSWORD) if DB_PASSWORD else ''
-
-        if password_escaped:
-            SQLALCHEMY_DATABASE_URI = (
-                f'{DB_ENGINE}://{username_escaped}:{password_escaped}'
-                f'@{DB_HOST}:{DB_PORT}/{DB_NAME}'
+        try:
+            SQLALCHEMY_DATABASE_URI = build_database_uri(
+                engine=DB_ENGINE,
+                username=DB_USERNAME,
+                password=DB_PASSWORD,
+                host=DB_HOST,
+                port=int(DB_PORT) if DB_PORT else None,
+                database=DB_NAME
             )
-        else:
-            # No password case
-            SQLALCHEMY_DATABASE_URI = (
-                f'{DB_ENGINE}://{username_escaped}'
-                f'@{DB_HOST}:{DB_PORT}/{DB_NAME}'
-            )
+        except ValueError as e:
+            raise ValueError(f"Database configuration error: {e}")
     else:
         # Fallback to SQLite with warning
-        SQLALCHEMY_DATABASE_URI = f"sqlite:///{basedir / 'db.sqlite3'}"
+        SQLALCHEMY_DATABASE_URI = build_database_uri(
+            engine='sqlite',
+            sqlite_path=basedir / 'db.sqlite3'
+        )
         print(
             "Warning: Missing database environment variables. "
             "Required: DB_ENGINE, DB_USERNAME, DB_NAME. Falling back to SQLite."

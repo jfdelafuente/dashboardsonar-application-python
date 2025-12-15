@@ -8,12 +8,13 @@ All environment-specific configs inherit from BaseConfig.
 
 Created: Phase 6 - Configuration System
 Updated: Phase 1 Improvements - Use shared mask_db_uri utility
+Updated: Phase 2 Improvements - Use str_to_bool, validate ASSETS_ROOT
 """
 
 import os
 import secrets
 from pathlib import Path
-from .utils import mask_db_uri
+from .utils import mask_db_uri, str_to_bool
 
 # Base directory (project root)
 basedir = Path(__file__).parent.parent.absolute()
@@ -37,7 +38,10 @@ class BaseConfig:
     # Database Settings
     # ==========================================
 
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = str_to_bool(
+        os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS'),
+        default=False
+    )
     SQLALCHEMY_ECHO = False
     BCRYPT_LOG_ROUNDS = 13
 
@@ -104,6 +108,30 @@ class BaseConfig:
             app.logger.info(f'Database: {masked_uri}')
         else:
             app.logger.warning('SQLALCHEMY_DATABASE_URI not configured')
+
+        # Validate and log ASSETS_ROOT
+        assets_root = app.config.get('ASSETS_ROOT', '')
+        if assets_root:
+            # For URL paths (like /static/assets), verify the physical directory exists
+            if assets_root.startswith('/'):
+                # Map URL path to physical directory
+                # /static/assets -> basedir/infocodest/static/assets
+                physical_path = basedir / 'infocodest' / assets_root.lstrip('/')
+            else:
+                # Absolute path provided
+                physical_path = Path(assets_root)
+
+            if not physical_path.exists():
+                app.logger.warning(
+                    f"ASSETS_ROOT path does not exist: {physical_path}. "
+                    "Static assets may not load correctly."
+                )
+            elif not physical_path.is_dir():
+                app.logger.warning(
+                    f"ASSETS_ROOT is not a directory: {physical_path}"
+                )
+            else:
+                app.logger.info(f"ASSETS_ROOT validated: {assets_root}")
 
     @staticmethod
     def init_app(app):

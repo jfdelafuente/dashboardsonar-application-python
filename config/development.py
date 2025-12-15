@@ -5,10 +5,12 @@ Development Configuration
 Configuration for development environment.
 
 Created: Phase 6 - Configuration System
+Updated: Phase 2 Improvements - Use build_database_uri and configurable DB name
 """
 
 import os
 from config.base import BaseConfig, basedir
+from config.utils import build_database_uri
 
 
 class DevelopmentConfig(BaseConfig):
@@ -19,8 +21,12 @@ class DevelopmentConfig(BaseConfig):
     TESTING = False
     DEVELOPMENT = True
 
-    # Database
-    SQLALCHEMY_DATABASE_URI = f"sqlite:///{basedir / 'db.sqlite3'}"
+    # Database - configurable SQLite filename
+    db_name = os.getenv('DB_NAME', 'db.sqlite3')
+    SQLALCHEMY_DATABASE_URI = build_database_uri(
+        engine='sqlite',
+        sqlite_path=basedir / db_name
+    )
     SQLALCHEMY_ECHO = True  # Show SQL queries in console
 
     # CSRF (disabled for easier manual testing)
