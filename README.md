@@ -388,18 +388,32 @@ python -m pytest --cov=infocodest --cov-report=html
 
 ## 🔄 CI/CD Automation
 
-The project includes automated Continuous Integration and Continuous Deployment workflows using GitHub Actions.
+The project includes a complete automated Continuous Integration and Continuous Deployment pipeline using GitHub Actions.
+
+### 📚 Documentation
+
+- **[CI/CD User Manual](docs/CICD_USER_MANUAL.md)** - Complete guide for developers and DevOps
+- **[Workflows Documentation](.github/README.md)** - Technical details of all workflows
+- **[Scripts Documentation](scripts/ci/README.md)** - CI/CD scripts reference
 
 ### CI Pipeline
 
 Every Pull Request to `develop` or `main` branches automatically runs:
 
-- **Code Quality & Linting** - Flake8 and Black checks
-- **Security Scanning** - Safety and Bandit security analysis
-- **Unit Tests** - Runs on Python 3.10, 3.11, and 3.12
+- **Code Quality & Linting** - Black, isort, Flake8, Pylint, mypy
+- **Security Scanning** - Safety (dependencies) and Bandit (code)
+- **Unit Tests** - Matrix testing on Python 3.10, 3.11, and 3.12
 - **Integration Tests** - Full application integration testing
 - **Build Validation** - Verify imports and configuration
 - **Coverage Reports** - Uploaded to Codecov
+
+### CD Pipeline
+
+- **Staging Deployment** - Automatic deployment to staging on merge to `develop`
+- **Production Deployment** - Manual deployment with approval on version tags
+- **Blue-Green Strategy** - Zero-downtime deployments
+- **Automatic Rollback** - Reverts automatically if deployment fails
+- **Smoke Tests** - Post-deployment health checks
 
 ### Running CI Checks Locally
 
@@ -407,22 +421,31 @@ Every Pull Request to `develop` or `main` branches automatically runs:
 # Install development dependencies
 pip install -r requirements-dev.txt
 
-# Code quality
+# Run all checks (recommended before pushing)
+./scripts/ci/lint.sh              # Code quality checks
+./scripts/ci/security.sh          # Security scanning
+./scripts/ci/test.sh --html       # Tests with coverage
+
+# Or run individual tools
 flake8 infocodest/
 black --check infocodest/
-
-# Security scanning
-safety check
-bandit -r infocodest/
-
-# Run tests with coverage
 pytest tests/ -v --cov=infocodest --cov-report=html
 ```
 
-### CI/CD Documentation
+### Quick Start for Developers
 
-- **Workflows**: [.github/README.md](.github/README.md)
-- **CI/CD Plan**: [docs/plan/PLAN_CICD_AUTOMATION.md](docs/plan/PLAN_CICD_AUTOMATION.md)
+**For your first time**:
+
+1. Read the [CI/CD User Manual](docs/CICD_USER_MANUAL.md) (15 min)
+2. Install dev dependencies: `pip install -r requirements-dev.txt`
+3. Run local checks before each commit: `./scripts/ci/lint.sh && ./scripts/ci/test.sh`
+
+**For deployments**:
+
+- Staging: Automatic on merge to `develop`
+- Production: Create version tag (e.g., `v1.2.3`) and approve deployment
+
+See the [User Manual](docs/CICD_USER_MANUAL.md) for complete workflows and troubleshooting.
 
 ---
 
