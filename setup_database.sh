@@ -35,6 +35,20 @@ fi
 echo "[+] Virtual environment: $VIRTUAL_ENV"
 echo ""
 
+# Load environment variables from .env file
+if [ -f .env ]; then
+    echo "[+] Loading environment variables from .env file..."
+    # Export variables from .env, ignoring comments and empty lines
+    set -a
+    source <(grep -v '^#' .env | grep -v '^$' | sed 's/\r$//')
+    set +a
+    echo "[+] Environment variables loaded successfully"
+    echo ""
+else
+    echo "[!] Warning: .env file not found"
+    echo ""
+fi
+
 # Determine configuration (default: Development)
 CONFIG="${1:-Development}"
 

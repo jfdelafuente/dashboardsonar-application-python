@@ -36,6 +36,27 @@ if not defined VIRTUAL_ENV (
 echo [+] Virtual environment: %VIRTUAL_ENV%
 echo.
 
+REM Load environment variables from .env file
+if exist .env (
+    echo [+] Loading environment variables from .env file...
+    for /f "usebackq tokens=1,* delims==" %%a in (".env") do (
+        REM Skip comments and empty lines
+        echo %%a | findstr /r "^#" >nul
+        if errorlevel 1 (
+            if not "%%a"=="" (
+                if not "%%b"=="" (
+                    set "%%a=%%b"
+                )
+            )
+        )
+    )
+    echo [+] Environment variables loaded successfully
+    echo.
+) else (
+    echo [!] Warning: .env file not found
+    echo.
+)
+
 REM Determine configuration (default: Development)
 set CONFIG=Development
 if not "%~1"=="" (
