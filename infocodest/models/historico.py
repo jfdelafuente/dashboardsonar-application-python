@@ -22,7 +22,7 @@ class Historico(db.Model):
     sqale_rating = db.Column(db.Integer, index=True, nullable=False)
     sqale_label = db.Column(db.String(64), nullable=True)
     alert_status = db.Column(db.String(64), nullable=True)
-    project = db.Column(db.String(64), nullable=True)
+    project = db.Column(db.String(128), nullable=True)
     complexity = db.Column(db.Integer, index=True, nullable=False)
     coverage = db.Column(db.Integer, index=True, nullable=False)
     unit_tests = db.Column(db.String(64), nullable=True)

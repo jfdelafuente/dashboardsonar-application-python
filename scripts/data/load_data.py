@@ -196,7 +196,7 @@ def validate_metrica_record(row, row_index):
             'sqale_rating': validate_int_field(row.get("sqale_rating"), "sqale_rating"),
             'sqale_label': validate_string_field(row.get("sqale_label"), "sqale_label"),
             'alert_status': validate_string_field(row.get("alert_status"), "alert_status"),
-            'project': validate_string_field(row.get("project"), "project"),
+            'project': validate_string_field(row.get("project"), "project", max_length=128),
             'complexity': validate_int_field(row.get("complexity"), "complexity"),
             'coverage': validate_float_field(row.get("coverage"), "coverage"),
             'unit_tests': 'N/A',
