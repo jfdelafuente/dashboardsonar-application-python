@@ -62,6 +62,53 @@ def verify_pass(provided_password, stored_password):
 
 ---
 
+### Error: `psycopg2.errors.StringDataRightTruncation: value too long for type character varying(256)`
+
+**Descripción del Error:**
+
+```python
+psycopg2.errors.StringDataRightTruncation: value too long for type character varying(256)
+[SQL: INSERT INTO users (username, email, password, ...) VALUES (...)]
+[parameters: {'password': b'6a37d6ade0465814...', ...}]
+```
+
+**Causa:**
+Este error ocurre cuando se intenta crear un usuario en PostgreSQL y el hash de la contraseña se pasa como `bytes` en lugar de `string`. Los bytes ocupan más espacio cuando se convierten y exceden el límite VARCHAR(256).
+
+**Solución:**
+
+Este problema ya está resuelto en la versión actual del código. El modelo `User` ahora decodifica automáticamente el hash a string:
+
+```python
+# En infocodest/models/users.py
+if property == "password":
+    value = hash_pass(value)  # Returns bytes
+    # Decode to string for database storage
+    if isinstance(value, bytes):
+        value = value.decode("ascii")
+```
+
+**Si sigues viendo este error:**
+
+1. Asegúrate de tener la última versión del código:
+   ```bash
+   git pull origin develop
+   ```
+
+2. Si usas `setup_database.sh` o `setup_database.bat`, el script debería funcionar correctamente ahora.
+
+3. Si creas usuarios manualmente, asegúrate de usar el modelo User:
+
+   ```python
+   # CORRECTO (automáticamente decodifica)
+   user = User(username='admin', email='admin@example.com', password='password')
+
+   # INCORRECTO (no uses hash_pass directamente)
+   # user.password = hash_pass('password')  # Esto dará bytes
+   ```
+
+---
+
 ### Error: Login falla después de migrar de SQLite a PostgreSQL
 
 **Causa:**
