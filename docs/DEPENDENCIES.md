@@ -40,11 +40,14 @@ ORM y gestión de migraciones:
 - **Flask-SQLAlchemy==3.1.1**: Integración de SQLAlchemy con Flask
 - **Flask-Migrate==4.0.5**: Gestión de migraciones de base de datos
 - **alembic==1.12.1**: Motor de migraciones (dependencia de Flask-Migrate)
+- **psycopg2-binary==2.9.11**: Driver de PostgreSQL para Python
 
 **Uso**:
 - Modelos de datos en `infocodest/models/`
 - Migraciones en `migrations/`
-- Configuración en `infocodest/config.py`
+- Configuración en `config/`
+- SQLite por defecto en Development
+- PostgreSQL/MySQL soportados vía psycopg2-binary
 
 ### Authentication
 
