@@ -40,7 +40,8 @@ def verify_pass(provided_password, stored_password):
 
     Args:
         provided_password (str): Plain text password provided by user
-        stored_password (bytes): Hashed password from database (salt + hash)
+        stored_password (bytes or str): Hashed password from database (salt + hash)
+            Can be bytes (from PostgreSQL binary columns) or str (from SQLite/text columns)
 
     Returns:
         bool: True if password matches, False otherwise
@@ -52,7 +53,10 @@ def verify_pass(provided_password, stored_password):
         >>> verify_pass("wrongpassword", stored)
         False
     """
-    stored_password = stored_password.decode("ascii")
+    # Handle both bytes (PostgreSQL) and str (SQLite) stored passwords
+    if isinstance(stored_password, bytes):
+        stored_password = stored_password.decode("ascii")
+
     salt = stored_password[:64]
     stored_password = stored_password[64:]
     pwdhash = hashlib.pbkdf2_hmac(

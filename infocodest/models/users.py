@@ -12,7 +12,9 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True)
     email = db.Column(db.String, unique=True, nullable=False)
-    password = db.Column(db.String, nullable=False)
+    # Password stored as String (works with both SQLite and PostgreSQL)
+    # The hash_pass() returns bytes, but SQLAlchemy converts to string for storage
+    password = db.Column(db.String(256), nullable=False)
     created_on = db.Column(db.DateTime(), default=datetime.now(), index=True)
     is_admin = db.Column(db.Boolean, nullable=False, default=False)
 

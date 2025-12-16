@@ -7,6 +7,7 @@ SQLAlchemy==2.0.23
 Flask-SQLAlchemy==3.1.1
 Flask-Migrate==4.0.5
 alembic==1.12.1
+psycopg2-binary==2.9.11  # PostgreSQL driver
 
 # Authentication
 Flask-Login==0.6.3
