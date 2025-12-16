@@ -94,6 +94,11 @@ La aplicación gestiona 7 tablas principales:
 6. [Entornos de Configuración](#entornos-de-configuración)
 7. [Solución de Problemas](#solución-de-problemas)
 
+**📖 Documentación Adicional:**
+
+- [Guía de Configuración Detallada (CONFIGURATION.md)](docs/CONFIGURATION.md) - Cómo cambiar entre SQLite y PostgreSQL
+- [Guía de Dependencias (DEPENDENCIES.md)](docs/DEPENDENCIES.md) - Información sobre paquetes y versiones
+
 ---
 
 ## Requisitos Previos
