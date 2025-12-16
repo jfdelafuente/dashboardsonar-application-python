@@ -129,8 +129,22 @@ Configuración de entorno:
 - **python-dotenv==1.0.0**: Carga de variables de entorno
 
 **Uso**:
+
 - Archivo `.env` (ver `.env.example`)
 - Configuración en `infocodest/config.py`
+
+### Data Processing (for ETL scripts)
+
+Procesamiento de datos para scripts ETL:
+
+- **pandas==2.1.4**: Manipulación y análisis de datos tabulares
+- **numpy==1.26.2**: Computación numérica y arrays multidimensionales
+
+**Uso**:
+
+- Scripts de ETL en `scripts/etl/`
+- Utilidades de datos en `scripts/utils/`
+- Scripts de carga de datos en `scripts/data/`
 
 ## Dependencias de Desarrollo
 

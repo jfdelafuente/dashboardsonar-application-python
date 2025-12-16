@@ -75,12 +75,13 @@ sys.path.insert(0, str(scripts_dir))
 
 # Import ETL utilities
 try:
-    from scripts.utils.utils import extract_from_csv
-    from scripts.etl.etl import transformar_metricas, transformar_historico
+    from utils.utils import extract_from_csv
+    from etl.etl import transformar_metricas, transformar_historico
     HAS_ETL = True
-except ImportError:
+except ImportError as e:
     HAS_ETL = False
-    print("⚠️  Warning: ETL utilities not found. Use --skip-transform or install dependencies.")
+    print("Warning: ETL utilities not found. Use --skip-transform or install dependencies.")
+    print(f"Import error: {e}")
 
 
 def load_metricas_from_dataframe(app, df_data, batch_size=1000):

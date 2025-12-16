@@ -1035,6 +1035,53 @@ flask db history
 python -c "from infocodest import create_app; from infocodest.extensions import db; app = create_app(); app.app_context().push(); db.create_all()"
 ```
 
+### Carga de Datos
+
+Los scripts de carga de datos permiten importar datos desde archivos CSV a la base de datos.
+
+**Windows:**
+
+```bash
+# Cargar datos en modo desarrollo (usa SQLite)
+load_data.bat
+
+# Cargar datos en producción (usa PostgreSQL/MySQL configurado en .env)
+load_data.bat Production
+
+# Con opciones adicionales
+load_data.bat Development --batch-size 500
+load_data.bat Production --data-dir ./custom_datos
+```
+
+**Linux/macOS:**
+
+```bash
+# Cargar datos en modo desarrollo
+./load_data.sh
+
+# Cargar datos en producción
+./load_data.sh Production
+
+# Con opciones adicionales
+./load_data.sh Development --batch-size 500
+./load_data.sh Production --data-dir ./custom_datos
+```
+
+Los scripts automáticamente:
+
+- ✅ Cargan las variables de entorno desde `.env`
+- ✅ Validan que el entorno virtual esté activado
+- ✅ Transforman los datos usando scripts ETL
+- ✅ Insertan los datos en batch para mejor rendimiento
+
+**Estructura de datos esperada:**
+
+Los archivos CSV deben estar en el directorio `./datos/` (configurable):
+
+- `metricas.csv`: Métricas actuales de SonarQube
+- `historico.csv`: Histórico de análisis
+- `proveedores.csv`: Información de proveedores
+
 ### Git
 
 ```bash

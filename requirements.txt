@@ -37,3 +37,7 @@ schedule==1.2.0
 # Environment
 python-decouple==3.8
 python-dotenv==1.0.0
+
+# Data Processing (for ETL scripts)
+pandas==2.1.4
+numpy==1.26.2
