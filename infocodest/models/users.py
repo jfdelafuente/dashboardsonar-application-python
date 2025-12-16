@@ -29,7 +29,10 @@ class User(UserMixin, db.Model):
                 value = value[0]
 
             if property == "password":
-                value = hash_pass(value)  # we need bytes here (not plain str)
+                value = hash_pass(value)  # Returns bytes
+                # Decode to string for database storage (works with SQLite and PostgreSQL)
+                if isinstance(value, bytes):
+                    value = value.decode("ascii")
 
             setattr(self, property, value)
             
