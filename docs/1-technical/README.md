@@ -18,11 +18,12 @@ Documentación para empezar rápidamente con el proyecto.
 ### 🏗️ [Architecture](architecture/)
 Arquitectura del sistema, decisiones de diseño y documentación de APIs.
 
-| Documento | Descripción |
-|-----------|-------------|
-| **[ARCHITECTURE.md](architecture/ARCHITECTURE.md)** | Arquitectura general del sistema (capas, componentes, patrones) |
-| **[api/API_DOCUMENTATION.md](architecture/api/API_DOCUMENTATION.md)** | Documentación completa de todas las APIs REST |
-| **[api/README.md](architecture/api/README.md)** | Índice de documentación de APIs |
+| Documento | Descripción | Prioridad |
+|-----------|-------------|-----------|
+| **[ARCHITECTURE.md](architecture/ARCHITECTURE.md)** | Arquitectura general del sistema (capas, componentes, patrones) | 🔴 CRÍTICO |
+| **[DATABASE_SCHEMA.md](architecture/DATABASE_SCHEMA.md)** | Esquema completo de BD con ER diagrams, índices, queries | 🟠 ALTA |
+| **[api/API_DOCUMENTATION.md](architecture/api/API_DOCUMENTATION.md)** | Documentación completa de todas las APIs REST | 🟠 ALTA |
+| **[api/README.md](architecture/api/README.md)** | Índice de documentación de APIs | 🟡 MEDIA |
 
 ---
 
@@ -66,15 +67,16 @@ Estrategias de testing, seguridad y QA.
 ### 🎓 [Advanced](advanced/)
 Temas avanzados: migraciones, performance tuning, escalabilidad.
 
-| Documento | Descripción |
-|-----------|-------------|
-| **[migration/MIGRATION_GUIDE.md](advanced/migration/MIGRATION_GUIDE.md)** | Guía de migración entre versiones |
-| **[migration/README.md](advanced/migration/README.md)** | Índice de documentación de migraciones |
+| Documento | Descripción | Prioridad |
+|-----------|-------------|-----------|
+| **[PERFORMANCE_TUNING.md](advanced/PERFORMANCE_TUNING.md)** | Optimización de queries, N+1, pooling, caching, Gunicorn | 🟠 ALTA |
+| **[migration/MIGRATION_GUIDE.md](advanced/migration/MIGRATION_GUIDE.md)** | Guía de migración entre versiones | 🟡 MEDIA |
+| **[migration/README.md](advanced/migration/README.md)** | Índice de documentación de migraciones | 🟡 MEDIA |
 
 **Documentación futura recomendada**:
-- `PERFORMANCE_TUNING.md` - Optimización de queries y rendimiento
-- `SCALING_GUIDE.md` - Estrategias de escalabilidad
-- `DATABASE_SCHEMA.md` - Esquema completo de base de datos
+
+- `SCALING_GUIDE.md` - Estrategias de escalabilidad horizontal/vertical
+- `CACHING_STRATEGIES.md` - Redis, Memcached, CDN
 
 ---
 

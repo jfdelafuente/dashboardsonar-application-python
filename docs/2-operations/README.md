@@ -127,12 +127,14 @@ Infraestructura as code, configuración de servidores.
 ### 📚 [Reference](reference/)
 Material de referencia rápida para operaciones.
 
-- *(Sección reservada para troubleshooting operativo y quick reference guides)*
+| Documento | Descripción | Prioridad |
+|-----------|-------------|-----------|
+| **[UPGRADE_GUIDE.md](reference/UPGRADE_GUIDE.md)** | Procedimientos de actualización y rollback entre versiones | 🟠 ALTA |
 
 **Documentación futura recomendada**:
+
 - `TROUBLESHOOTING_OPS.md` - Troubleshooting operativo
-- `COMMAND_REFERENCE.md` - Comandos útiles
-- `UPGRADE_GUIDE.md` - Guía de actualización entre versiones
+- `COMMAND_REFERENCE.md` - Comandos útiles para operaciones diarias
 
 ---
 
@@ -154,6 +156,7 @@ Material de referencia rápida para operaciones.
 7. Memorizar [runbooks/RUNBOOK.md](runbooks/RUNBOOK.md) - Incidentes comunes
 8. Configurar alertas desde [monitoring/MONITORING_GUIDE.md](monitoring/MONITORING_GUIDE.md)
 9. Practicar restore desde [backup-recovery/BACKUP_RESTORE.md](backup-recovery/BACKUP_RESTORE.md)
+10. Leer [reference/UPGRADE_GUIDE.md](reference/UPGRADE_GUIDE.md) - Procedimientos de upgrade/rollback
 
 ---
 
@@ -167,7 +170,8 @@ Material de referencia rápida para operaciones.
 
 **Advanced Topics**:
 5. [deployment/DEPLOYMENT_AWS.md](deployment/DEPLOYMENT_AWS.md) - Infrastructure
-6. Ver [../1-technical/](../1-technical/) para entender la arquitectura
+6. [reference/UPGRADE_GUIDE.md](reference/UPGRADE_GUIDE.md) - Version upgrades
+7. Ver [../1-technical/](../1-technical/) para entender la arquitectura
 
 ---
 
