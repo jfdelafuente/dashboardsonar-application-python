@@ -62,6 +62,7 @@ Guías de deployment en diferentes plataformas cloud y on-premise.
 | Documento | Descripción | Prioridad |
 |-----------|-------------|-----------|
 | **[DEPLOYMENT_AWS.md](deployment/DEPLOYMENT_AWS.md)** | AWS: EC2, RDS, ECS Fargate, Elastic Beanstalk | 🟠 ALTA |
+| **[DEPLOYMENT_GCP.md](deployment/DEPLOYMENT_GCP.md)** | GCP: Compute Engine, Cloud Run, Cloud SQL, GKE | 🟠 ALTA |
 | **[DEPLOYMENT_KUBERNETES.md](deployment/DEPLOYMENT_KUBERNETES.md)** | Kubernetes: manifests, Helm charts, autoscaling | 🟠 ALTA |
 | **[DEPLOYMENT_PAAS.md](deployment/DEPLOYMENT_PAAS.md)** | PaaS: Heroku, Railway, Render, Fly.io | 🟡 MEDIA |
 | **[DEPLOYMENT_VM_DOCKER.md](deployment/DEPLOYMENT_VM_DOCKER.md)** | VM + Docker: DigitalOcean, Linode, Vultr, Hetzner | 🟡 MEDIA |
@@ -70,14 +71,14 @@ Guías de deployment en diferentes plataformas cloud y on-premise.
 **Guías por plataforma**:
 
 - **AWS** (~$220/mes): EC2+RDS, ECS Fargate, Elastic Beanstalk, VPC, ALB, Auto-scaling
+- **GCP** (~$70-135/mes): Compute Engine+Cloud SQL ($135), Cloud Run+Cloud SQL ($70), GKE
 - **Kubernetes** (~$150/mes): EKS/GKE/AKS/DOKS, Helm charts, HPA, Ingress NGINX, Cert-Manager
 - **PaaS** (~$25-50/mes): Heroku ($25+), Railway ($20+), Render ($32+), Fly.io ($15+)
 - **VM+Docker** (~$12/mes): DigitalOcean, Linode, Vultr, Hetzner con Docker Compose
 
 **Documentación futura recomendada**:
 
-- `DEPLOYMENT_GCP.md` - Google Cloud Platform (Cloud Run, GKE)
-- `DEPLOYMENT_AZURE.md` - Microsoft Azure (App Service, AKS)
+- `DEPLOYMENT_AZURE.md` - Microsoft Azure (App Service, AKS, Azure SQL)
 
 ---
 

@@ -204,6 +204,10 @@ Documentación del proceso de refactorización completo (10 fases):
 
 - [DEPLOYMENT_AWS.md](2-operations/deployment/DEPLOYMENT_AWS.md) - EC2, RDS, ECS, Beanstalk (~$220/mes)
 
+**Cloud Managed (GCP)**:
+
+- [DEPLOYMENT_GCP.md](2-operations/deployment/DEPLOYMENT_GCP.md) - Compute Engine, Cloud Run, Cloud SQL (~$70-135/mes)
+
 **Kubernetes (cualquier cloud)**:
 
 - [DEPLOYMENT_KUBERNETES.md](2-operations/deployment/DEPLOYMENT_KUBERNETES.md) - EKS, GKE, AKS, DOKS (~$150/mes)
