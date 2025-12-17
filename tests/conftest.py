@@ -60,12 +60,46 @@ def login_in_user(test_client):
 def init_test_data(init_database):
     """
     Initialize test data for API tests
-    Creates sample historico and proveedor records
+    Creates sample metrica, historico and proveedor records
+
+    Note: API endpoints use different tables:
+    - /api/aplicacion/{aplicacion} -> Metrica table
+    - /api/aplicacion/{aplicacion}/{project} -> Historico table
     """
+    from infocodest.models.metricas import Metrica
     from infocodest.models.historico import Historico
     from infocodest.models.proveedor import Proveedor
 
-    # Create sample historico data
+    # Create sample metrica data (for /api/aplicacion/{aplicacion})
+    metrica1 = Metrica(
+        repo="abacus-application-java",
+        aplicacion="abacusbrmosp",
+        fecha="2025-01-01",
+        bugs=5,
+        reliability_rating=3,
+        reliability_label="C",
+        vulnerabilities=2,
+        security_rating=4,
+        security_label="D",
+        code_smells=10,
+        sqale_rating=2,
+        sqale_label="B",
+        alert_status="OK",
+        project="abacus-application-java",
+        complexity=100,
+        coverage=75,
+        unit_tests="50",
+        ncloc=1000,
+        duplicated_line_density=5,
+        sqale_index=120,
+        sqale_debt_ratio=10,
+        size="M",
+        dloc_label="A",
+        coverage_label="B",
+        quality_gate="PASSED"
+    )
+
+    # Create sample historico data (for /api/aplicacion/{aplicacion}/{project})
     historico1 = Historico(
         repo="abacus-application-java",
         aplicacion="abacusbrmosp",
@@ -101,6 +135,7 @@ def init_test_data(init_database):
         tipo="Internal"
     )
 
+    db.session.add(metrica1)
     db.session.add(historico1)
     db.session.add(proveedor1)
     db.session.commit()
