@@ -1,421 +1,344 @@
-# 📚 Documentación del Proyecto de Refactorización
+# 📚 Dashboard Sonar - Documentación
 
-> **Dashboard Sonar - Flask Application**
+> **Flask Application para Visualización de Métricas de SonarQube**
 >
-> Transformación a arquitectura en capas mantenible, ágil y eficaz
+> Arquitectura en capas mantenible, documentación profesional completa
 
 ---
 
-## 🗂️ Estructura de Documentación
+## 🎯 Navegación por Audiencia
+
+La documentación está organizada por audiencia para facilitar el acceso a la información relevante:
 
 ```
 docs/
-├── README.md                    ← Estás aquí (índice principal)
-├── ARCHITECTURE.md              Arquitectura del sistema
-├── DEVELOPMENT_GUIDE.md         Guía de desarrollo
-│
-├── 📡 api/                      (Documentación de API)
-│   ├── README.md                Índice de API
-│   └── API_DOCUMENTATION.md     Documentación completa de API
-│
-├── 🚢 deployment/               (Despliegue en Producción)
-│   ├── README.md                Índice de deployment
-│   ├── DEPLOYMENT.md            Guía completa de despliegue
-│   └── examples/                Configuraciones de ejemplo
-│
-├── 🔄 migration/                (Migración de Código Legacy)
-│   ├── README.md                Índice de migración
-│   └── MIGRATION_GUIDE.md       Guía de migración paso a paso
-│
-├── 📋 plan/                     (Plan de Refactorización)
-│   └── PLAN_REORGANIZACION.md   Plan maestro de 10 fases
-│
-├── 🔀 git/                      (Control de Versiones)
-│   └── GIT_STRATEGY.md          Estrategia Git completa
-│
-├── 📖 guides/                   (Guías de Usuario)
-│   ├── INICIO_RAPIDO.md         Quick start 5-10 minutos
-│   ├── CONFIGURATION_GUIDE.md   Sistema de configuración
-│   ├── EXCEPTION_HANDLING_GUIDE.md  Manejo de excepciones
-│   └── RESUMEN.md               Navegación entre docs
-│
-├── 📝 templates/                (Plantillas)
-│   ├── README.md                Guía de templates
-│   └── PHASE_REPORT_TEMPLATE.md Template reportes de fase
-│
-└── 📊 reports/                  (Reportes de Fases)
-    ├── README.md                Índice de reportes
-    └── phase-X-*.md             Reportes completados (0-10)
+├── 1-technical/          → Para Desarrolladores (arquitectura, APIs, desarrollo)
+├── 2-operations/         → Para DevOps/SRE (deployment, monitoring, runbooks)
+├── 3-user/               → Para Usuarios y Administradores (guías, FAQ)
+└── archive/              → Documentación histórica de refactorización
 ```
 
 ---
 
 ## 🚀 Inicio Rápido por Rol
 
-### 👤 Soy Nuevo en el Proyecto (5 min)
+### 👨‍💻 Soy Desarrollador
 
-1. **[Quick Start Guide](guides/INICIO_RAPIDO.md)** ⚡
-   - Comandos básicos Git
-   - Workflow diario resumido
-   - Troubleshooting común
+**¿Primera vez en el proyecto?** (15 minutos)
+1. **[Technical Documentation Index](1-technical/README.md)** 📖
+2. **[Development Guide](1-technical/development/DEVELOPMENT_GUIDE.md)** - Setup del entorno
+3. **[Architecture](1-technical/architecture/ARCHITECTURE.md)** - Entender la arquitectura
 
-2. **Ejecutar inicialización**:
-   ```bash
-   ./scripts/init_git_workflow.sh
-   ```
-
-3. **[Resumen de Documentación](guides/RESUMEN.md)**
-   - Mapa de navegación
-   - Qué leer cuándo
-
-### 👨‍💻 Voy a Desarrollar una Fase (15 min)
-
-1. **[Plan de Reorganización](plan/PLAN_REORGANIZACION.md)** 📋
-   - Leer fase específica (N)
-   - Ver ejemplos de código
-   - Entender criterios de éxito
-
-2. **[Estrategia Git](git/GIT_STRATEGY.md)** 🔀
-   - Workflow por fase
-   - Commits semánticos
-   - Pull Requests
-
-3. **Plantillas**:
-   - [Template Commits](../.github/COMMIT_TEMPLATE.md)
-   - [Template PRs](../.github/PULL_REQUEST_TEMPLATE.md)
-
-### 👔 Soy Tech Lead / Arquitecto (45 min)
-
-1. **[Plan Completo](plan/PLAN_REORGANIZACION.md)** (30 min)
-   - Diagnóstico actual
-   - Arquitectura objetivo
-   - 10 fases detalladas
-   - Métricas de éxito
-
-2. **[Estrategia Git Completa](git/GIT_STRATEGY.md)** (15 min)
-   - Modelo de branching
-   - Estrategia de tagging
-   - Rollback y recuperación
-
-3. **Configurar**:
-   - Protección de ramas en GitHub
-   - CI/CD pipelines
-   - Code review guidelines
+**Día a día**:
+- **[API Documentation](1-technical/architecture/api/API_DOCUMENTATION.md)** - Endpoints disponibles
+- **[Git Strategy](1-technical/development/GIT_STRATEGY.md)** - Workflow de Git
+- **[Configuration Guide](1-technical/configuration/CONFIGURATION.md)** - Variables de entorno
 
 ---
 
-## 📋 Documentos por Categoría
+### 🛠️ Soy DevOps/SRE
 
-### 🎯 Planificación
+**¿Nuevo en operaciones?** (30 minutos)
+1. **[Operations Documentation Index](2-operations/README.md)** 📊
+2. **[Deployment AWS](2-operations/deployment/DEPLOYMENT_AWS.md)** - Deployar en AWS
+3. **[Runbook](2-operations/runbooks/RUNBOOK.md)** - Incidentes comunes
 
-| Documento | Descripción | Tiempo | Prioridad |
-|-----------|-------------|--------|-----------|
-| **[PLAN_REORGANIZACION.md](plan/PLAN_REORGANIZACION.md)** | Plan maestro de 10 fases con código de ejemplo | 30-45 min | 🔴 Alta |
+**On-call preparation** (CRÍTICO):
+- **[Runbook](2-operations/runbooks/RUNBOOK.md)** 🚨 - Procedimientos de incidentes
+- **[Monitoring Guide](2-operations/monitoring/MONITORING_GUIDE.md)** 📈 - Métricas y alertas
+- **[Backup & Restore](2-operations/backup-recovery/BACKUP_RESTORE.md)** 💾 - Disaster recovery
 
-**Contenido**:
-- 📊 Diagnóstico del proyecto actual
-- 🏗️ Arquitectura objetivo (4 capas)
-- 📝 10 fases con ejemplos de código
-- ⏱️ Estimaciones: 14-20 horas
-- 📊 Métricas de éxito
-- 🚨 Riesgos y mitigaciones
-
-**Para**: Todo el equipo (lectura obligatoria)
+**Security & Compliance**:
+- **[Security Hardening](2-operations/security/SECURITY_HARDENING.md)** 🔒 - Hardening checklist
 
 ---
 
-### 🔀 Control de Versiones
+### 👤 Soy Usuario / Administrador
 
-| Documento | Descripción | Tiempo | Prioridad |
-|-----------|-------------|--------|-----------|
-| **[GIT_STRATEGY.md](git/GIT_STRATEGY.md)** | Estrategia Git completa para el proyecto | 15-20 min | 🔴 Alta |
+**¿Nuevo usuario?** (10 minutos)
+1. **[User Documentation Index](3-user/README.md)** 📚
+2. **[What is Dashboard Sonar?](3-user/getting-started/WHAT_IS_DASHBOARD_SONAR.md)** - Introducción
+3. **[User Guide](3-user/user-guide/USER_GUIDE.md)** - Cómo usar la aplicación
 
-**Contenido**:
-- 🌳 GitFlow simplificado
-- 🔄 Workflow detallado por fase
-- 📝 Commits semánticos (tipos, ámbitos)
-- 🏷️ Estrategia de tagging
-- 🚨 Rollback y recuperación
-- 📐 Ejemplo completo Fase 1
+**Para administradores**:
+- **[Admin Guide](3-user/admin-guide/ADMIN_GUIDE.md)** ⚙️ - Gestión de usuarios, carga de datos, backups
+- **[FAQ](3-user/faq/FAQ.md)** ❓ - 50+ preguntas frecuentes
 
-**Para**: Desarrolladores durante todo el proyecto
+**Referencia**:
+- **[Metrics Explained](3-user/user-guide/METRICS_EXPLAINED.md)** 📊 - Qué significan las métricas
 
 ---
 
-### 📖 Guías de Usuario
+## 📋 Documentación por Categoría
 
-| Documento | Descripción | Tiempo | Prioridad |
-|-----------|-------------|--------|-----------|
-| **[INICIO_RAPIDO.md](guides/INICIO_RAPIDO.md)** | Quick start y comandos diarios | 5-10 min | 🔴 Alta |
-| **[CONFIGURATION_GUIDE.md](guides/CONFIGURATION_GUIDE.md)** | Sistema modular de configuración | 20-30 min | 🔴 Alta |
-| **[EXCEPTION_HANDLING_GUIDE.md](guides/EXCEPTION_HANDLING_GUIDE.md)** | Manejo de excepciones custom | 15-20 min | 🟡 Media |
-| **[RESUMEN.md](guides/RESUMEN.md)** | Navegación entre documentos | 5 min | 🟡 Media |
+### 1️⃣ [Technical Documentation](1-technical/)
 
-#### [INICIO_RAPIDO.md](guides/INICIO_RAPIDO.md)
+**Para**: Desarrolladores, Arquitectos de Software, Ingenieros Backend/Frontend
 
-**Contenido**:
-- ⚡ Setup automático/manual
-- 📋 Workflow diario resumido
-- 🎯 Comandos más usados (cheatsheet)
-- 📝 Formato de commits quick reference
-- 🚨 Solución problemas comunes
-- ✅ Checklist pre-push
+| Sección | Documentos Clave |
+|---------|------------------|
+| **Architecture** | [ARCHITECTURE.md](1-technical/architecture/ARCHITECTURE.md), [API_DOCUMENTATION.md](1-technical/architecture/api/API_DOCUMENTATION.md) |
+| **Development** | [DEVELOPMENT_GUIDE.md](1-technical/development/DEVELOPMENT_GUIDE.md), [GIT_STRATEGY.md](1-technical/development/GIT_STRATEGY.md) |
+| **Configuration** | [CONFIGURATION.md](1-technical/configuration/CONFIGURATION.md), [DEPENDENCIES.md](1-technical/configuration/DEPENDENCIES.md) |
+| **Data** | [DATA_PIPELINE.md](1-technical/data/DATA_PIPELINE.md) |
+| **Advanced** | [migration/](1-technical/advanced/migration/) |
 
-**Para**: Nuevos desarrolladores, referencia rápida
-
-#### [RESUMEN.md](guides/RESUMEN.md)
-
-**Contenido**:
-- 🗺️ Mapa de navegación
-- 🎯 Qué documento consultar según necesidad
-- 📊 Índice completo de recursos
-- 🔍 Búsqueda rápida por concepto
-
-**Para**: Navegar la documentación eficientemente
+**Total**: ~6,000 LOC de documentación técnica
 
 ---
 
-### 📝 Plantillas
+### 2️⃣ [Operations Documentation](2-operations/)
 
-| Plantilla | Uso | Ubicación |
-|-----------|-----|-----------|
-| **[COMMIT_TEMPLATE.md](../.github/COMMIT_TEMPLATE.md)** | Mensajes de commit semánticos | Al hacer commits |
-| **[PR_TEMPLATE.md](../.github/PULL_REQUEST_TEMPLATE.md)** | Pull Requests consistentes | Al crear PRs |
+**Para**: DevOps Engineers, SRE, System Administrators, Cloud Engineers
 
-#### [COMMIT_TEMPLATE.md](../.github/COMMIT_TEMPLATE.md)
+| Sección | Documentos Clave | Prioridad |
+|---------|------------------|-----------|
+| **Runbooks** | [RUNBOOK.md](2-operations/runbooks/RUNBOOK.md) | 🔴 CRÍTICO |
+| **Monitoring** | [MONITORING_GUIDE.md](2-operations/monitoring/MONITORING_GUIDE.md) | 🔴 CRÍTICO |
+| **Backup & Recovery** | [BACKUP_RESTORE.md](2-operations/backup-recovery/BACKUP_RESTORE.md) | 🔴 CRÍTICO |
+| **Deployment** | [DEPLOYMENT_AWS.md](2-operations/deployment/DEPLOYMENT_AWS.md) | 🟠 ALTA |
+| **Security** | [SECURITY_HARDENING.md](2-operations/security/SECURITY_HARDENING.md) | 🔴 CRÍTICO |
+| **CI/CD** | [CICD_USER_MANUAL.md](2-operations/cicd/CICD_USER_MANUAL.md) | 🟡 MEDIA |
 
-**Contenido**:
-- 📝 Formato estándar: `<tipo>(<ámbito>): <descripción>`
-- 🏷️ Tipos: feat, refactor, fix, test, docs, chore, perf
-- 📂 Ámbitos comunes: repositories, services, views, etc.
-- ✅ Reglas de escritura
-- 💡 9 ejemplos completos
+**Total**: ~4,600 LOC de documentación operativa
 
-**Configurar**:
-```bash
-git config commit.template docs/../.github/COMMIT_TEMPLATE.md
+**SLAs de Referencia**:
+- Uptime: 99.5%
+- RTO: < 2 horas
+- RPO: < 24 horas
+- MTTR: < 30 minutos
+
+---
+
+### 3️⃣ [User Documentation](3-user/)
+
+**Para**: Usuarios finales, Administradores de aplicación, Clientes, Management
+
+| Sección | Documentos Clave |
+|---------|------------------|
+| **Getting Started** | [WHAT_IS_DASHBOARD_SONAR.md](3-user/getting-started/WHAT_IS_DASHBOARD_SONAR.md) |
+| **User Guide** | [USER_GUIDE.md](3-user/user-guide/USER_GUIDE.md), [METRICS_EXPLAINED.md](3-user/user-guide/METRICS_EXPLAINED.md) |
+| **Admin Guide** | [ADMIN_GUIDE.md](3-user/admin-guide/ADMIN_GUIDE.md) |
+| **FAQ** | [FAQ.md](3-user/faq/FAQ.md) |
+
+**Total**: ~4,100 LOC de documentación de usuario
+
+---
+
+### 📦 [Archive](archive/)
+
+**Para**: Referencia histórica
+
+Documentación del proceso de refactorización completo (10 fases):
+- [Refactoring Plan](archive/refactoring/plan/) - 6 planes de fases
+- [Phase Reports](archive/refactoring/reports/) - 11 reportes de ejecución
+- [Analysis](archive/analysis/) - Análisis de dependencias
+
+**Total**: ~15,000 LOC de documentación de refactorización
+
+---
+
+## 🎯 Rutas de Aprendizaje por Rol
+
+### 🆕 Nuevo en el Proyecto (Cualquier Rol)
+
+**Día 1** (30 minutos):
+1. Lee este README completo
+2. Identifica tu rol principal (Developer / DevOps / User)
+3. Ve a tu sección correspondiente (1-technical / 2-operations / 3-user)
+4. Sigue el "Inicio Rápido" de tu sección
+
+---
+
+### 👨‍💻 Developer Track
+
+**Semana 1**:
+1. [DEVELOPMENT_GUIDE.md](1-technical/development/DEVELOPMENT_GUIDE.md) - Setup (día 1)
+2. [ARCHITECTURE.md](1-technical/architecture/ARCHITECTURE.md) - Arquitectura (día 2-3)
+3. [API_DOCUMENTATION.md](1-technical/architecture/api/API_DOCUMENTATION.md) - APIs (día 3-4)
+4. [DATA_PIPELINE.md](1-technical/data/DATA_PIPELINE.md) - Pipeline (día 4-5)
+
+**Mes 1**:
+5. [CONFIGURATION.md](1-technical/configuration/CONFIGURATION.md) - Configuración
+6. [GIT_STRATEGY.md](1-technical/development/GIT_STRATEGY.md) - Workflow
+7. [reference/guides/](1-technical/reference/guides/) - Guías avanzadas
+
+---
+
+### 🛠️ DevOps/SRE Track
+
+**Día 1** (setup):
+1. [DEPLOYMENT_AWS.md](2-operations/deployment/DEPLOYMENT_AWS.md) - Deploy
+2. [SECURITY_HARDENING.md](2-operations/security/SECURITY_HARDENING.md) - Securizar
+3. [BACKUP_RESTORE.md](2-operations/backup-recovery/BACKUP_RESTORE.md) - Backups
+
+**Semana 1** (operación):
+4. [MONITORING_GUIDE.md](2-operations/monitoring/MONITORING_GUIDE.md) - Monitoring
+5. [RUNBOOK.md](2-operations/runbooks/RUNBOOK.md) - Incidentes
+6. [CICD_USER_MANUAL.md](2-operations/cicd/CICD_USER_MANUAL.md) - CI/CD
+
+**On-call prep** (MEMORIZAR):
+7. [RUNBOOK.md](2-operations/runbooks/RUNBOOK.md) - Health checks e incidentes comunes
+8. Configurar alertas según [MONITORING_GUIDE.md](2-operations/monitoring/MONITORING_GUIDE.md)
+
+---
+
+### 👤 User/Admin Track
+
+**Primera hora**:
+1. [WHAT_IS_DASHBOARD_SONAR.md](3-user/getting-started/WHAT_IS_DASHBOARD_SONAR.md) - ¿Qué es?
+2. [USER_GUIDE.md](3-user/user-guide/USER_GUIDE.md) - Cómo usar
+
+**Primera semana** (administradores):
+3. [ADMIN_GUIDE.md](3-user/admin-guide/ADMIN_GUIDE.md) - Gestión completa
+4. [METRICS_EXPLAINED.md](3-user/user-guide/METRICS_EXPLAINED.md) - Métricas
+5. [FAQ.md](3-user/faq/FAQ.md) - Referencia
+
+---
+
+## 🔍 Búsqueda Rápida por Tarea
+
+### "Necesito deployar la aplicación"
+
+**Cloud AWS**:
+- [DEPLOYMENT_AWS.md](2-operations/deployment/DEPLOYMENT_AWS.md) - EC2, RDS, ECS, Beanstalk
+
+**On-premise**:
+- [infrastructure/deployment/DEPLOYMENT.md](2-operations/infrastructure/deployment/DEPLOYMENT.md)
+
+---
+
+### "Tengo un incidente en producción"
+
+**URGENTE**:
+1. [RUNBOOK.md](2-operations/runbooks/RUNBOOK.md) - Health checks y procedimientos
+2. Ver alertas en [MONITORING_GUIDE.md](2-operations/monitoring/MONITORING_GUIDE.md)
+3. Si necesitas restore: [BACKUP_RESTORE.md](2-operations/backup-recovery/BACKUP_RESTORE.md)
+
+---
+
+### "Quiero desarrollar una nueva feature"
+
+1. [DEVELOPMENT_GUIDE.md](1-technical/development/DEVELOPMENT_GUIDE.md) - Setup
+2. [ARCHITECTURE.md](1-technical/architecture/ARCHITECTURE.md) - Entender arquitectura
+3. [API_DOCUMENTATION.md](1-technical/architecture/api/API_DOCUMENTATION.md) - APIs existentes
+4. [GIT_STRATEGY.md](1-technical/development/GIT_STRATEGY.md) - Workflow Git
+
+---
+
+### "Necesito entender las métricas"
+
+**Para usuarios**:
+- [METRICS_EXPLAINED.md](3-user/user-guide/METRICS_EXPLAINED.md) - Explicación detallada
+
+**Para técnicos**:
+- [DATA_PIPELINE.md](1-technical/data/DATA_PIPELINE.md) - Cómo se cargan
+
+---
+
+### "¿Cómo agrego un nuevo usuario?"
+
+- [ADMIN_GUIDE.md](3-user/admin-guide/ADMIN_GUIDE.md) - Sección "Gestión de Usuarios"
+
+---
+
+### "Necesito hacer backup / restore"
+
+- [BACKUP_RESTORE.md](2-operations/backup-recovery/BACKUP_RESTORE.md) - Procedimientos completos
+
+---
+
+### "¿Cómo securizo la aplicación?"
+
+- [SECURITY_HARDENING.md](2-operations/security/SECURITY_HARDENING.md) - Checklist completo
+
+---
+
+## 📊 Estadísticas de Documentación
+
+### Por Categoría
+
+| Categoría | Archivos | LOC (aprox) | Estado |
+|-----------|----------|-------------|--------|
+| **1-technical/** | 15+ archivos | ~6,000 LOC | ✅ Completo |
+| **2-operations/** | 8 archivos | ~4,600 LOC | ✅ Completo |
+| **3-user/** | 6 archivos | ~4,100 LOC | ✅ Completo |
+| **archive/** | 40+ archivos | ~15,000 LOC | ✅ Archivado |
+
+**Total**: ~30,000 LOC de documentación profesional
+
+---
+
+### Por Tipo
+
+| Tipo | Documentos |
+|------|------------|
+| Guías de Usuario | 6 docs |
+| Guías Técnicas | 15+ docs |
+| Guías Operativas | 8 docs |
+| Runbooks | 1 doc (crítico) |
+| API Documentation | 2 docs |
+| Deployment Guides | 3+ docs |
+| Refactoring History | 40+ docs (archivado) |
+
+---
+
+## ✅ Estado del Proyecto
+
+```
+Refactorización:  ████████████████████ 100% ✅ (10 fases completadas)
+Tests:            ████████████████████ 100% ✅ (202 tests, >80% coverage)
+Documentación:    ████████████████████ 100% ✅ (~30,000 LOC)
+
+├─ User Docs:     ████████████████████ 100% ✅
+├─ Ops Docs:      ████████████████████ 100% ✅
+├─ Tech Docs:     ████████████████████ 100% ✅
+└─ Archive:       ████████████████████ 100% ✅
 ```
 
-#### [PR_TEMPLATE.md](../.github/PULL_REQUEST_TEMPLATE.md)
-
-**Contenido**:
-- 📋 Estructura estándar de PR
-- 🧪 Sección de testing y cobertura
-- 📊 Métricas antes/después
-- ✅ Checklist completo (funcionalidad, calidad, docs, git)
-- 🚨 Breaking changes
-- 👥 Reviewers sugeridos
-
-**Uso**: GitHub lo carga automáticamente al crear PR
+**🎉 Proyecto 100% Completo y Documentado** 🎉
 
 ---
 
-## 🔧 Herramientas
+## 🎯 Objetivos Alcanzados
 
-### Scripts de Automatización
+### Independencia del Cliente ✅
 
-| Script | Propósito | Cuándo Ejecutar |
-|--------|-----------|-----------------|
-| **[init_git_workflow.sh](../scripts/init_git_workflow.sh)** | Inicialización automática completa | Una vez, al inicio |
+- ✅ **Documentación de usuario completa** - Clientes pueden operar sin soporte
+- ✅ **Guías de administración** - Gestión de usuarios, datos, backups
+- ✅ **FAQ con 50+ preguntas** - Auto-servicio
 
-**Qué hace**:
-- ✅ Inicializa Git (si no está)
-- ✅ Verifica tests pasan
-- ✅ Crea commit baseline
-- ✅ Crea tag `v1.0.0-baseline`
-- ✅ Crea rama `develop`
-- ✅ Configura estructura de directorios
-- ✅ Configura plantilla de commits
-- ✅ Actualiza `.gitignore`
+### Operación en Producción ✅
 
-**Ejecutar**:
-```bash
-cd "c:\My Program Files\workspace-claude\dashboardsonar-application-python"
-./scripts/init_git_workflow.sh
-```
+- ✅ **Runbooks de incidentes** - MTTR < 30 minutos
+- ✅ **Guías de deployment** - AWS, on-premise
+- ✅ **Monitoring y alertas** - Prometheus, Grafana, CloudWatch
+- ✅ **Backup & DR** - RPO 24h, RTO 2h
+- ✅ **Security hardening** - OWASP Top 10, checklist completo
 
----
+### Mantenibilidad Técnica ✅
 
-## 🎯 Flujos de Trabajo Recomendados
-
-### Día 1: Inicialización
-
-```
-1. Leer INICIO_RAPIDO.md (5 min)
-   └─> Comandos básicos Git
-
-2. Ejecutar init_git_workflow.sh (2 min)
-   └─> Inicialización automática
-
-3. Leer PLAN_REORGANIZACION.md (30 min)
-   └─> Entender alcance completo
-
-4. Revisar GIT_STRATEGY.md (15 min)
-   └─> Workflow detallado
-```
-
-### Durante Desarrollo de Fase
-
-```
-Para cada fase (N):
-
-1. Consultar PLAN_REORGANIZACION.md Fase N
-   └─> Ver código de ejemplo y requisitos
-
-2. Crear rama según GIT_STRATEGY.md
-   └─> git checkout -b feature/refactor-phase-N-nombre
-
-3. Desarrollar usando ejemplos del plan
-   └─> Implementar componentes
-
-4. Commits usando COMMIT_TEMPLATE.md
-   └─> Mensajes semánticos consistentes
-
-5. PR usando PR_TEMPLATE.md
-   └─> Checklist completo
-
-6. Después del merge: Tag + Cleanup
-   └─> Seguir GIT_STRATEGY.md
-```
+- ✅ **Arquitectura documentada** - 4 capas, patrones, decisiones
+- ✅ **API completa** - Todos los endpoints documentados
+- ✅ **Guías de desarrollo** - Setup, workflow, testing
+- ✅ **Pipeline de datos** - Carga desde SonarQube
 
 ---
 
-## 📐 Mapa de Decisiones
+## 🔗 Enlaces Útiles
 
-### ¿Qué documento necesito?
+### Documentación Principal
 
-```
-┌─────────────────────────────────────────┐
-│ Tu Necesidad                            │
-└─────────────────────────────────────────┘
-            ↓
-┌───────────────────────────────────────────────────────┐
-│ Primer día en el proyecto                             │
-│ → guides/INICIO_RAPIDO.md                            │
-└───────────────────────────────────────────────────────┘
+- **[1-technical/README.md](1-technical/README.md)** - Índice documentación técnica
+- **[2-operations/README.md](2-operations/README.md)** - Índice documentación operativa
+- **[3-user/README.md](3-user/README.md)** - Índice documentación de usuario
 
-┌───────────────────────────────────────────────────────┐
-│ Entender el plan completo de refactorización         │
-│ → plan/PLAN_REORGANIZACION.md                        │
-└───────────────────────────────────────────────────────┘
+### Quick Access
 
-┌───────────────────────────────────────────────────────┐
-│ Crear rama para nueva fase                            │
-│ → git/GIT_STRATEGY.md (sección "Workflow")           │
-└───────────────────────────────────────────────────────┘
-
-┌───────────────────────────────────────────────────────┐
-│ Escribir mensaje de commit                            │
-│ → ../.github/COMMIT_TEMPLATE.md                        │
-│   O: git commit (sin -m)                             │
-└───────────────────────────────────────────────────────┘
-
-┌───────────────────────────────────────────────────────┐
-│ Crear Pull Request                                     │
-│ → ../.github/PULL_REQUEST_TEMPLATE.md                            │
-│   (GitHub lo carga automáticamente)                   │
-└───────────────────────────────────────────────────────┘
-
-┌───────────────────────────────────────────────────────┐
-│ Problema con Git / Rollback                           │
-│ → guides/INICIO_RAPIDO.md (Troubleshooting)          │
-│ → git/GIT_STRATEGY.md (Rollback completo)            │
-└───────────────────────────────────────────────────────┘
-
-┌───────────────────────────────────────────────────────┐
-│ ¿Qué código escribir en Fase N?                       │
-│ → plan/PLAN_REORGANIZACION.md (Fase N)               │
-│   (Incluye ejemplos de código completos)              │
-└───────────────────────────────────────────────────────┘
-
-┌───────────────────────────────────────────────────────┐
-│ Navegar entre documentos                              │
-│ → guides/RESUMEN.md                                   │
-└───────────────────────────────────────────────────────┘
-```
-
----
-
-## 📊 Información de Documentos
-
-### Por Tamaño y Tiempo de Lectura
-
-| Documento | Tamaño | Lectura | Uso |
-|-----------|--------|---------|-----|
-| PLAN_REORGANIZACION.md | 39 KB | 30-45 min | Planificación |
-| GIT_STRATEGY.md | 18 KB | 15-20 min | Referencia Git |
-| RESUMEN.md | 14 KB | 5 min | Navegación |
-| INICIO_RAPIDO.md | 7 KB | 5-10 min | Quick start |
-| COMMIT_TEMPLATE.md | 6 KB | 1 min/uso | Commits |
-| PR_TEMPLATE.md | 3.7 KB | 2 min/uso | Pull Requests |
-
-**Total**: ~111 KB de documentación profesional
-
----
-
-## 🔍 Búsqueda Rápida
-
-### Por Concepto
-
-| Concepto | Documento | Sección |
-|----------|-----------|---------|
-| Arquitectura en capas | plan/PLAN_REORGANIZACION.md | "Arquitectura Objetivo" |
-| Crear rama Git | git/GIT_STRATEGY.md | "Workflow por Fase" |
-| Formato commit | ../.github/COMMIT_TEMPLATE.md | "Tipos de Commit" |
-| Ejemplo código Fase 1 | plan/PLAN_REORGANIZACION.md | "FASE 1" |
-| Resolver conflictos | guides/INICIO_RAPIDO.md | "Problemas Comunes" |
-| Crear tag | git/GIT_STRATEGY.md | "Estrategia de Tagging" |
-| Rollback | git/GIT_STRATEGY.md | "Rollback y Recuperación" |
-| Setup inicial | guides/INICIO_RAPIDO.md | "Quick Start" |
-
-### Por Comando Git
-
-| Comando | Documento | Info |
-|---------|-----------|------|
-| `git init` | git/GIT_STRATEGY.md | Inicialización |
-| `git checkout -b` | git/GIT_STRATEGY.md | Crear rama |
-| `git commit` | ../.github/COMMIT_TEMPLATE.md | Ejemplos |
-| `git tag` | git/GIT_STRATEGY.md | Tagging |
-| `git reset` | guides/INICIO_RAPIDO.md | Correcciones |
-| `git merge` | git/GIT_STRATEGY.md | Merge strategy |
-
----
-
-## ✅ Checklist de Documentación
-
-### Lectura Obligatoria (1 hora)
-
-- [ ] [INICIO_RAPIDO.md](guides/INICIO_RAPIDO.md) - 10 min
-- [ ] [PLAN_REORGANIZACION.md](plan/PLAN_REORGANIZACION.md) Fase 0 - 10 min
-- [ ] [GIT_STRATEGY.md](git/GIT_STRATEGY.md) Workflow - 15 min
-- [ ] [COMMIT_TEMPLATE.md](../.github/COMMIT_TEMPLATE.md) - 5 min
-
-### Lectura Recomendada (1 hora)
-
-- [ ] [PLAN_REORGANIZACION.md](plan/PLAN_REORGANIZACION.md) Completo - 45 min
-- [ ] [RESUMEN.md](guides/RESUMEN.md) - 5 min
-- [ ] [PR_TEMPLATE.md](../.github/PULL_REQUEST_TEMPLATE.md) - 5 min
-
-### Ejecutar
-
-- [ ] Script de inicialización: `./scripts/init_git_workflow.sh`
-
----
-
-## 🎓 Recursos Externos
-
-### Git y Control de Versiones
-
-- [Git Documentation](https://git-scm.com/doc)
-- [GitFlow Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
-- [Conventional Commits](https://www.conventionalcommits.org/)
-
-### Arquitectura de Software
-
-- [Flask Best Practices](https://flask.palletsprojects.com/patterns/)
-- [Repository Pattern](https://www.cosmicpython.com/book/chapter_02_repository.html)
-- [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
-- [12 Factor App](https://12factor.net/)
+- **Nuevo usuario**: [3-user/getting-started/WHAT_IS_DASHBOARD_SONAR.md](3-user/getting-started/WHAT_IS_DASHBOARD_SONAR.md)
+- **Nuevo developer**: [1-technical/development/DEVELOPMENT_GUIDE.md](1-technical/development/DEVELOPMENT_GUIDE.md)
+- **Nuevo DevOps**: [2-operations/runbooks/RUNBOOK.md](2-operations/runbooks/RUNBOOK.md)
+- **On-call**: [2-operations/README.md#-documentos-críticos-para-on-call](2-operations/README.md#-documentos-críticos-para-on-call)
 
 ---
 
@@ -423,79 +346,43 @@ Para cada fase (N):
 
 ### Dudas sobre Documentación
 
-- **Workflow diario**: [INICIO_RAPIDO.md](guides/INICIO_RAPIDO.md)
-- **Qué código escribir**: [PLAN_REORGANIZACION.md](plan/PLAN_REORGANIZACION.md)
-- **Problemas Git**: [GIT_STRATEGY.md](git/GIT_STRATEGY.md)
-- **Navegación**: [RESUMEN.md](guides/RESUMEN.md)
+- **General**: Este README
+- **Technical**: [1-technical/README.md](1-technical/README.md)
+- **Operations**: [2-operations/README.md](2-operations/README.md)
+- **User**: [3-user/README.md](3-user/README.md)
 
 ### Contacto
 
-[Añadir información de contacto del equipo]
+Para soporte o preguntas, consulta primero la documentación relevante o el FAQ.
 
 ---
 
 ## 🚀 Próximos Pasos
 
-### Ahora Mismo (2 minutos)
+### Si eres nuevo
 
-```bash
-# Ejecutar inicialización
-./scripts/init_git_workflow.sh
-```
+1. ✅ Lee este README completo (15 minutos)
+2. ✅ Identifica tu rol (Developer / DevOps / User / Admin)
+3. ✅ Ve a tu sección (1-technical / 2-operations / 3-user)
+4. ✅ Sigue la "Ruta de Aprendizaje" de tu rol
 
-### Hoy (1 hora)
+### Si vas a deployar
 
-1. ✅ Leer [INICIO_RAPIDO.md](guides/INICIO_RAPIDO.md)
-2. ✅ Revisar [PLAN_REORGANIZACION.md](plan/PLAN_REORGANIZACION.md) Fase 0
-3. ✅ Familiarizarse con [COMMIT_TEMPLATE.md](../.github/COMMIT_TEMPLATE.md)
+1. ✅ [DEPLOYMENT_AWS.md](2-operations/deployment/DEPLOYMENT_AWS.md) - Setup completo
+2. ✅ [SECURITY_HARDENING.md](2-operations/security/SECURITY_HARDENING.md) - Securizar
+3. ✅ [MONITORING_GUIDE.md](2-operations/monitoring/MONITORING_GUIDE.md) - Monitoring
+4. ✅ [BACKUP_RESTORE.md](2-operations/backup-recovery/BACKUP_RESTORE.md) - Backups
 
-### Mañana (empezar desarrollo)
+### Si vas a desarrollar
 
-1. ✅ Crear rama `feature/refactor-phase-0-preparation`
-2. ✅ Implementar Fase 0 (30 min)
-3. ✅ Primer PR usando [PR_TEMPLATE.md](../.github/PULL_REQUEST_TEMPLATE.md)
-
----
-
-## 📊 Estado del Proyecto
-
-```
-Documentación:  ████████████████████ 100% ✅
-Herramientas:   ████████████████████ 100% ✅
-Fase 0:         ████████████████████ 100% ✅ (Preparación)
-Fase 1:         ████████████████████ 100% ✅ (Repositorios)
-Fase 2:         ████████████████████ 100% ✅ (Servicios)
-Fase 3:         ████████████████████ 100% ✅ (Vistas)
-Fase 4:         ████████████████████ 100% ✅ (Utilidades)
-Fase 5:         ████████████████████ 100% ✅ (Excepciones)
-Fase 6:         ████████████████████ 100% ✅ (Configuración)
-Fase 7:         ████████████████████ 100% ✅ (Dependencias)
-Fase 8:         ████████████████████ 100% ✅ (Entry Points)
-Fase 9:         ████████████████████ 100% ✅ (Tests - 202 tests)
-Fase 10:        ████████████████████ 100% ✅ (Documentación - 5,548+ LOC)
-
-Progreso total: ████████████████████ 100% (10/10 fases) 🎉
-Proyecto: COMPLETADO CON ÉXITO
-```
+1. ✅ [DEVELOPMENT_GUIDE.md](1-technical/development/DEVELOPMENT_GUIDE.md) - Setup
+2. ✅ [ARCHITECTURE.md](1-technical/architecture/ARCHITECTURE.md) - Arquitectura
+3. ✅ [GIT_STRATEGY.md](1-technical/development/GIT_STRATEGY.md) - Workflow
 
 ---
 
-## 🎉 ¡Proyecto 100% Completado!
-
-La refactorización completa ha sido finalizada exitosamente:
-
-- ✅ Plan detallado de 10 fases (COMPLETADO)
-- ✅ Estrategia Git profesional
-- ✅ Arquitectura en capas (4 layers)
-- ✅ 202 tests unitarios (>80% coverage)
-- ✅ 7 servicios + 7 repositorios
-- ✅ Documentación completa (5,548+ LOC)
-- ✅ Guías de desarrollo, API, deployment
-
-**🎊 ¡Proyecto Finalizado! 🎊**
-
----
-
-**Última actualización**: 2025-12-14
+**Última actualización**: Diciembre 2025
 **Versión**: v1.10.0-phase-10
 **Mantenedor**: Dashboard Sonar Team
+
+**📚 Documentación completa y profesional - Lista para uso en producción** 📚
