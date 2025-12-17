@@ -60,7 +60,10 @@ Pipeline de datos, ETL y procesamiento de métricas de SonarQube.
 ### 🧪 [Testing](testing/)
 Estrategias de testing, seguridad y QA.
 
-- *(Nota: Mover TESTING_SECURITY.md aquí en el futuro)*
+| Documento | Descripción | Prioridad |
+|-----------|-------------|-----------|
+| **[TESTING_SECURITY.md](testing/TESTING_SECURITY.md)** | Testing de funciones de seguridad (password hashing) | 🟡 MEDIA |
+| **[MANUAL_TESTING.md](testing/MANUAL_TESTING.md)** | Guía de testing manual y casos de prueba | 🟡 MEDIA |
 
 ---
 
@@ -83,14 +86,15 @@ Temas avanzados: migraciones, performance tuning, escalabilidad.
 ### 📚 [Reference](reference/)
 Material de referencia, guías rápidas y troubleshooting para desarrolladores.
 
-| Documento | Descripción |
-|-----------|-------------|
-| **[guides/CONFIGURATION_GUIDE.md](reference/guides/CONFIGURATION_GUIDE.md)** | Guía de configuración |
-| **[guides/DOCUMENTAR_CAMBIOS.md](reference/guides/DOCUMENTAR_CAMBIOS.md)** | Cómo documentar cambios |
-| **[guides/ETL_IMPORT_FIX.md](reference/guides/ETL_IMPORT_FIX.md)** | Fix de importación ETL |
-| **[guides/EXCEPTION_HANDLING_GUIDE.md](reference/guides/EXCEPTION_HANDLING_GUIDE.md)** | Guía de manejo de excepciones |
-| **[guides/INICIO_RAPIDO.md](reference/guides/INICIO_RAPIDO.md)** | Inicio rápido |
-| **[guides/RESUMEN.md](reference/guides/RESUMEN.md)** | Resumen general |
+| Documento | Descripción | Prioridad |
+|-----------|-------------|-----------|
+| **[TROUBLESHOOTING.md](reference/TROUBLESHOOTING.md)** | Resolución de problemas técnicos comunes | 🟠 ALTA |
+| **[guides/CONFIGURATION_GUIDE.md](reference/guides/CONFIGURATION_GUIDE.md)** | Guía de configuración | 🟡 MEDIA |
+| **[guides/DOCUMENTAR_CAMBIOS.md](reference/guides/DOCUMENTAR_CAMBIOS.md)** | Cómo documentar cambios | 🟡 MEDIA |
+| **[guides/ETL_IMPORT_FIX.md](reference/guides/ETL_IMPORT_FIX.md)** | Fix de importación ETL | 🟢 BAJA |
+| **[guides/EXCEPTION_HANDLING_GUIDE.md](reference/guides/EXCEPTION_HANDLING_GUIDE.md)** | Guía de manejo de excepciones | 🟡 MEDIA |
+| **[guides/INICIO_RAPIDO.md](reference/guides/INICIO_RAPIDO.md)** | Inicio rápido | 🟡 MEDIA |
+| **[guides/RESUMEN.md](reference/guides/RESUMEN.md)** | Resumen general | 🟢 BAJA |
 
 ---
 
