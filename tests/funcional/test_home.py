@@ -23,24 +23,44 @@ from flask_login import current_user
 #     assert response.status_code == 405
 
 
-def test_metricas_page(test_client):
+def test_metricas_page(test_client: FlaskClient, init_database: None, login_in_user: None):
+    """
+    GIVEN a Flask application with authenticated user
+    WHEN the '/metricas' page is requested (GET)
+    THEN check that the response is valid
+    """
     response = test_client.get('/metricas')
     assert response.status_code == 200
     # assert b"Sonar CFM - Metricas | Orange" in response.data
-    
-def test_metricas_page_login(test_client: FlaskClient, init_database: None):
+
+def test_metricas_page_login(test_client: FlaskClient, init_database: None, login_in_user: None):
+    """
+    GIVEN a Flask application with authenticated user
+    WHEN the '/metricas' page is requested (GET) with login
+    THEN check that the response is valid
+    """
     response = test_client.get('/metricas')
     assert response.status_code == 200
     # assert b"Sonar CFM - Metricas | Orange" in response.data
 
 
-def test_proveedores_metricas_page(test_client):
-    response = test_client.get('/proveedores')
+def test_proveedores_metricas_page(test_client: FlaskClient, init_database: None, login_in_user: None):
+    """
+    GIVEN a Flask application with authenticated user
+    WHEN the '/metricas/proveedores' page is requested (GET)
+    THEN check that the response is valid
+    """
+    response = test_client.get('/metricas/proveedores')
     assert response.status_code == 200
     # assert b"Sonar CFM - Proveedores Metricas | Orange" in response.data
 
 
-def test_historico_metricas_page(test_client):
-    response = test_client.get('/historico')
+def test_historico_metricas_page(test_client: FlaskClient, init_database: None, login_in_user: None, init_test_data: None):
+    """
+    GIVEN a Flask application with authenticated user and test data
+    WHEN the '/metricas/historico' page is requested (GET)
+    THEN check that the response is valid
+    """
+    response = test_client.get('/metricas/historico')
     assert response.status_code == 200
     # assert b"Sonar CFM - Historico Metricas | Orange" in response.data

@@ -54,3 +54,57 @@ def login_in_user(test_client):
     )
     yield
     test_client.get("/logout")
+
+
+@pytest.fixture()
+def init_test_data(init_database):
+    """
+    Initialize test data for API tests
+    Creates sample historico and proveedor records
+    """
+    from infocodest.models.historico import Historico
+    from infocodest.models.proveedor import Proveedor
+
+    # Create sample historico data
+    historico1 = Historico(
+        repo="abacus-application-java",
+        aplicacion="abacusbrmosp",
+        fecha="2025-01-01",
+        bugs=5,
+        reliability_rating=3,
+        reliability_label="C",
+        vulnerabilities=2,
+        security_rating=4,
+        security_label="D",
+        code_smells=10,
+        sqale_rating=2,
+        sqale_label="B",
+        alert_status="OK",
+        project="abacus-application-java",
+        complexity=100,
+        coverage=75,
+        unit_tests="50",
+        ncloc=1000,
+        duplicated_line_density=5,
+        sqale_index=120,
+        sqale_debt_ratio=10,
+        size="M",
+        dloc_label="A",
+        coverage_label="B",
+        quality_gate="PASSED"
+    )
+
+    # Create sample proveedor data
+    proveedor1 = Proveedor(
+        aplicacion="abacusbrmosp",
+        proveedor="Test Provider",
+        tipo="Internal"
+    )
+
+    db.session.add(historico1)
+    db.session.add(proveedor1)
+    db.session.commit()
+
+    yield  # Tests run here
+
+    # Cleanup is handled by init_database fixture

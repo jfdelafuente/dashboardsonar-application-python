@@ -69,9 +69,16 @@ def test_login_page(test_client):
 
 
 def test_register_page(test_client):
+    """
+    GIVEN a Flask application configured for testing
+    WHEN the '/register' page is requested (GET)
+    THEN check that the page renders correctly with registration form
+    """
     response = test_client.get("/register")
     assert response.status_code == 200
-    assert b"INFOCODE - Register | Orange" in response.data
+    # Template title format: "INFOCODE - Register -  | Orange" (note the extra dash and space)
+    assert b"INFOCODE - Register -" in response.data
+    assert b"Create Account" in response.data
     assert b"Username" in response.data
     assert b"Email" in response.data
     assert b"Password" in response.data

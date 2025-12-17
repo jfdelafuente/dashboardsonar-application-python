@@ -54,17 +54,22 @@ def test_login_already_logged(test_client: FlaskClient, init_database: None, log
     assert current_user.is_authenticated
 
 
-def test_correct_register(test_client: FlaskClient):
+def test_correct_register(test_client: FlaskClient, init_database: None):
     """
     GIVEN a Flask application configured for testing
     WHEN the '/register' page is posted to (POST)
     THEN check the response is valid and the user is logged in
     """
+    import time
+    # Use timestamp to ensure unique username on each test run
+    unique_username = f"test_user_{int(time.time() * 1000)}"
+    unique_email = f"{unique_username}@gmail.com"
+
     response = test_client.post("/register",
-                                data=dict(username="test_user",
-                                email="test_user@gmail.com",
-                                password="test_user",
-                                confirm_password="test_user",
+                                data=dict(username=unique_username,
+                                email=unique_email,
+                                password="test_user_password",
+                                confirm_password="test_user_password",
                                 is_admin=False),
                                 follow_redirects=True)
     assert response.status_code == 200
@@ -72,10 +77,14 @@ def test_correct_register(test_client: FlaskClient):
 
 
 def test_user_already_register(test_client: FlaskClient, init_database: None):
-    # Ensure login behaves correctly with incorrect credentials
+    """
+    GIVEN a Flask application with an existing user 'lolo'
+    WHEN trying to register with the same username
+    THEN check that the appropriate error message is shown
+    """
     response = test_client.post("/register",
                                 data=dict(username="lolo",
-                                email="lolo@gmail",
+                                email="lolo_new@gmail.com",  # Different email but same username
                                 password="lolololo",
                                 confirm_password="lolololo",
                                 is_admin=True),
