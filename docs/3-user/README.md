@@ -227,6 +227,41 @@ Si eres **administrador de sistemas** y necesitas:
 
 ---
 
+### 📚 Material de Referencia
+
+#### [Glosario de Términos](reference/GLOSSARY.md)
+
+**Duración de lectura**: Consulta rápida (1-2 min por término)
+
+**Contenido**: Definiciones completas de términos técnicos, acrónimos y conceptos:
+
+**Categorías**:
+
+1. **Métricas de SonarQube** - Bugs, Coverage, DLOC, NCLOC, Quality Gate, SQALE, etc.
+2. **Conceptos de Calidad** - Code Smell, Complexity, Technical Debt, Duplication
+3. **Arquitectura** - Flask, SQLAlchemy, Gunicorn, PostgreSQL, Docker
+4. **DevOps** - Prometheus, Grafana, Golden Signals, MTTR, SLA, CI/CD
+5. **Base de Datos** - Índices, N+1 Problem, Connection Pool, Query Optimization
+6. **Seguridad** - OWASP Top 10, bcrypt, SSL/TLS, CSRF, XSS
+
+**Incluye**:
+
+- Definiciones claras sin tecnicismos excesivos
+- Ejemplos y cálculos cuando aplica
+- Referencias cruzadas a documentación detallada
+- Tabla de acrónimos comunes
+
+**Lee esto si**:
+
+- No entiendes un término técnico
+- Quieres saber qué significa un acrónimo (SQALE, DLOC, etc.)
+- Necesitas explicar conceptos a otros
+- Buscas definición rápida sin leer documentación extensa
+
+**Úsalo como**: Diccionario de referencia rápida
+
+---
+
 ### ❓ Preguntas Frecuentes
 
 #### [FAQ - Preguntas Frecuentes](faq/FAQ.md)

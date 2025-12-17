@@ -236,6 +236,14 @@ Documentación del proceso de refactorización completo (10 fases):
 
 ---
 
+### "No entiendo un término técnico (SQALE, DLOC, etc.)"
+
+**Glosario completo**:
+
+- [GLOSSARY.md](3-user/reference/GLOSSARY.md) - Todos los términos técnicos y acrónimos explicados
+
+---
+
 ### "¿Cómo agrego un nuevo usuario?"
 
 - [ADMIN_GUIDE.md](3-user/admin-guide/ADMIN_GUIDE.md) - Sección "Gestión de Usuarios"
