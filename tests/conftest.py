@@ -60,15 +60,20 @@ def login_in_user(test_client):
 def init_test_data(init_database):
     """
     Initialize test data for API tests
-    Creates sample metrica, historico and proveedor records
+    Creates sample metrica, historico, proveedor, daily, and registro records
 
     Note: API endpoints use different tables:
     - /api/aplicacion/{aplicacion} -> Metrica table
     - /api/aplicacion/{aplicacion}/{project} -> Historico table
+    - /api/daily/{aplicacion} -> Daily table
+    - /api/registro -> Registro table
     """
     from infocodest.models.metricas import Metrica
     from infocodest.models.historico import Historico
     from infocodest.models.proveedor import Proveedor
+    from infocodest.models.daily import Daily
+    from infocodest.models.registros import Registro
+    from datetime import date, timedelta
 
     # Create sample metrica data (for /api/aplicacion/{aplicacion})
     metrica1 = Metrica(
@@ -135,9 +140,31 @@ def init_test_data(init_database):
         tipo="Internal"
     )
 
+    # Create sample daily data (for /api/daily/{aplicacion})
+    daily1 = Daily(
+        repo="abacus-application-java",
+        aplicacion="abacusbrmosp",
+        proveedor="Test Provider",
+        created_on=date.today() - timedelta(days=1),
+        num_bugs=5,
+        num_vulnerabilities=2,
+        num_code_smells=10,
+        num_analisis=1
+    )
+
+    # Create sample registro data (for /api/registro)
+    registro1 = Registro(
+        repo="abacus-application-java",
+        aplicacion="abacusbrmosp",
+        created_on=date.today(),
+        status="SUCCESS"
+    )
+
     db.session.add(metrica1)
     db.session.add(historico1)
     db.session.add(proveedor1)
+    db.session.add(daily1)
+    db.session.add(registro1)
     db.session.commit()
 
     yield  # Tests run here
