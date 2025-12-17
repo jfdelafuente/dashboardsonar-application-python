@@ -200,10 +200,24 @@ Documentación del proceso de refactorización completo (10 fases):
 
 ### "Necesito deployar la aplicación"
 
-**Cloud AWS**:
-- [DEPLOYMENT_AWS.md](2-operations/deployment/DEPLOYMENT_AWS.md) - EC2, RDS, ECS, Beanstalk
+**Cloud Managed (AWS)**:
+
+- [DEPLOYMENT_AWS.md](2-operations/deployment/DEPLOYMENT_AWS.md) - EC2, RDS, ECS, Beanstalk (~$220/mes)
+
+**Kubernetes (cualquier cloud)**:
+
+- [DEPLOYMENT_KUBERNETES.md](2-operations/deployment/DEPLOYMENT_KUBERNETES.md) - EKS, GKE, AKS, DOKS (~$150/mes)
+
+**PaaS (rápido y fácil)**:
+
+- [DEPLOYMENT_PAAS.md](2-operations/deployment/DEPLOYMENT_PAAS.md) - Heroku, Railway, Render, Fly.io (~$25/mes)
+
+**VPS + Docker (económico)**:
+
+- [DEPLOYMENT_VM_DOCKER.md](2-operations/deployment/DEPLOYMENT_VM_DOCKER.md) - DigitalOcean, Linode, Vultr (~$12/mes)
 
 **On-premise**:
+
 - [infrastructure/deployment/DEPLOYMENT.md](2-operations/infrastructure/deployment/DEPLOYMENT.md)
 
 ---

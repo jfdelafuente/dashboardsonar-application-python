@@ -57,24 +57,27 @@ Estrategia de backups, disaster recovery y restauración.
 ---
 
 ### 🚀 [Deployment](deployment/)
-Guías de deployment en diferentes plataformas cloud.
+Guías de deployment en diferentes plataformas cloud y on-premise.
 
 | Documento | Descripción | Prioridad |
 |-----------|-------------|-----------|
-| **[DEPLOYMENT_AWS.md](deployment/DEPLOYMENT_AWS.md)** | Deployment completo en AWS (EC2, RDS, ECS, Beanstalk) | 🟠 ALTA |
-| **[infrastructure/deployment/DEPLOYMENT.md](infrastructure/deployment/DEPLOYMENT.md)** | Guía general de deployment | 🟡 MEDIA |
+| **[DEPLOYMENT_AWS.md](deployment/DEPLOYMENT_AWS.md)** | AWS: EC2, RDS, ECS Fargate, Elastic Beanstalk | 🟠 ALTA |
+| **[DEPLOYMENT_KUBERNETES.md](deployment/DEPLOYMENT_KUBERNETES.md)** | Kubernetes: manifests, Helm charts, autoscaling | 🟠 ALTA |
+| **[DEPLOYMENT_PAAS.md](deployment/DEPLOYMENT_PAAS.md)** | PaaS: Heroku, Railway, Render, Fly.io | 🟡 MEDIA |
+| **[DEPLOYMENT_VM_DOCKER.md](deployment/DEPLOYMENT_VM_DOCKER.md)** | VM + Docker: DigitalOcean, Linode, Vultr, Hetzner | 🟡 MEDIA |
+| **[infrastructure/deployment/DEPLOYMENT.md](infrastructure/deployment/DEPLOYMENT.md)** | Guía general de deployment | 🟢 BAJA |
 
-**DEPLOYMENT_AWS.md - Contenido clave**:
-- 3 arquitecturas de deployment (EC2+RDS, ECS Fargate, Elastic Beanstalk)
-- Setup completo paso a paso (VPC, Security Groups, RDS Multi-AZ, ALB)
-- Auto-scaling y HA configuration
-- CI/CD pipeline con GitHub Actions
-- Cost optimization (~$220/mes baseline)
+**Guías por plataforma**:
+
+- **AWS** (~$220/mes): EC2+RDS, ECS Fargate, Elastic Beanstalk, VPC, ALB, Auto-scaling
+- **Kubernetes** (~$150/mes): EKS/GKE/AKS/DOKS, Helm charts, HPA, Ingress NGINX, Cert-Manager
+- **PaaS** (~$25-50/mes): Heroku ($25+), Railway ($20+), Render ($32+), Fly.io ($15+)
+- **VM+Docker** (~$12/mes): DigitalOcean, Linode, Vultr, Hetzner con Docker Compose
 
 **Documentación futura recomendada**:
-- `DEPLOYMENT_GCP.md` - Google Cloud Platform
-- `DEPLOYMENT_AZURE.md` - Microsoft Azure
-- `DEPLOYMENT_KUBERNETES.md` - Kubernetes/Helm
+
+- `DEPLOYMENT_GCP.md` - Google Cloud Platform (Cloud Run, GKE)
+- `DEPLOYMENT_AZURE.md` - Microsoft Azure (App Service, AKS)
 
 ---
 
