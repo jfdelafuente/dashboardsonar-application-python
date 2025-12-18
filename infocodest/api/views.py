@@ -40,12 +40,14 @@ def registro():
     limite = request.args.get('limit')
     valor = int(limite)
     fecha_actualizada = datetime.now() - timedelta(days=valor)
-    return json.dumps([registro.to_dict() for registro in Registro.query.filter(Registro.created_on >= date(year=fecha_actualizada.year, month=fecha_actualizada.month, day=fecha_actualizada.day))])
+    registros = Registro.query.filter(Registro.created_on >= date(year=fecha_actualizada.year, month=fecha_actualizada.month, day=fecha_actualizada.day)).all()
+    return jsonify([registro.to_dict() for registro in registros])
 
 
 @api_bp.route("/api/kpis")
 def kpis():
-    return json.dumps([registro.to_dict() for registro in Metrica.query.all()])
+    metricas = Metrica.query.all()
+    return jsonify([metrica.to_dict() for metrica in metricas])
 
 
 @api_bp.route("/api/kpis/<project>/<name>")
