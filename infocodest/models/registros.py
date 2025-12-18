@@ -4,18 +4,18 @@ from infocodest.extensions import db
 
 
 class Registro(db.Model):
-    """Data model for user accounts."""
+    """Data model for import process records."""
 
     __tablename__ = "registro"
 
     id = db.Column(db.Integer, primary_key=True)
-    proceso = db.Column(db.String(64), unique=True, nullable=False)
+    proceso = db.Column(db.String(64), unique=False, nullable=False)
     created_on = db.Column(db.DateTime(), unique=False, nullable=True)
-    num_app = db.Column(db.Integer, index=True, unique=True, nullable=False)
-    num_repo = db.Column(db.Integer, index=True, unique=True, nullable=False)
-    num_bugs = db.Column(db.Integer, index=True, unique=True, nullable=False)
-    num_quality = db.Column(db.Integer, index=True, unique=True, nullable=False)
-    num_analisis = db.Column(db.Integer, index=True, unique=True, nullable=True)
+    num_app = db.Column(db.Integer, index=True, unique=False, nullable=False)
+    num_repo = db.Column(db.Integer, index=True, unique=False, nullable=False)
+    num_bugs = db.Column(db.Integer, index=True, unique=False, nullable=False)
+    num_quality = db.Column(db.Integer, index=True, unique=False, nullable=False)
+    num_analisis = db.Column(db.Integer, index=True, unique=False, nullable=True)
     
     def __repr__(self):
         return "<Registro {}>".format(self.aplicacion)
