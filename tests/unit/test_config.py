@@ -38,7 +38,9 @@ def test_testing_config():
 
     assert app.config['DEBUG'] is True
     assert app.config['TESTING'] is True
-    assert 'testdb.sqlite3' in app.config['SQLALCHEMY_DATABASE_URI']
+    # Verify it's using SQLite (filename may vary based on environment variable SQLITE_DB_FILE)
+    assert 'sqlite' in app.config['SQLALCHEMY_DATABASE_URI']
+    assert '.sqlite3' in app.config['SQLALCHEMY_DATABASE_URI']
     assert app.config['WTF_CSRF_ENABLED'] is False
     assert app.config['BCRYPT_LOG_ROUNDS'] == 1
 
