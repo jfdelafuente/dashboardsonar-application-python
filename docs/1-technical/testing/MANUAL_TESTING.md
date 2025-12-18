@@ -620,54 +620,77 @@ Cada test nuevo se evalúa con 3 criterios:
    - 4: Difícil (4-8 horas)
    - 5: Muy difícil (> 8 horas)
 
-### Priority 3: Próximos Pasos (Pendiente)
+### Priority 5+: Próximos Pasos
 
-#### 3.1 Fix Registro Fixture Issues
+#### 5.1 ~~Fix Registro Fixture Issues~~ ✅ **COMPLETADO (Priority 2)**
 **Necesidad: 4 | Prioridad: Alta | Dificultad: 2**
-**Estado**: ⚠️ Pendiente
+**Estado**: ✅ **RESUELTO** - commit `6f1cdd3`
 
-El modelo Registro tiene UNIQUE constraints en múltiples campos que causan fallos en fixtures:
+El modelo Registro tenía UNIQUE constraints en múltiples campos que causaban fallos en fixtures.
 
-```python
-# Campos con UNIQUE constraint:
-- proceso (unique=True)
-- num_app (unique=True)
-- num_repo (unique=True)
-- num_bugs (unique=True)
-- num_quality (unique=True)
-```
+**Solución implementada**: Se removieron los UNIQUE constraints innecesarios del modelo Registro.
 
-**Solución propuesta**: Revisar si estos constraints son necesarios o si el modelo necesita ajustes.
-
-#### 3.2 Increase API Coverage to 70%+
+#### 5.2 ~~Fix API Tests~~ ✅ **COMPLETADO (Priority 4)**
 **Necesidad: 4 | Prioridad: Alta | Dificultad: 3**
-**Estado**: ⚠️ Parcialmente completado (21 tests, pero algunos con fixture issues)
+**Estado**: ✅ **RESUELTO** - 100% pass rate achieved
 
-Tests creados pero necesitan Registro fixture fix:
-- `/api/registro` tests (límite, filtros)
-- `/api/daily` tests con datos relacionados
+- ✅ Fixed `/api/registro` tests (json.dumps → jsonify)
+- ✅ Fixed `/api/kpis` tests (json.dumps → jsonify)
+- ✅ All 21 API tests passing
+- ✅ 378/378 tests passing (100%)
 
-#### 3.3 Reorganizar Estructura de Tests
-**Necesidad: 3 | Prioridad: Media | Dificultad: 3**
-**Estado**: ⚠️ Pendiente
+#### 5.3 Reorganizar Estructura de Tests
+**Necesidad: 2 | Prioridad: Baja | Dificultad: 3**
+**Estado**: ⚠️ Opcional - Estructura actual funciona bien
 
-Propuesta de nueva estructura:
+La estructura actual ya funciona correctamente con pytest markers:
 
 ```text
 tests/
-├── unit/          # Tests unitarios puros
+├── unit/          # Tests unitarios (333 tests)
 │   ├── test_models/
 │   ├── test_repositories/
 │   ├── test_services/
 │   └── test_utils/
-├── integration/   # Tests de integración
-│   ├── test_database/
-│   └── test_etl/
-├── functional/    # Tests funcionales actuales
-│   └── ...
-└── api/          # Tests de API separados
-    └── test_endpoints/
+└── funcional/     # Tests funcionales (45 tests)
+    ├── test_api.py
+    ├── test_auth.py
+    └── ...
 ```
+
+**Nota**: Los markers de pytest permiten ejecutar tests por categoría sin necesidad de reorganizar archivos.
+
+#### 5.4 CI/CD con GitHub Actions
+**Necesidad: 4 | Prioridad: Alta | Dificultad: 3**
+**Estado**: ⚠️ **Pendiente** - Alta prioridad
+
+Implementar CI/CD workflow con paralelización por markers:
+
+```yaml
+jobs:
+  test-unit:
+    strategy:
+      matrix:
+        marker: [models, services, repositories, utils]
+  test-functional:
+    strategy:
+      matrix:
+        marker: [api, auth, functional]
+```
+
+**Beneficio**: Reducir tiempo de CI de 4 minutos a ~1 minuto
+
+#### 5.5 Performance Testing
+**Necesidad: 3 | Prioridad: Media | Dificultad: 4**
+**Estado**: ⚠️ **Pendiente**
+
+Implementar tests de rendimiento con pytest-benchmark para critical paths.
+
+#### 5.6 E2E Testing
+**Necesidad: 2 | Prioridad: Baja | Dificultad: 5**
+**Estado**: ⚠️ **Pendiente**
+
+Implementar tests end-to-end con Selenium/Playwright.
 
 ### Fase 1: Tests Críticos ~~(Sprint 1-2)~~ ✅ COMPLETADO
 
