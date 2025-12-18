@@ -2,6 +2,8 @@
 Unit tests for input validators.
 
 Tests validation functions for dates, emails, names, metrics, etc.
+
+Updated: Priority 3 - Added pytest markers
 """
 
 import pytest
@@ -15,6 +17,9 @@ from infocodest.utils.validators import (
     validate_percentage,
     validate_rating
 )
+
+# Mark all tests in this module as unit and utils tests
+pytestmark = [pytest.mark.unit, pytest.mark.utils]
 
 
 class TestValidateDateRange:

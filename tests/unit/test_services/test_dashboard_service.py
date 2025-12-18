@@ -2,12 +2,17 @@
 Unit tests for DashboardService.
 
 Tests business logic using mocked repositories to isolate service layer.
+
+Updated: Priority 3 - Added pytest markers
 """
 
 import pytest
 from unittest.mock import Mock, MagicMock, patch
 from datetime import datetime, timedelta
 from infocodest.services.dashboard_service import DashboardService
+
+# Mark all tests in this module as services and unit tests
+pytestmark = [pytest.mark.services, pytest.mark.unit]
 
 
 class TestDashboardService:

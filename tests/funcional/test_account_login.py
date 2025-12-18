@@ -1,5 +1,15 @@
+"""
+Functional tests for account login functionality.
+
+Updated: Priority 3 - Added pytest markers
+"""
+
+import pytest
 from flask.testing import FlaskClient
 from flask_login import current_user
+
+# Mark all tests in this module as auth, functional, and security tests
+pytestmark = [pytest.mark.auth, pytest.mark.functional, pytest.mark.security]
 
 
 def test_correct_login(test_client: FlaskClient, init_database: None):

@@ -7,10 +7,15 @@ Tests cover:
 - Compatibility between SQLite (str) and PostgreSQL (bytes) storage
 - Edge cases (empty passwords, special characters, Unicode, very long passwords)
 - Security properties (unique salts, hash consistency)
+
+Updated: Priority 3 - Added pytest markers
 """
 
 import pytest
 from infocodest.utils.security import hash_pass, verify_pass
+
+# Mark all tests in this module as unit, utils, and security tests
+pytestmark = [pytest.mark.unit, pytest.mark.utils, pytest.mark.security]
 
 
 class TestHashPass:

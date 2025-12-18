@@ -2,6 +2,8 @@
 Unit tests for BaseRepository.
 
 Tests generic CRUD operations and query methods of the base repository class.
+
+Updated: Priority 3 - Added pytest markers
 """
 
 import pytest
@@ -9,6 +11,9 @@ from sqlalchemy.exc import SQLAlchemyError
 from infocodest.repositories.base_repository import BaseRepository
 from infocodest.models.users import User
 from infocodest.extensions import db
+
+# Mark all tests in this module as repositories and unit tests
+pytestmark = [pytest.mark.repositories, pytest.mark.unit]
 
 
 class TestBaseRepository:

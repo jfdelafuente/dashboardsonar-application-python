@@ -2,6 +2,8 @@
 Unit tests for MetricaRepository.
 
 Tests specific query methods for SonarQube metrics data.
+
+Updated: Priority 3 - Added pytest markers
 """
 
 import pytest
@@ -9,6 +11,9 @@ from infocodest.repositories.metrica_repository import MetricaRepository
 from infocodest.models.metricas import Metrica
 from infocodest.models.proveedor import Proveedor
 from infocodest.extensions import db
+
+# Mark all tests in this module as repositories and unit tests
+pytestmark = [pytest.mark.repositories, pytest.mark.unit]
 
 
 class TestMetricaRepository:
