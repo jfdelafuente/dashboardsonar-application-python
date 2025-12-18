@@ -9,9 +9,13 @@ Tests all decorator functions:
     - _service_class_to_param_name: Helper function
 
 Created: Phase 6 - Test Coverage Improvements
+Updated: Priority 3 - Added pytest markers
 """
 
 import pytest
+
+# Mark all tests in this module as unit and utils tests
+pytestmark = [pytest.mark.unit, pytest.mark.utils]
 import time
 import warnings
 from unittest.mock import Mock, patch, MagicMock

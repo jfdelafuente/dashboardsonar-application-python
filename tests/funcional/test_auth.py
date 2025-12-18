@@ -1,5 +1,15 @@
+"""Functional tests for authentication flows
+
+Updated: Priority 3 - Added pytest markers
+"""
+
+import pytest
 from flask.testing import FlaskClient
 from flask_login import current_user
+
+# Mark all tests in this module as auth and functional tests
+pytestmark = [pytest.mark.auth, pytest.mark.functional, pytest.mark.security]
+
 
 def test_main_route_requires_login(test_client: FlaskClient):
     # Ensure main route requres logged in user.

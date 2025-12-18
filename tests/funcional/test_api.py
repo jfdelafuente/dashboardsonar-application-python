@@ -14,11 +14,15 @@ Tests all 11 API endpoints:
     10. /api/daily/by_proveedor/<proveedor> - Get daily data by provider
 
 Created: Phase 6 - Test Coverage Improvements (Priority 2)
+Updated: Priority 3 - Added pytest markers
 """
 
 import json
 import pytest
 from flask.testing import FlaskClient
+
+# Mark all tests in this module as API tests
+pytestmark = [pytest.mark.api, pytest.mark.functional]
 
 
 # ============================================================================
