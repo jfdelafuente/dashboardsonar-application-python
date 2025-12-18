@@ -47,6 +47,20 @@ This directory contains comprehensive testing documentation for the Dashboard So
    - **Date**: Priority 1 discovery
    - **Status**: 📝 Documented for team review
 
+### Additional Testing Guides
+
+1. **[MANUAL_TESTING.md](MANUAL_TESTING.md)** - Manual Testing Guide
+   - Manual testing procedures
+   - UI/UX testing workflows
+   - User acceptance testing (UAT)
+   - **Status**: ✅ Active reference
+
+2. **[TESTING_SECURITY.md](TESTING_SECURITY.md)** - Security Testing
+   - Security testing procedures
+   - Vulnerability assessment
+   - Penetration testing guidelines
+   - **Status**: ✅ Active reference
+
 ---
 
 ## 📊 Test Coverage Evolution
