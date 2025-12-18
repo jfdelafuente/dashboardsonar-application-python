@@ -153,11 +153,17 @@ def init_test_data(init_database):
     )
 
     # Create sample registro data (for /api/registro)
+    # Using timestamp to ensure unique values (all fields have unique=True constraint)
+    import time
+    timestamp = int(time.time() * 1000)
     registro1 = Registro(
-        repo="abacus-application-java",
-        aplicacion="abacusbrmosp",
+        proceso=f"test_import_{timestamp}",
         created_on=date.today(),
-        status="SUCCESS"
+        num_app=timestamp,
+        num_repo=timestamp + 1,
+        num_bugs=timestamp + 2,
+        num_quality=timestamp + 3,
+        num_analisis=timestamp + 4
     )
 
     db.session.add(metrica1)
