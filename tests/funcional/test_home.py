@@ -68,9 +68,9 @@ def test_proveedores_metricas_page(test_client: FlaskClient, init_database: None
 def test_historico_metricas_page(test_client: FlaskClient, init_database: None, login_in_user: None, init_test_data: None):
     """
     GIVEN a Flask application with authenticated user and test data
-    WHEN the '/metricas/historico' page is requested (GET)
+    WHEN the '/metricas/aplicacion' page is requested (GET)
     THEN check that the response is valid
     """
-    response = test_client.get('/metricas/historico')
+    response = test_client.get('/metricas/aplicacion')
     assert response.status_code == 200
     # assert b"Sonar CFM - Historico Metricas | Orange" in response.data
