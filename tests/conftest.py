@@ -149,21 +149,20 @@ def init_test_data(init_database):
         num_bugs=5,
         num_vulnerabilities=2,
         num_code_smells=10,
+        num_quality=8,
         num_analisis=1
     )
 
     # Create sample registro data (for /api/registro)
-    # Using timestamp to ensure unique values (all fields have unique=True constraint)
-    import time
-    timestamp = int(time.time() * 1000)
+    # No need for unique values - constraints removed from model
     registro1 = Registro(
-        proceso=f"test_import_{timestamp}",
+        proceso="test_import_001",
         created_on=date.today(),
-        num_app=timestamp,
-        num_repo=timestamp + 1,
-        num_bugs=timestamp + 2,
-        num_quality=timestamp + 3,
-        num_analisis=timestamp + 4
+        num_app=10,
+        num_repo=15,
+        num_bugs=25,
+        num_quality=8,
+        num_analisis=5
     )
 
     db.session.add(metrica1)
