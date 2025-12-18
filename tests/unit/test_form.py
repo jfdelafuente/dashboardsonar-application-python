@@ -1,5 +1,15 @@
+"""
+Unit tests for form validation.
+
+Updated: Priority 3 - Added pytest markers
+"""
+
+import pytest
 from flask.testing import FlaskClient
 from infocodest.accounts.forms import RegisterForm, LoginForm, PasswordForm
+
+# Mark all tests in this module as unit tests
+pytestmark = pytest.mark.unit
 
 def test_validate_success_register_form(test_client: FlaskClient, init_database: None):
     """Ensure correct data validates."""

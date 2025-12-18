@@ -1,6 +1,16 @@
+"""
+Unit tests for User model.
+
+Updated: Priority 3 - Added pytest markers
+"""
+
+import pytest
 from infocodest.models.users import User
 from infocodest import db
 from flask.testing import FlaskClient
+
+# Mark all tests in this module as models and unit tests
+pytestmark = [pytest.mark.models, pytest.mark.unit]
 
 
 def test_create_user(test_client: FlaskClient, init_database: None):

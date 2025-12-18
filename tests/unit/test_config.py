@@ -3,12 +3,18 @@ Tests for configuration system.
 
 Tests verify that each configuration class (Development, Testing, Production)
 has the correct settings for DEBUG, TESTING, and database URI.
+
+Updated: Priority 3 - Added pytest markers
 """
 import os
+import pytest
 from pathlib import Path
 from unittest.mock import patch
 from infocodest import create_app
 from config import DevelopmentConfig, TestingConfig, ProductionConfig
+
+# Mark all tests in this module as unit tests
+pytestmark = pytest.mark.unit
 
 
 basedir = Path(__file__).resolve().parent.parent.parent

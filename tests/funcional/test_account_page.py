@@ -1,4 +1,14 @@
+"""
+Functional tests for account pages (login, register, password).
+
+Updated: Priority 3 - Added pytest markers
+"""
+
+import pytest
 from flask.testing import FlaskClient
+
+# Mark all tests in this module as auth and functional tests
+pytestmark = [pytest.mark.auth, pytest.mark.functional]
 
 
 def test_home_page_requires_login(test_client: FlaskClient):

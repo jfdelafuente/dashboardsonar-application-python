@@ -2,6 +2,8 @@
 Unit tests for business exception classes.
 
 Tests custom business exceptions and their attributes.
+
+Updated: Priority 3 - Added pytest markers
 """
 
 import pytest
@@ -19,6 +21,9 @@ from infocodest.exceptions.business_exceptions import (
     InvalidMetricValueException,
     InvalidDateRangeException
 )
+
+# Mark all tests in this module as unit tests
+pytestmark = pytest.mark.unit
 
 
 class TestApplicationException:

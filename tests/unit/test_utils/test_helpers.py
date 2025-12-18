@@ -12,6 +12,7 @@ Tests all helper functions:
     - get_rating_color: Get color for rating (A-E)
 
 Created: Phase 6 - Test Coverage Improvements
+Updated: Priority 3 - Added pytest markers
 """
 
 import pytest
@@ -26,6 +27,9 @@ from infocodest.utils.helpers import (
     get_quality_gate_color,
     get_rating_color
 )
+
+# Mark all tests in this module as unit and utils tests
+pytestmark = [pytest.mark.unit, pytest.mark.utils]
 
 
 # ============================================================================

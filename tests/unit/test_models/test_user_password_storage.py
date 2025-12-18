@@ -3,11 +3,16 @@ Unit tests for User model password storage.
 
 Tests that passwords are correctly hashed and stored as strings,
 compatible with both SQLite and PostgreSQL.
+
+Updated: Priority 3 - Added pytest markers
 """
 
 import pytest
 from infocodest.models.users import User
 from infocodest.utils.security import verify_pass
+
+# Mark all tests in this module as models, unit, and security tests
+pytestmark = [pytest.mark.models, pytest.mark.unit, pytest.mark.security]
 
 
 class TestUserPasswordStorage:
