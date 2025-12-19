@@ -1,0 +1,86 @@
+# Git
+.git
+.gitignore
+.github
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info
+dist
+build
+*.egg
+.pytest_cache
+.coverage
+coverage.xml
+htmlcov
+
+# Virtual environments
+venv
+.venv
+env
+ENV
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Testing
+.pytest_cache
+.coverage
+htmlcov
+*.sqlite3
+testdb.sqlite3
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+db.sqlite3
+
+# Logs
+logs
+*.log
+
+# Documentation
+docs
+*.md
+CHANGELOG.md
+CONTRIBUTING.md
+PROYECTO_COMPLETADO.md
+SETUP.md
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+nginx
+
+# Environment files (will be set via docker-compose)
+.env
+.env.bak
+.env.example
+
+# Scripts
+*.bat
+*.sh
+activate_venv.bat
+setup_venv.bat
+load_data.bat
+load_data.sh
+setup_database.bat
+setup_database.sh
+run_data_pipeline.bat
+run_data_pipeline.sh
+
+# Migrations (should be run in container)
+migrations
+
+# Claude
+.claude

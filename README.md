@@ -66,6 +66,29 @@ docs/
 
 ### 🚀 Inicio Rápido
 
+#### 🐳 Opción 1: Docker (Recomendado)
+
+La forma más rápida de ejecutar la aplicación:
+
+```bash
+# 1. Configurar variables de entorno
+cp .env.docker .env
+# Editar .env y generar SECRET_KEY: python -c "import secrets; print(secrets.token_hex(32))"
+
+# 2. Iniciar servicios (app + PostgreSQL)
+docker-compose up -d
+
+# 3. Inicializar base de datos
+docker-compose exec web flask db upgrade
+
+# 4. Acceder a la aplicación
+# http://localhost:5000
+```
+
+📖 **Ver guía completa**: [DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md)
+
+#### 💻 Opción 2: Instalación Local
+
 **Para nuevos desarrolladores**:
 
 1. Lee **[docs/guides/INICIO_RAPIDO.md](docs/guides/INICIO_RAPIDO.md)** (5-10 min)

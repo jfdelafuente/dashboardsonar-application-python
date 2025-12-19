@@ -77,7 +77,8 @@ def create_app(app_config) -> Flask:
         4. Initialize extensions
         5. Register blueprints
         6. Register error handlers
-        7. Log startup information
+        7. Add health check endpoint
+        8. Log startup information
     """
     app = Flask(__name__)
     app.config.from_object(app_config)
@@ -97,6 +98,19 @@ def create_app(app_config) -> Flask:
 
         # Register error handlers
         register_error_handlers(app)
+
+        # Add health check endpoint for Docker
+        @app.route('/health')
+        def health_check():
+            """Health check endpoint for Docker and monitoring."""
+            from flask import jsonify
+            try:
+                # Check database connectivity
+                db.session.execute(db.text('SELECT 1'))
+                return jsonify({'status': 'healthy', 'database': 'connected'}), 200
+            except Exception as e:
+                app.logger.error(f'Health check failed: {str(e)}')
+                return jsonify({'status': 'unhealthy', 'error': str(e)}), 503
 
         # Log application startup
         app.logger.info(f'Application started - Config: {app_config.__name__}')
