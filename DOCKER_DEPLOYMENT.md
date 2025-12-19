@@ -143,13 +143,17 @@ docker-compose exec web python manage.py seed-data --users 5
 **Opción B: Datos reales desde CSV**
 
 ```bash
-# Copiar archivos CSV al contenedor
-docker cp datos/metricas.csv dashboardsonar-web:/app/datos/
-docker cp datos/historico.csv dashboardsonar-web:/app/datos/
-docker cp datos/proveedores.csv dashboardsonar-web:/app/datos/
+# Los archivos CSV ya están montados en ./datos (bind mount)
+# No necesitas copiarlos, están disponibles automáticamente
 
-# Ejecutar pipeline de carga
-docker-compose exec web python scripts/data_pipeline.py
+# Ejecutar pipeline completo de carga de datos
+docker-compose exec web python scripts/data/run_all_data_scripts.py
+
+# O solo cargar datos sin generar snapshots/stats
+docker-compose exec web python scripts/data/run_all_data_scripts.py --skip-daily --skip-stats --skip-registry
+
+# O solo cargar datos CSV (sin procesamiento adicional)
+docker-compose exec web python scripts/data/load_data.py
 ```
 
 ### 6. Acceder a la Aplicación
@@ -452,6 +456,30 @@ El comando `create-admin` incluye validaciones:
 - Rollback automático si falla
 - Mensajes claros de error
 - Colores en terminal para mejor UX
+
+### Gestión de Logs
+
+Los logs se almacenan en un volumen Docker (`app_logs`) para evitar problemas de permisos.
+
+```bash
+# Ver logs de la aplicación en tiempo real
+docker-compose exec web tail -f /app/logs/info.log
+
+# Ver todos los archivos de log
+docker-compose exec web ls -la /app/logs
+
+# Leer log completo
+docker-compose exec web cat /app/logs/info.log
+
+# Copiar logs al host (backup)
+docker cp dashboardsonar-web:/app/logs ./logs-backup
+
+# Ver ubicación del volumen en el host
+docker volume inspect dashboardsonar-application-python_app_logs
+
+# Limpiar logs antiguos (dentro del contenedor)
+docker-compose exec web sh -c "find /app/logs -name '*.log' -mtime +7 -delete"
+```
 
 ### Gestión de Base de Datos
 
