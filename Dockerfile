@@ -48,7 +48,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Create non-root user for security
 RUN useradd -m -u 1000 appuser && \
-    mkdir -p /app /app/logs /app/datos && \
+    mkdir -p /app && \
     chown -R appuser:appuser /app
 
 # Set working directory
@@ -62,6 +62,9 @@ COPY --chown=appuser:appuser . .
 
 # Switch to non-root user
 USER appuser
+
+# Create logs and datos directories as appuser (after USER switch)
+RUN mkdir -p /app/logs /app/datos
 
 # Expose port
 EXPOSE 5000

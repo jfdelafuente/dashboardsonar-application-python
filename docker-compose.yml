@@ -59,7 +59,7 @@ services:
 
     volumes:
       - ./datos:/app/datos
-      - ./logs:/app/logs
+      - app_logs:/app/logs
 
     depends_on:
       db:
@@ -112,6 +112,8 @@ networks:
 # ============================================
 volumes:
   postgres_data:
+    driver: local
+  app_logs:
     driver: local
   nginx_logs:
     driver: local
