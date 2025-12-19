@@ -118,11 +118,29 @@ docker-compose --profile with-nginx up -d
 # Ejecutar migraciones
 docker-compose exec web flask db upgrade
 
-# Crear usuario admin (opcional)
-docker-compose exec web python manage.py create_admin
+# Verificar estado de la base de datos
+docker-compose exec web python manage.py db-status
+
+# Crear usuario admin (interactivo con validación)
+docker-compose exec web python manage.py create-admin
 ```
 
 ### 5. Cargar Datos Iniciales (Opcional)
+
+**Opción A: Datos de prueba (Desarrollo)**
+
+```bash
+# Cargar usuarios de prueba (rápido)
+docker-compose exec web python manage.py seed-data --users 5
+
+# Credenciales generadas:
+# - admin@test.com / Admin123! (admin)
+# - user1@test.com / User123!
+# - user2@test.com / User123!
+# ...
+```
+
+**Opción B: Datos reales desde CSV**
 
 ```bash
 # Copiar archivos CSV al contenedor
@@ -372,12 +390,68 @@ docker-compose exec web flask db upgrade
 docker-compose exec web flask db migrate -m "descripción"
 
 # Python scripts
-docker-compose exec web python manage.py create_admin
+docker-compose exec web python manage.py create-admin
 docker-compose exec web python scripts/data_pipeline.py
 
 # Ver variables de entorno
 docker-compose exec web env
 ```
+
+### Comandos de Gestión (manage.py)
+
+El nuevo `manage.py` incluye comandos mejorados para gestión de usuarios y base de datos:
+
+#### Gestión de Usuarios
+
+```bash
+# Crear admin (con validación de email y contraseña)
+docker-compose exec web python manage.py create-admin
+
+# Listar todos los usuarios
+docker-compose exec web python manage.py list-users
+
+# Eliminar usuario
+docker-compose exec web python manage.py delete-user --email user@example.com
+
+# Promover usuario a admin
+docker-compose exec web python manage.py make-admin --email user@example.com
+
+# Resetear contraseña
+docker-compose exec web python manage.py reset-password --email user@example.com
+
+# Cargar usuarios de prueba (solo desarrollo)
+docker-compose exec web python manage.py seed-data --users 10
+```
+
+#### Utilidades de Base de Datos
+
+```bash
+# Ver estado de la base de datos
+docker-compose exec web python manage.py db-status
+# Muestra: conexión, total usuarios, admins, versión SQLAlchemy
+
+# Listar comandos disponibles
+docker-compose exec web python manage.py commands
+```
+
+#### Validaciones Incluidas
+
+El comando `create-admin` incluye validaciones:
+
+**Email:**
+- Formato válido (RFC compliant)
+- Verifica duplicados
+
+**Contraseña:**
+- Mínimo 8 caracteres
+- Al menos 1 mayúscula
+- Al menos 1 minúscula
+- Al menos 1 dígito
+
+**Manejo de Errores:**
+- Rollback automático si falla
+- Mensajes claros de error
+- Colores en terminal para mejor UX
 
 ### Gestión de Base de Datos
 
