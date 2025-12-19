@@ -206,7 +206,7 @@ def extract_daily_metrics(app, snapshot_date: date) -> List[Dict[str, Any]]:
                 daily_records.append(daily_record)
                 total_repos += 1
 
-        print(f"✓ Extracted metrics for {total_repos} repositories across {len(aplicaciones)} applications")
+        print(f"[OK] Extracted metrics for {total_repos} repositories across {len(aplicaciones)} applications")
         return daily_records
 
 
@@ -254,7 +254,7 @@ def load_daily_to_db(app, daily_data: List[Dict[str, Any]], batch_size: int = 10
             progress = (records_inserted / total_records) * 100
             print(f"  Progress: {records_inserted}/{total_records} ({progress:.1f}%)")
 
-        print(f"✓ Loaded {records_inserted} daily records")
+        print(f"[OK] Loaded {records_inserted} daily records")
         return records_inserted
 
 
@@ -276,7 +276,7 @@ def clear_daily_for_date(app, snapshot_date: date):
             .delete()
         )
         db.session.commit()
-        print(f"✓ Deleted {deleted_count} existing records")
+        print(f"[OK] Deleted {deleted_count} existing records")
         return deleted_count
 
 
@@ -316,7 +316,7 @@ def main():
         try:
             snapshot_date = datetime.strptime(args.date, '%Y-%m-%d').date()
         except ValueError:
-            print(f"✗ Invalid date format: {args.date}. Use YYYY-MM-DD")
+            print(f"[ERROR] Invalid date format: {args.date}. Use YYYY-MM-DD")
             return 1
     else:
         snapshot_date = date.today()
@@ -326,7 +326,7 @@ def main():
     config_class = config_dict.get(config_name)
 
     if not config_class:
-        print(f"✗ Invalid configuration: {config_name}")
+        print(f"[ERROR] Invalid configuration: {config_name}")
         return 1
 
     # Create Flask application
@@ -357,7 +357,7 @@ def main():
         records_inserted = load_daily_to_db(app, daily_data, args.batch_size)
 
     except Exception as e:
-        print(f"\n✗ Error during daily metrics generation: {e}")
+        print(f"\n[ERROR] Error during daily metrics generation: {e}")
         import traceback
         traceback.print_exc()
         return 1
@@ -371,7 +371,7 @@ def main():
     print(f"Records generated: {records_inserted}")
     print(f"Duration: {duration:.2f} seconds")
     print("="*60)
-    print("\n✓ Daily metrics generation completed successfully!\n")
+    print("\n[OK] Daily metrics generation completed successfully!\n")
 
     return 0
 
