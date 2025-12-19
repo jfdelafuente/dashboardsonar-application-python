@@ -555,7 +555,8 @@ class TestSeedDataCommand:
             )
 
             assert result.exit_code == 0
-            assert 'Seed completed' in result.output
+            assert 'Seed Summary' in result.output
+            assert 'Created:' in result.output
 
             # Verify admin was created
             admin = User.query.filter_by(email='admin@test.com').first()
@@ -578,7 +579,7 @@ class TestSeedDataCommand:
             )
 
             assert result.exit_code == 0
-            assert 'Seed completed' in result.output
+            assert 'Seed Summary' in result.output
 
     def test_seed_data_cancelled(self, app, init_database):
         """Test cancelling seed data operation."""

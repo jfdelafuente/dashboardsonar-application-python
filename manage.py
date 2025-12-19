@@ -436,16 +436,18 @@ def seed_data(users: int):
     """
     click.echo(click.style('\n=== Seed Sample Data ===\n', fg='cyan', bold=True))
 
-    if not click.confirm(f'⚠️  This will create {users} test users. Continue?'):
+    if not click.confirm(f'WARNING: This will create {users} test users. Continue?'):
         click.echo('Seed cancelled.')
         return
 
     try:
         created_count = 0
+        skipped_count = 0
 
         # Create test admin
         admin_email = 'admin@test.com'
-        if not User.query.filter_by(email=admin_email).first():
+        existing_admin = User.query.filter_by(email=admin_email).first()
+        if not existing_admin:
             admin = User(
                 email=admin_email,
                 username='admin',
@@ -454,12 +456,16 @@ def seed_data(users: int):
             )
             db.session.add(admin)
             created_count += 1
-            click.echo(f'✅ Created admin: {admin_email} (password: Admin123!)')
+            click.echo(click.style(f'[OK] Created admin: {admin_email} (password: Admin123!)', fg='green'))
+        else:
+            skipped_count += 1
+            click.echo(click.style(f'[SKIP] Skipped admin: {admin_email} (already exists)', fg='yellow'))
 
         # Create test users
         for i in range(1, users):
             email = f'user{i}@test.com'
-            if not User.query.filter_by(email=email).first():
+            existing_user = User.query.filter_by(email=email).first()
+            if not existing_user:
                 user = User(
                     email=email,
                     username=f'user{i}',
@@ -468,19 +474,32 @@ def seed_data(users: int):
                 )
                 db.session.add(user)
                 created_count += 1
+                click.echo(click.style(f'[OK] Created user: {email}', fg='green'))
+            else:
+                skipped_count += 1
 
         db.session.commit()
 
-        click.echo(click.style(f'\n✅ Seed completed! Created {created_count} users.', fg='green', bold=True))
-        click.echo(click.style('\n⚠️  WARNING: These are TEST credentials. Do NOT use in production!', fg='yellow'))
+        # Summary
+        click.echo(click.style('\n=== Seed Summary ===', fg='cyan', bold=True))
+        click.echo(f'   Created: {created_count} users')
+        click.echo(f'   Skipped: {skipped_count} users (already exist)')
+        click.echo(f'   Total: {created_count + skipped_count} users processed')
 
-    except IntegrityError:
+        if created_count > 0:
+            click.echo(click.style('\n[SUCCESS] Seed completed successfully!', fg='green', bold=True))
+            click.echo(click.style('WARNING: These are TEST credentials. Do NOT use in production!', fg='yellow'))
+        else:
+            click.echo(click.style('\n[INFO] All users already exist. Nothing to create.', fg='green'))
+
+    except IntegrityError as e:
         db.session.rollback()
-        click.echo(click.style('⚠️  Some users already exist. Skipped duplicates.', fg='yellow'))
+        click.echo(click.style(f'\n[ERROR] Database integrity error: {str(e.orig)}', fg='red'))
+        click.echo(click.style('   Some users may have been created before the error.', fg='yellow'))
 
     except Exception as e:
         db.session.rollback()
-        click.echo(click.style(f'❌ Failed to seed data: {str(e)}', fg='red'))
+        click.echo(click.style(f'[ERROR] Failed to seed data: {str(e)}', fg='red'))
         raise
 
 
