@@ -15,7 +15,7 @@ class Daily(db.Model):
     Attributes:
         id: Primary key
         aplicacion: Application name (NOT unique - multiple daily records per app)
-        repo: Number of repositories for this application
+        repo: Repository name for this application
         proveedor: Provider/vendor information
         created_on: Record creation timestamp (date of the snapshot)
         num_bugs: Number of bugs detected
@@ -38,7 +38,7 @@ class Daily(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     aplicacion = db.Column(db.String(64), index=True, unique=False, nullable=False)  # Fixed: removed unique=True
-    repo = db.Column(db.Integer, index=True, unique=False, nullable=False)
+    repo = db.Column(db.String(128), index=True, unique=False, nullable=False)  # Fixed: changed from Integer to String
     proveedor = db.Column(db.Text, index=False, unique=False, nullable=True)
     created_on = db.Column(db.DateTime(), unique=False, nullable=True)
     num_bugs = db.Column(db.Integer, index=False, unique=False, nullable=False)

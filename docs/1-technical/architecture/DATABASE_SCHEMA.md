@@ -120,7 +120,7 @@ Dashboard Sonar utiliza una base de datos relacional para almacenar:
 │  (referenced)   │                    ├──────────────────┤
 └─────────────────┘                    │ PK id            │
                                        │ IX aplicacion    │
-                                       │ IX repo          │
+                                       │ IX repo (V128)   │ ⚠️ FIXED v1.11.0
                                        │    proveedor     │
                                        │ IX created_on    │
                                        │    num_bugs      │
@@ -383,7 +383,7 @@ db.session.commit()
 
 ### 6. DAILY
 
-**Propósito**: Métricas agregadas diarias por aplicación (snapshots diarios).
+**Propósito**: Métricas agregadas diarias por repositorio (snapshots diarios).
 
 **Modelo**: `infocodest.models.daily.Daily`
 
@@ -393,7 +393,7 @@ db.session.commit()
 |---------|------|-------------|-------------|
 | `id` | INTEGER | PK | Primary key |
 | `aplicacion` | VARCHAR(64) | NOT NULL, INDEX | Nombre de aplicación |
-| `repo` | INTEGER | NOT NULL, INDEX | Número de repositorios |
+| `repo` | VARCHAR(128) | NOT NULL, INDEX | **Nombre del repositorio** ⚠️ **FIXED: v1.11.0** |
 | `proveedor` | TEXT | | Proveedor |
 | `created_on` | DATETIME | INDEX | Fecha del snapshot |
 | `num_bugs` | INTEGER | NOT NULL | Total bugs |
@@ -410,7 +410,46 @@ CREATE INDEX idx_daily_aplicacion_date ON daily (aplicacion, created_on);
 
 **Justificación**: Permite queries rápidas de trending por aplicación en un rango de fechas.
 
-**Nota**: Una aplicación puede tener múltiples registros (uno por día), por lo que `aplicacion` NO es unique.
+**Nota**: Una aplicación puede tener múltiples registros (uno por día con diferentes repos), por lo que `aplicacion` NO es unique.
+
+#### Cambio de Esquema (v1.11.0)
+
+⚠️ **BREAKING CHANGE - Migración Requerida**
+
+**Fecha**: 2025-12-19
+**Issue**: [#26](https://github.com/jfdelafuente/dashboardsonar-application-python/issues/26)
+
+**Cambio**: La columna `repo` cambió de `INTEGER` a `VARCHAR(128)`.
+
+**Antes** (❌ Incorrecto):
+
+```sql
+repo INTEGER NOT NULL
+```
+
+- Almacenaba un número (count de repositorios)
+- Causaba error al intentar insertar nombres de repos
+
+**Después** (✅ Correcto):
+
+```sql
+repo VARCHAR(128) NOT NULL
+```
+
+- Almacena el **nombre del repositorio** (ej: `'abacus-application-java'`)
+- Consistente con las columnas `repo` en METRICAS e HISTORICO
+
+**Migración**:
+
+```bash
+# Ejecutar migración automática
+python scripts/migrations/fix_daily_repo_datatype.py --config Development
+
+# Verificar migración
+python scripts/migrations/fix_daily_repo_datatype.py --config Development --verify-only
+```
+
+**Documentación**: Ver [DAILY_REPO_DATATYPE_FIX.md](../bugfixes/DAILY_REPO_DATATYPE_FIX.md) para detalles completos.
 
 ---
 
@@ -685,7 +724,40 @@ Aplicar:
 flask db upgrade
 ```
 
-### Migración: Remover UNIQUE de REGISTRO
+### Migración: Fix Daily.repo Data Type (v1.11.0) ✅ COMPLETADA
+
+**Fecha**: 2025-12-19
+**Issue**: [#26](https://github.com/jfdelafuente/dashboardsonar-application-python/issues/26)
+**Script**: `scripts/migrations/fix_daily_repo_datatype.py`
+
+**Problema**: La columna `daily.repo` estaba definida como `INTEGER` pero el código insertaba strings (nombres de repositorios).
+
+**Error**:
+
+```text
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: "abacus-application-java"
+```
+
+**Solución Implementada**:
+
+```bash
+# Ejecutar migración
+python scripts/migrations/fix_daily_repo_datatype.py --config Development
+```
+
+**Cambios aplicados**:
+
+- ✅ Cambió `repo` de `INTEGER` a `VARCHAR(128)`
+- ✅ Preservó datos existentes (si los hubiera)
+- ✅ Recreó índices correctamente
+- ✅ Soporta SQLite, PostgreSQL y MySQL
+- ✅ Incluye tests de verificación
+
+**Documentación completa**: [DAILY_REPO_DATATYPE_FIX.md](../bugfixes/DAILY_REPO_DATATYPE_FIX.md)
+
+---
+
+### Migración: Remover UNIQUE de REGISTRO (Pendiente)
 
 **Problema identificado**: Las columnas num_* en REGISTRO tienen UNIQUE constraint innecesario.
 
@@ -792,6 +864,6 @@ WHERE created_on < (CURRENT_DATE - INTERVAL '3 months');
 
 ---
 
-**Última actualización**: Diciembre 2025
-**Versión del schema**: 1.10.0
+**Última actualización**: 2025-12-19
+**Versión del schema**: 1.11.0 (Daily.repo: INTEGER → VARCHAR(128))
 **Mantenido por**: Equipo de Desarrollo

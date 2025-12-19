@@ -59,8 +59,8 @@ def fix_daily_repo_constraint(app):
             db.session.execute(db.text("""
                 CREATE TABLE IF NOT EXISTS daily_new (
                     id INTEGER PRIMARY KEY,
-                    aplicacion VARCHAR(64) NOT NULL UNIQUE,
-                    repo INTEGER NOT NULL,
+                    aplicacion VARCHAR(64) NOT NULL,
+                    repo VARCHAR(128) NOT NULL,
                     proveedor TEXT,
                     created_on DATETIME,
                     num_bugs INTEGER NOT NULL,
@@ -171,10 +171,10 @@ def verify_migration(app):
                 Daily.aplicacion.in_(['test_daily_1', 'test_daily_2'])
             ).delete()
 
-            # Insert two applications with same repo count
+            # Insert two applications with same repo name (should work with non-unique repo)
             daily1 = Daily(
                 aplicacion='test_daily_1',
-                repo=10,  # Same repo count
+                repo='test-repo-name',  # Same repo name
                 num_bugs=5,
                 num_vulnerabilities=3,
                 num_code_smells=20,
@@ -183,7 +183,7 @@ def verify_migration(app):
             )
             daily2 = Daily(
                 aplicacion='test_daily_2',
-                repo=10,  # Same repo count
+                repo='test-repo-name',  # Same repo name
                 num_bugs=8,
                 num_vulnerabilities=2,
                 num_code_smells=15,
