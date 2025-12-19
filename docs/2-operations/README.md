@@ -61,6 +61,7 @@ Guías de deployment en diferentes plataformas cloud y on-premise.
 
 | Documento | Descripción | Prioridad |
 |-----------|-------------|-----------|
+| **[DOCKER_DEPLOYMENT.md](deployment/DOCKER_DEPLOYMENT.md)** | Docker Compose: Deployment local y producción con PostgreSQL + Nginx | 🔴 RECOMENDADO |
 | **[DEPLOYMENT_AWS.md](deployment/DEPLOYMENT_AWS.md)** | AWS: EC2, RDS, ECS Fargate, Elastic Beanstalk | 🟠 ALTA |
 | **[DEPLOYMENT_GCP.md](deployment/DEPLOYMENT_GCP.md)** | GCP: Compute Engine, Cloud Run, Cloud SQL, GKE | 🟠 ALTA |
 | **[DEPLOYMENT_KUBERNETES.md](deployment/DEPLOYMENT_KUBERNETES.md)** | Kubernetes: manifests, Helm charts, autoscaling | 🟠 ALTA |
