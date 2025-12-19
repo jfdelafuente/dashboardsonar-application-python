@@ -9,8 +9,8 @@
 [![Refactoring](https://img.shields.io/badge/refactoring-100%25%20complete-brightgreen.svg)](docs/plan/PLAN_REORGANIZACION.md)
 [![Version](https://img.shields.io/badge/version-v1.10.0--phase--10-blue.svg)](CHANGELOG.md)
 [![Phases](https://img.shields.io/badge/phases-10%2F10%20done-brightgreen.svg)](docs/reports/)
-[![Tests](https://img.shields.io/badge/tests-378%20passing%20(100%25)-success.svg)](tests/)
-[![Coverage](https://img.shields.io/badge/coverage-78%25-success.svg)](tests/)
+[![Tests](https://img.shields.io/badge/tests-425%20passing%20(100%25)-success.svg)](tests/)
+[![Coverage](https://img.shields.io/badge/coverage-80%25-success.svg)](tests/)
 [![Architecture](https://img.shields.io/badge/architecture-layered-blue.svg)](docs/ARCHITECTURE.md)
 
 ---
@@ -23,7 +23,7 @@
 >
 > **Arquitectura**: Layered Architecture (Presentation → Service → Repository → Model)
 >
-> **Calidad**: 378 tests (100% passing), 78% coverage, SOLID principles
+> **Calidad**: 425 tests (100% passing), 80% coverage, SOLID principles
 
 ### 📚 Documentación Completa
 
@@ -65,6 +65,32 @@ docs/
 ```
 
 ### 🚀 Inicio Rápido
+
+#### 🐳 Opción 1: Docker (Recomendado)
+
+La forma más rápida de ejecutar la aplicación:
+
+```bash
+# 1. Configurar variables de entorno
+cp .env.docker .env
+# Editar .env y generar SECRET_KEY: python -c "import secrets; print(secrets.token_hex(32))"
+
+# 2. Iniciar servicios (app + PostgreSQL)
+docker-compose up -d
+
+# 3. Inicializar base de datos
+docker-compose exec web flask db upgrade
+
+# 4. Acceder a la aplicación
+# http://localhost:5000
+```
+
+📖 **Ver guías completas**:
+
+- **[Docker Deployment](docs/2-operations/deployment/DOCKER_DEPLOYMENT.md)** - Guía completa de despliegue
+- **[Docker Testing](docs/1-technical/testing/DOCKER_TESTING.md)** - Testing local con Docker
+
+#### 💻 Opción 2: Instalación Local
 
 **Para nuevos desarrolladores**:
 
