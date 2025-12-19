@@ -409,7 +409,10 @@ def db_status():
 
         # Database engine info
         click.echo(f'\nDatabase Engine: {db.engine.name}')
-        click.echo(f'SQLAlchemy Version: {db.__version__}')
+
+        # Get SQLAlchemy version
+        import sqlalchemy
+        click.echo(f'SQLAlchemy Version: {sqlalchemy.__version__}')
 
         click.echo()
 
