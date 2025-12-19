@@ -227,27 +227,125 @@ services:
 
 ### Gestión de Servicios
 
+#### Iniciar Servicios
+
 ```bash
-# Iniciar servicios
+# Iniciar todos los servicios en background
 docker-compose up -d
 
-# Detener servicios
+# Iniciar con logs visibles (foreground)
+docker-compose up
+
+# Iniciar solo servicios específicos
+docker-compose up -d web db
+
+# Iniciar con Nginx
+docker-compose --profile with-nginx up -d
+```
+
+#### Parar Servicios
+
+**Opción 1: Parar y mantener contenedores (pausa temporal)**
+
+```bash
+docker-compose stop
+```
+- ✅ Detiene los contenedores
+- ❌ NO elimina contenedores
+- ✅ Mantiene todos los datos
+- 💡 Uso: Pausa temporal, reinicio rápido con `docker-compose start`
+
+**Opción 2: Parar y eliminar contenedores (parada normal)** ⭐ **RECOMENDADO**
+
+```bash
 docker-compose down
+```
+- ✅ Detiene los contenedores
+- ✅ Elimina los contenedores
+- ✅ **Mantiene los volúmenes** (datos persistentes)
+- ✅ Libera recursos de red
+- 💡 Uso: Parada normal del día a día
 
-# Detener y eliminar volúmenes (¡CUIDADO! Borra datos)
+**Opción 3: Parar y eliminar TODO** ⚠️ **CUIDADO - BORRA DATOS**
+
+```bash
 docker-compose down -v
+```
+- ✅ Detiene los contenedores
+- ✅ Elimina los contenedores
+- ❌ **ELIMINA VOLÚMENES** (¡pierdes base de datos!)
+- 💡 Uso: Solo para limpieza completa o reset total
 
-# Ver logs
+**Opción 4: Parar servicios específicos**
+
+```bash
+# Parar solo el servicio web
+docker-compose stop web
+
+# Parar solo la base de datos
+docker-compose stop db
+
+# Parar solo nginx
+docker-compose stop nginx
+```
+
+#### Tabla Comparativa - Opciones de Parada
+
+| Comando | Detiene | Elimina Contenedores | Elimina Volúmenes | Datos DB | Uso Recomendado |
+|---------|---------|---------------------|-------------------|----------|-----------------|
+| `stop` | ✅ | ❌ | ❌ | ✅ Persisten | Pausa temporal |
+| `down` | ✅ | ✅ | ❌ | ✅ Persisten | **Parada normal** |
+| `down -v` | ✅ | ✅ | ✅ | ❌ Se borran | Limpieza total |
+
+#### Reiniciar Servicios
+
+```bash
+# Reiniciar todos los servicios
+docker-compose restart
+
+# Reiniciar servicio específico
+docker-compose restart web
+docker-compose restart db
+
+# Parar, rebuild y reiniciar
+docker-compose down
+docker-compose up -d --build
+```
+
+#### Ver Estado y Logs
+
+```bash
+# Ver estado de servicios
+docker-compose ps
+
+# Ver logs en tiempo real
 docker-compose logs -f
 
 # Ver logs de servicio específico
 docker-compose logs -f web
+docker-compose logs -f db
 
-# Reiniciar servicio
-docker-compose restart web
+# Ver últimas 100 líneas de logs
+docker-compose logs --tail=100 web
+```
 
-# Ver estado
-docker-compose ps
+#### Flujo de Trabajo Típico
+
+```bash
+# 1. Iniciar servicios por primera vez
+docker-compose up -d
+
+# 2. Trabajar con la aplicación...
+
+# 3. Ver logs si hay problemas
+docker-compose logs -f web
+
+# 4. Al finalizar el día, parar servicios
+docker-compose down
+
+# 5. Al día siguiente, volver a iniciar
+docker-compose up -d
+# ✅ Los datos persisten porque los volúmenes se mantienen
 ```
 
 ### Build y Rebuild
